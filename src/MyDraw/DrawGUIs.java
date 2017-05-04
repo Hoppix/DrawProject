@@ -292,6 +292,7 @@ class DrawGUIs extends JPanel
                 }
             }
         }
+        //shapemanager end
 
         shape_chooser.addItemListener(new ShapeManager(this));     
         color_chooser.addItemListener(new ColorItemListener(this));
