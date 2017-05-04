@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+
 public class GUIHandler
 {
     private JFrame frame;
@@ -48,9 +49,9 @@ public class GUIHandler
 
         }
         else if (command.equals("quit"))
-        { // quit the application
-            frame.dispose(); // close the GUI
-            System.exit(0); // and exit.
+        {
+            frame.dispose();
+            System.exit(0);
         }
         else if(command.equals("auto"))
         {           
