@@ -14,6 +14,7 @@ public class GUIHandler
 {
     //TODO gui, logik trennen
     //TODO command queue
+	//TODO new app windowbuilder?
     private JFrame frame;
     public DrawGUIs panel;
     
