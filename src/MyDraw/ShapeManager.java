@@ -10,6 +10,8 @@ import java.awt.event.MouseMotionListener;
 
 class ShapeManager implements ItemListener
 {
+    //TODO drawable implementieren
+    //TODO graphics g integrieren
     DrawGUIs gui;
     Graphics2D backgroundG;
 

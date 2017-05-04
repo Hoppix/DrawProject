@@ -12,6 +12,8 @@ import javax.swing.WindowConstants;
 
 public class GUIHandler
 {
+    //TODO gui, logik trennen
+    //TODO command queue
     private JFrame frame;
     public DrawGUIs panel;
     
@@ -61,8 +63,7 @@ public class GUIHandler
         {
             try
             {
-                //TODO Verzeichnis anpassen!
-                drawScreen.writeImage(drawScreen.getDrawing(), "C:\\Users\\5hopfman\\Desktop\\test.bmp");                              
+                drawScreen.writeImage(drawScreen.getDrawing(), "test.bmp");                              
             }
             catch (IOException e)
             {

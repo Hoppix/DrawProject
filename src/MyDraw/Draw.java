@@ -9,13 +9,12 @@ package MyDraw;
 // behavior is similiar but not equal ! Why?
 // Gruppe 5
 
-import javax.swing.*; //++
+
 
 /** The application class.  Processes high-level commands sent by GUI */
 public class Draw
 {
-    protected JPanel panel; //chg
-    protected JFrame frame;
+
     protected GUIHandler app;
     protected DrawGUIs gui;
 

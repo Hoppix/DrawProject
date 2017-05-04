@@ -93,10 +93,9 @@ public class DrawTest
     @Test
     public void testAutoDraw() throws IOException, InterruptedException
     {
-        //TODO Verzeichnis korrigieren!
-        testCorrect =  MyBMPFile.read("C:\\Users\\5hopfman\\Desktop\\testCorrect.bmp");
+        testCorrect =  MyBMPFile.read("testCorrect.bmp");
         testMe.autoDraw();
-        testMe.writeImage(testMe.getDrawing(), "C:\\Users\\5hopfman\\Desktop\\test.bmp");
+        testMe.writeImage(testMe.getDrawing(), "test.bmp");
         BufferedImage testImg = (BufferedImage) testMe.getDrawing();
         BufferedImage buffImg = convertToBufferedImage(testCorrect);
         boolean boolshit = true;
