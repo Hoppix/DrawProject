@@ -97,6 +97,7 @@ class ShapeManager implements ItemListener
             // these commands set the rubberband mode
             g.setXORMode(gui.color);
             g.setColor(gui.getBackground());
+            //TODO fix drawing
             backgroundG.setXORMode(gui.color);
             backgroundG.setColor(gui.getBackground());
             if (lastx != -1)
