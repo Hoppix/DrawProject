@@ -93,9 +93,9 @@ public class DrawTest
     @Test
     public void testAutoDraw() throws IOException, InterruptedException
     {
-        testCorrect =  MyBMPFile.read("testCorrect.bmp");
+        testCorrect =  MyBMPFile.read("imageTesting\\testCorrect.bmp");
         testMe.autoDraw();
-        testMe.writeImage(testMe.getDrawing(), "test.bmp");
+        testMe.writeImage(testMe.getDrawing(), "imageTesting\\test.bmp");
         BufferedImage testImg = (BufferedImage) testMe.getDrawing();
         BufferedImage buffImg = convertToBufferedImage(testCorrect);
         boolean boolshit = true;

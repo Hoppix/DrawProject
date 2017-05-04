@@ -63,7 +63,7 @@ public class GUIHandler
         {
             try
             {
-                drawScreen.writeImage(drawScreen.getDrawing(), "test.bmp");                              
+                drawScreen.writeImage(drawScreen.getDrawing(), "imageTesting\\test.bmp");                              
             }
             catch (IOException e)
             {
