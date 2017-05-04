@@ -638,18 +638,10 @@ class DrawGUIs extends JPanel
     }
     public Image getDrawing()
     {
-//        this.setSize(getPreferredSize());
-//        BufferedImage image = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
-//        Graphics2D g = image.createGraphics();
-//        g.drawImage(image, null, 0, 0);
-//        this.printAll(g);
         return saveImage;
     }
     
-    public Image getScreenImage()
-    {
-        return ScreenImage.createImage(this);
-    }
+   
     
     public void clear()
     {
@@ -675,7 +667,7 @@ class DrawGUIs extends JPanel
         { 
             this.setBGColor("white");
             this.clear();
-            //TODO delete this
+
             this.setFGColor("black");
             this.drawRectangle(points.get(0), points.get(1));
             this.setFGColor("GrEEn");

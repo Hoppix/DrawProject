@@ -18,8 +18,7 @@ public class DrawTest
     Draw_swing testApp;
     DrawGUIs testMe;
     Image testCorrect;
-    
-    //git commit test 1
+
 
     public DrawTest()
     {
