@@ -123,7 +123,8 @@ class DrawGUIs extends JPanel
             {
                 public void mouseMoved(MouseEvent e)
                 {
-                    /* ignore */ }
+                    /* ignore */
+                }
             }
 
             // if this class is active, the mouse is interpreted as a pen
@@ -294,44 +295,14 @@ class DrawGUIs extends JPanel
             }
         }
 
-        shape_chooser.addItemListener(new ShapeManager(this));
-
-        class ColorItemListener implements ItemListener
-        {
-
-            // user selected new color => store new color in DrawGUIs
-            public void itemStateChanged(ItemEvent e)
-            {
-                if (e.getItem()
-                    .equals("Black"))
-                {
-                    color = Color.black;
-                }
-                else if (e.getItem()
-                    .equals("Green"))
-                {
-                    color = Color.green;
-                }
-                else if (e.getItem()
-                    .equals("Red"))
-                {
-                    color = Color.red;
-                }
-                else if (e.getItem()
-                    .equals("Blue"))
-                {
-                    color = Color.blue;
-                }
-            }
-        }
-
-        color_chooser.addItemListener(new ColorItemListener());
+        shape_chooser.addItemListener(new ShapeManager(this));     
+        color_chooser.addItemListener(new ColorItemListener(this));
 
         // Handle the window close request similarly
         // Finally, set the size of the window, and pop it up        
-        Container DrawContainer = this; //.getContentPane();
+        Container DrawContainer = this; 
         DrawContainer.setBackground(colorBG);
-        this.setVisible(true); // ++
+        this.setVisible(true); 
         
         this.setBounds(0, 37, 694, 535); 
         saveImage = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB );        
