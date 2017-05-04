@@ -3,9 +3,6 @@ package MyDraw;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-
-import org.junit.internal.runners.model.EachTestNotifier;
 
 public class ColorHashMap
 {

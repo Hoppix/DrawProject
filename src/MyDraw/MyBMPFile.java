@@ -8,6 +8,11 @@ import java.awt.image.*;
 public class MyBMPFile extends Component { 
 
      /**
+     * 
+     */
+    private static final long serialVersionUID = 6142737888450882223L;
+
+    /**
       Read a Windows bitmap file (*.bmp) 
       @param filename the image's file name
       @return the image read 
@@ -37,16 +42,12 @@ public class MyBMPFile extends Component {
 
      //--- Private variable declaration 
 
-     //--- Bitmap file header 
-     private byte bitmapFileHeader [] = new byte [14]; 
      private byte bfType [] = {(byte)'B', (byte)'M'}; 
      private int bfSize = 0; 
      private int bfReserved1 = 0; 
      private int bfReserved2 = 0; 
      private int bfOffBits = BITMAPFILEHEADER_SIZE + BITMAPINFOHEADER_SIZE; 
 
-     //--- Bitmap info header 
-     private byte bitmapInfoHeader [] = new byte [40]; 
      private int biSize = BITMAPINFOHEADER_SIZE; 
      private int biWidth = 0; 
      private int biHeight = 0; 
@@ -286,6 +287,7 @@ public class MyBMPFile extends Component {
         return result;
     }
      
+    @SuppressWarnings("resource")
     private Image loadBitmap (String sfile) throws IOException
     { 
         Image image; 
@@ -298,22 +300,21 @@ public class MyBMPFile extends Component {
         byte bi[]=new byte[bilen]; 
         fs.read(bi,0,bilen); 
 
-        // Interperet data. 
-        int nsize = intFromLSBLong(bf, 2); 
+        intFromLSBLong(bf, 2); 
         if((char)bf[0] != 'B' || (char)bf[1] != 'M')
             throw new IOException("BMPFile.read('"+sfile+"'): File isn't a BMP image.");
             
-        int nbisize = intFromLSBLong(bi,0);
+        intFromLSBLong(bi,0);
         int nwidth = intFromLSBLong(bi,4);
         int nheight = intFromLSBLong(bi,8);
-        int nplanes = intFromLSBShort(bi,12);
+        intFromLSBShort(bi,12);
         int nbitcount = intFromLSBShort(bi,14);
         int ncompression = intFromLSBLong(bi,16);
         int nsizeimage = intFromLSBLong(bi,20);
-        int nxpm = intFromLSBLong(bi,24); 
-        int nypm = intFromLSBLong(bi,28);
+        intFromLSBLong(bi,24); 
+        intFromLSBLong(bi,28);
         int nclrused = intFromLSBLong(bi,32);
-        int nclrimp = intFromLSBLong(bi,36);
+        intFromLSBLong(bi,36);
 
         if (nbitcount==24) 
         { 

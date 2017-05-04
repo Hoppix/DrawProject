@@ -9,19 +9,6 @@ package MyDraw;
 // behavior is similiar but not equal ! Why?
 // Gruppe 5
 
-import java.awt.*;
-import java.awt.dnd.DropTarget;
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
-import java.awt.image.RenderedImage;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
 import javax.swing.*; //++
 
 /** The application class.  Processes high-level commands sent by GUI */

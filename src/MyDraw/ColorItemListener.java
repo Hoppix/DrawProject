@@ -13,6 +13,7 @@ public class ColorItemListener implements ItemListener
         parentGUI = gui;
     }
 
+    @SuppressWarnings("static-access")
     @Override
     public void itemStateChanged(ItemEvent e)
     {

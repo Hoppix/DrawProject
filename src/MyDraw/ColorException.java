@@ -1,7 +1,5 @@
 package MyDraw;
 
-import javax.swing.JOptionPane;
-
 public class ColorException extends Exception
 {
     /**
@@ -11,7 +9,6 @@ public class ColorException extends Exception
 
     public ColorException()
     {
-        //JOptionPane.showMessageDialog(null,  "Unbekannte Farbe!");
         System.out.println("Unbekannte Farbe!");
     }
 }
