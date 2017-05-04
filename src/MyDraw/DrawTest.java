@@ -15,14 +15,14 @@ import org.junit.rules.ExpectedException;
 
 public class DrawTest
 {
-    Draw_swing testApp;
+    GUIHandler testApp;
     DrawGUIs testMe;
     Image testCorrect;
 
 
     public DrawTest()
     {
-        testApp = new Draw_swing();
+        testApp = new GUIHandler();
         testMe = new DrawGUIs(testApp);
     }
 
@@ -139,7 +139,7 @@ public class DrawTest
     @Before
     public void resetTestMe()
     {
-        testApp = new Draw_swing();
+        testApp = new GUIHandler();
         testMe = (DrawGUIs) testApp.panel;
     }
 

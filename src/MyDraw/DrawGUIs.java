@@ -32,7 +32,7 @@ class DrawGUIs extends JPanel
      * 
      */
     private static final long serialVersionUID = 5549826489329119875L;
-    Draw_swing app; // A reference to the application, to send commands to.
+    GUIHandler app; // A reference to the application, to send commands to.
     Color color;
     Color colorBG;
     BufferedImage saveImage;
@@ -42,10 +42,10 @@ class DrawGUIs extends JPanel
     * The GUI constructor does all the work of creating the GUI and setting
     * up event listeners.  Note the use of local and anonymous classes.
     */
-    public DrawGUIs(Draw_swing application)
+    public DrawGUIs(GUIHandler guiHandler)
     {
         //super("Draw_swing"); // Create the window
-        app = application; // Remember the application reference
+        app = guiHandler; // Remember the application reference
         color = Color.black; // the current drawing color
         colorBG = Color.white;
         this.setBackground(colorBG);
@@ -53,7 +53,7 @@ class DrawGUIs extends JPanel
         super.setBackground(colorBG);
         super.setForeground(colorBG);
         
-        Container frame = application.getFrame();
+        Container frame = guiHandler.getFrame();
         
         
         // selector for drawing modes
@@ -105,27 +105,12 @@ class DrawGUIs extends JPanel
         
       
         
-        // Here's a local class used for action listeners for the buttons
-        class DrawActionListener implements ActionListener
-        {
-            private String command;
-
-            public DrawActionListener(String cmd)
-            {
-                command = cmd;
-            }
-
-            public void actionPerformed(ActionEvent e)
-            {
-                app.doCommand(command);
-            }
-        }
-
+        
         // Define action listener adapters that connect the  buttons to the app
-        clear.addActionListener(new DrawActionListener("clear"));
-        quit.addActionListener(new DrawActionListener("quit"));
-        auto.addActionListener(new DrawActionListener("auto"));
-        save.addActionListener(new DrawActionListener("save"));
+        clear.addActionListener(new DrawActionListener("clear", app));
+        quit.addActionListener(new DrawActionListener("quit", app));
+        auto.addActionListener(new DrawActionListener("auto", app));
+        save.addActionListener(new DrawActionListener("save", app));
 
         // this class determines how mouse events are to be interpreted,
         // depending on the shape mode currently set    
