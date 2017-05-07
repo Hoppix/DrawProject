@@ -16,8 +16,9 @@ class DrawGUIs
     private static final long serialVersionUID = 5549826489329119875L;
     Color color;
     Color colorBG;
+    Color frameColor;
     BufferedImage saveImage;
-    Graphics2D backgroundG;
+    Graphics2D imageG;
     JPanel drawPanel;
     JFrame drawFrame;
     JButton clear;
@@ -47,11 +48,12 @@ class DrawGUIs
         drawFrame.setPreferredSize(new Dimension(700, 600));
         drawFrame.pack();
         drawFrame.setTitle("MyDraw -  Gruppe 5");
-        drawFrame.setResizable(false);
+        drawFrame.setResizable(true);
         drawFrame.setVisible(true);
 
         color = Color.black;
         colorBG = Color.white;
+        frameColor = Color.lightGray;
 
         
         // selector for drawing modes
@@ -89,12 +91,18 @@ class DrawGUIs
         save.setBounds(550, 10, 70, 20);
         auto.setBounds(480, 10, 60, 20);
 
+        quit.setBackground(frameColor);
+        clear.setBackground(frameColor);
+        save.setBackground(frameColor);
+        auto.setBackground(frameColor);
 
+        shape_chooser.setForeground(Color.black);
+        color_chooser.setForeground(Color.black);
+
+        drawFrame.getContentPane().setBackground(frameColor);
+        drawFrame.getContentPane().setForeground(frameColor);
         drawPanel.setBackground(colorBG);
         drawPanel.setForeground(colorBG);
-        drawFrame.setBackground(colorBG);
-        drawFrame.setForeground(colorBG);
-
 
 
         drawFrame.add(quit);
@@ -109,11 +117,9 @@ class DrawGUIs
 
 
         saveImage = new BufferedImage(drawPanel.getWidth(), drawPanel.getHeight(), BufferedImage.TYPE_INT_RGB );
-        backgroundG = saveImage.createGraphics();
-        backgroundG.setColor(colorBG);
-        backgroundG.fillRect(0, 37, 694, 535);
-
-
+        imageG = saveImage.createGraphics();
+        imageG.setColor(colorBG);
+        imageG.fillRect(0, 37, 694, 535);
 
 
     } 
@@ -261,8 +267,8 @@ class DrawGUIs
         // draw rectangle
         g.setColor(color);
         g.drawRect(x, y, w, h);
-        backgroundG.setColor(color);
-        backgroundG.drawRect(x, y, w, h);
+        imageG.setColor(color);
+        imageG.drawRect(x, y, w, h);
         
     }
     
@@ -277,15 +283,15 @@ class DrawGUIs
         int h = Math.abs(lower_right.y - upper_left.y);
         // draw rectangle
         g.drawOval(x, y, w, h);
-        backgroundG.setColor(color);
-        backgroundG.drawOval(x, y, w, h);
+        imageG.setColor(color);
+        imageG.drawOval(x, y, w, h);
     }
     
     public void drawPolyLine(java.util.List<Point> points)
     {
         Graphics g = drawPanel.getGraphics();
         g.setColor(color);
-        backgroundG.setColor(color);
+        imageG.setColor(color);
         for(int i = 0; i < points.size() -1; i++)
         {
             if(points.get(i+1).equals(null))
@@ -318,7 +324,7 @@ class DrawGUIs
             int xB = pointB.x;
             int yB = pointB.y;
             
-            backgroundG.drawLine(xA, yA, xB, yB);
+            imageG.drawLine(xA, yA, xB, yB);
             
         }
         
@@ -335,8 +341,8 @@ class DrawGUIs
         Graphics g = drawPanel.getGraphics();
         g.setColor(colorBG);
         g.fillRect(0, 0, drawPanel.getSize().width, drawPanel.getSize().height);
-        backgroundG.setColor(colorBG);
-        backgroundG.fillRect(0, 0, drawPanel.getSize().width, drawPanel.getSize().height);
+        imageG.setColor(colorBG);
+        imageG.fillRect(0, 0, drawPanel.getSize().width, drawPanel.getSize().height);
 
     }
     
@@ -386,9 +392,9 @@ class DrawGUIs
      * temporary help function for refactoring
      * @return background graphics of gui class
      */
-    public Graphics2D getBackgroundG()
+    public Graphics2D getImageG()
     {
-        return backgroundG;
+        return imageG;
     }
 
     /**

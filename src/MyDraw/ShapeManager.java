@@ -10,10 +10,10 @@ import java.awt.event.MouseMotionListener;
 
 class ShapeManager implements ItemListener
 {
-	// TODO drawable implementieren
-	// TODO graphics g integrieren
+	//TODO drawable implementieren
+	//TODO graphics g integrieren
 	DrawGUIs gui;
-	Graphics2D backgroundG;
+	Graphics2D imageG;
 
 	abstract class ShapeDrawer extends MouseAdapter implements MouseMotionListener
 	{
@@ -36,16 +36,18 @@ class ShapeManager implements ItemListener
 
 		public void mouseDragged(MouseEvent e)
 		{
-            //temp fix
-            backgroundG = gui.getBackgroundG();
+            imageG = gui.getImageG();
 
 			Graphics g = gui.getDrawPanel().getGraphics();
 			int x = e.getX(), y = e.getY();
+
 			g.setColor(gui.color);
 			g.setPaintMode();
 			g.drawLine(lastx, lasty, x, y);
-			backgroundG.setColor(gui.color);
-			backgroundG.drawLine(lastx, lasty, x, y);
+
+			imageG.setColor(gui.color);
+			imageG.drawLine(lastx, lasty, x, y);
+
 			lastx = x;
 			lasty = y;
 
@@ -75,8 +77,8 @@ class ShapeManager implements ItemListener
 				// first undraw a rubber rect
 				g.setXORMode(gui.color);
 				g.setColor(gui.getDrawPanel().getBackground());
-				backgroundG.setXORMode(gui.color);
-				backgroundG.setColor(gui.getDrawPanel().getBackground());
+				imageG.setXORMode(gui.color);
+				imageG.setColor(gui.getDrawPanel().getBackground());
 				doDraw(pressx, pressy, lastx, lasty, g);
 				lastx = -1;
 				lasty = -1;
@@ -84,8 +86,8 @@ class ShapeManager implements ItemListener
 			// these commands finish the rubberband mode
 			g.setPaintMode();
 			g.setColor(gui.color);
-			backgroundG.setPaintMode();
-			backgroundG.setColor(gui.color);
+			imageG.setPaintMode();
+			imageG.setColor(gui.color);
 			// draw the finel rectangle
 			doDraw(pressx, pressy, e.getX(), e.getY(), g);
 		}
@@ -98,9 +100,10 @@ class ShapeManager implements ItemListener
 			// these commands set the rubberband mode
 			g.setXORMode(gui.color);
 			g.setColor(gui.getDrawPanel().getBackground());
-			// TODO fix drawing getbackground
-			backgroundG.setXORMode(gui.color);
-			backgroundG.setColor(gui.getDrawPanel().getBackground());
+
+			imageG.setXORMode(gui.color);
+			imageG.setColor(gui.getDrawPanel().getBackground());
+
 			if (lastx != -1)
 			{
 				// first undraw previous rubber rect
@@ -122,8 +125,8 @@ class ShapeManager implements ItemListener
 			int h = Math.abs(y1 - y0);
 			// draw rectangle
 			g.drawRect(x, y, w, h);
-			backgroundG.setColor(gui.color);
-			backgroundG.drawRect(x, y, w, h);
+			imageG.setColor(gui.color);
+			imageG.drawRect(x, y, w, h);
 
 		}
 	}
@@ -139,8 +142,8 @@ class ShapeManager implements ItemListener
 			int h = Math.abs(y1 - y0);
 			// draw oval instead of rectangle
 			g.drawOval(x, y, w, h);
-			backgroundG.setColor(gui.color);
-			backgroundG.drawOval(x, y, w, h);
+			imageG.setColor(gui.color);
+			imageG.drawOval(x, y, w, h);
 		}
 	}
 
@@ -152,7 +155,7 @@ class ShapeManager implements ItemListener
 	public ShapeManager(DrawGUIs itsGui)
 	{
 		gui = itsGui;
-		backgroundG = gui.getBackgroundG();
+		imageG = gui.getImageG();
 		//TODO temp fix
 		// default: scribble mode
 		currentDrawer = scribbleDrawer;
