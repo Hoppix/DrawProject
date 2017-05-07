@@ -19,8 +19,8 @@ public class DrawTest
 
     public DrawTest()
     {
-        testApp = new GUIHandler();
-        testMe = new DrawGUIs(testApp);
+        testMe = new DrawGUIs();
+        testApp = new GUIHandler(testMe);
     }
 
     @Test
@@ -69,24 +69,24 @@ public class DrawTest
     public void testSetGetHeight()
     {
         testMe.setHeight(42);
-        assertEquals(42, testMe.getHeight());
-        assertNotEquals(0, testMe.getHeight());
+        assertEquals(42, testMe.getDrawPanel().getHeight());
+        assertNotEquals(0, testMe.getDrawPanel().getHeight());
         
         testMe.setHeight(1337);
-        assertEquals(1337, testMe.getHeight());
-        assertNotEquals(0, testMe.getHeight());
+        assertEquals(1337, testMe.getDrawPanel().getHeight());
+        assertNotEquals(0, testMe.getDrawPanel().getHeight());
     }
     
     @Test
     public void testSetGetWidth()
     {
         testMe.setWidth(42);
-        assertEquals(42, testMe.getWidth());
-        assertNotEquals(0, testMe.getWidth());
+        assertEquals(42, testMe.getDrawPanel().getWidth());
+        assertNotEquals(0, testMe.getDrawPanel().getWidth());
         
         testMe.setWidth(1337);
-        assertEquals(1337, testMe.getWidth());
-        assertNotEquals(0, testMe.getWidth());
+        assertEquals(1337, testMe.getDrawPanel().getWidth());
+        assertNotEquals(0, testMe.getDrawPanel().getWidth());
     }
     
   
@@ -135,8 +135,8 @@ public class DrawTest
     @Before
     public void resetTestMe()
     {
-        testApp = new GUIHandler();
-        testMe = (DrawGUIs) testApp.panel;
+        testMe = new DrawGUIs();
+        testApp = new GUIHandler(testMe);
     }
 
 }

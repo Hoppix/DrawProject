@@ -26,8 +26,8 @@ public class Draw
     
     public Draw()
     {
-        app = new GUIHandler();
-        gui = new DrawGUIs(app);
+        gui = new DrawGUIs();
+        app = new GUIHandler(gui);
     }
 
     

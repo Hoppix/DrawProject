@@ -7,6 +7,7 @@ import java.awt.event.ItemListener;
 public class ColorItemListener implements ItemListener
 {
     DrawGUIs parentGUI = null;
+    Color color = null;
     
     public ColorItemListener(DrawGUIs gui)
     {
@@ -17,7 +18,6 @@ public class ColorItemListener implements ItemListener
     @Override
     public void itemStateChanged(ItemEvent e)
     {
-        Color color = null;
         ColorHashMap colorMap = new ColorHashMap();
         
         color = colorMap.StringToColor((String)e.getItem());

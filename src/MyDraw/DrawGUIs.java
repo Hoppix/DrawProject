@@ -1,13 +1,6 @@
 package MyDraw;
 
-import java.awt.Choice;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
@@ -15,48 +8,60 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
-class DrawGUIs extends JPanel
+class DrawGUIs
 {
-    /**
-     * 
-     */
+
     private static final long serialVersionUID = 5549826489329119875L;
-    GUIHandler app; // A reference to the application, to send commands to.
     Color color;
     Color colorBG;
     BufferedImage saveImage;
     Graphics2D backgroundG;
+    JPanel drawPanel;
+    JFrame drawFrame;
+    JButton clear;
+    JButton quit;
+    JButton auto;
+    JButton save;
+    JLabel shapeLabel;
+    JLabel colorLabel;
+    Choice shape_chooser;
+    Choice color_chooser;
 
     /**
     * The GUI constructor does all the work of creating the GUI and setting
     * up event listeners.  Note the use of local and anonymous classes.
     */
-    public DrawGUIs(GUIHandler guiHandler)
+    public DrawGUIs()
     {
-        //super("Draw_swing"); // Create the window
-        app = guiHandler; // Remember the application reference
-        color = Color.black; // the current drawing color
+        drawPanel = new JPanel();
+        drawFrame = new JFrame();
+        drawFrame.add(drawPanel);
+        drawPanel.setLayout(null);
+        drawFrame.setLayout(null);
+
+        drawPanel.setBounds(0, 37, 694, 535);
+        drawFrame.setBackground(Color.LIGHT_GRAY);
+        drawFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        drawFrame.setPreferredSize(new Dimension(700, 600));
+        drawFrame.pack();
+        drawFrame.setTitle("MyDraw -  Gruppe 5");
+        drawFrame.setResizable(false);
+        drawFrame.setVisible(true);
+
+        color = Color.black;
         colorBG = Color.white;
-        this.setBackground(colorBG);
-        this.setForeground(colorBG);
-        super.setBackground(colorBG);
-        super.setForeground(colorBG);
-        
-        Container frame = guiHandler.getFrame();
-        
+
         
         // selector for drawing modes
-        Choice shape_chooser = new Choice();
+        shape_chooser = new Choice();
         shape_chooser.add("Scribble");
         shape_chooser.add("Rectangle");
         shape_chooser.add("Oval");
 
         // selector for drawing colors
-        Choice color_chooser = new Choice();
+        color_chooser = new Choice();
         color_chooser.add("Black");
         color_chooser.add("Green");
         color_chooser.add("Red");
@@ -64,80 +69,66 @@ class DrawGUIs extends JPanel
 
        
         // Create two buttons
-        JButton clear = new JButton("Clear");
-        JButton quit = new JButton("Quit");
-        JButton auto = new JButton("Auto");
-        JButton save = new JButton("Save");
+        clear = new JButton("Clear");
+        quit = new JButton("Quit");
+        auto = new JButton("Auto");
+        save = new JButton("Save");
                 
         
         //Create two labels
-        JLabel shapeLabel = new JLabel("Shape: ");
-        JLabel colorLabel = new JLabel("Color: ");
-        
-            
+        shapeLabel = new JLabel("Shape: ");
+        colorLabel = new JLabel("Color: ");
 
-        // Set a LayoutManager, and add the choosers and buttons to the window.
-        //this.setLayout(new FlowLayout(FlowLayout.RIGHT, 10, 5));       
-        frame.add(quit);
-        frame.add(clear);
-        frame.add(shapeLabel);
-        frame.add(shape_chooser);
-        frame.add(colorLabel);
-        frame.add(color_chooser);
-        frame.add(save);
-        frame.add(auto);
+
         quit.setBounds(10, 10, 60, 20 );
         clear.setBounds(80, 10, 70, 20);
         shapeLabel.setBounds(160, 10, 50, 20);
         shape_chooser.setBounds(220, 10, 90, 20);
         colorLabel.setBounds(320, 10, 50, 20);
         color_chooser.setBounds(380, 10, 90, 20);
-        auto.setBounds(480, 10, 60, 20);
         save.setBounds(550, 10, 70, 20);
-        this.setVisible(true);
-        
-      
-        
-        
-        // Define action listener adapters that connect the  buttons to the app
-        clear.addActionListener(new DrawActionListener("clear", app));
-        quit.addActionListener(new DrawActionListener("quit", app));
-        auto.addActionListener(new DrawActionListener("auto", app));
-        save.addActionListener(new DrawActionListener("save", app));
+        auto.setBounds(480, 10, 60, 20);
 
-        // this class determines how mouse events are to be interpreted,
-        // depending on the shape mode currently set    
-       
-        //shapemanager end
 
-        shape_chooser.addItemListener(new ShapeManager(this));     
-        color_chooser.addItemListener(new ColorItemListener(this));
+        drawPanel.setBackground(colorBG);
+        drawPanel.setForeground(colorBG);
+        drawFrame.setBackground(colorBG);
+        drawFrame.setForeground(colorBG);
 
-        // Handle the window close request similarly
-        // Finally, set the size of the window, and pop it up        
-        Container DrawContainer = this; 
-        DrawContainer.setBackground(colorBG);
-        this.setVisible(true); 
-        
-        this.setBounds(0, 37, 694, 535); 
-        saveImage = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB );        
+
+
+        drawFrame.add(quit);
+        drawFrame.add(clear);
+        drawFrame.add(shapeLabel);
+        drawFrame.add(shape_chooser);
+        drawFrame.add(colorLabel);
+        drawFrame.add(color_chooser);
+        drawFrame.add(save);
+        drawFrame.add(auto);
+
+
+
+        saveImage = new BufferedImage(drawPanel.getWidth(), drawPanel.getHeight(), BufferedImage.TYPE_INT_RGB );
         backgroundG = saveImage.createGraphics();
         backgroundG.setColor(colorBG);
         backgroundG.fillRect(0, 37, 694, 535);
-        
+
+
+
+
     } 
     //constructor end
 
     public void setHeight(int height)
     {
-        Rectangle rekt = this.getBounds();
-        this.setBounds(rekt.x, rekt.y, rekt.width, height);
+        Rectangle rekt = drawPanel.getBounds();
+        drawPanel.setBounds(rekt.x, rekt.y, rekt.width, height);
     }
 
     public void setWidth(int width)
     {
-        Rectangle rekt = this.getBounds(); //get rekt
-        this.setBounds(rekt.x, rekt.y, width, rekt.height);
+        Rectangle rekt = drawPanel.getBounds(); //get rekt
+        drawPanel.setBounds(rekt.x, rekt.y, width, rekt.height);
     }
     
 
@@ -262,7 +253,7 @@ class DrawGUIs extends JPanel
     
     public void drawRectangle(Point upper_left, Point lower_right)
     {
-        Graphics g = this.getGraphics();              
+        Graphics g = drawPanel.getGraphics();
         int x = upper_left.x;
         int y = upper_left.y;
         int w = Math.abs(lower_right.x - upper_left.x);
@@ -277,7 +268,7 @@ class DrawGUIs extends JPanel
     
     public void drawOval(Point upper_left, Point lower_right)
     {
-        Graphics g = this.getGraphics();        
+        Graphics g = drawPanel.getGraphics();
         g.setColor(color);
         
         int x = upper_left.x;
@@ -292,7 +283,7 @@ class DrawGUIs extends JPanel
     
     public void drawPolyLine(java.util.List<Point> points)
     {
-        Graphics g = this.getGraphics();        
+        Graphics g = drawPanel.getGraphics();
         g.setColor(color);
         backgroundG.setColor(color);
         for(int i = 0; i < points.size() -1; i++)
@@ -341,11 +332,11 @@ class DrawGUIs extends JPanel
     
     public void clear()
     {
-        Graphics g = this.getGraphics();
+        Graphics g = drawPanel.getGraphics();
         g.setColor(colorBG);
-        g.fillRect(0, 0, this.getSize().width, this.getSize().height);
+        g.fillRect(0, 0, drawPanel.getSize().width, drawPanel.getSize().height);
         backgroundG.setColor(colorBG);
-        backgroundG.fillRect(0, 0, this.getSize().width, this.getSize().height);
+        backgroundG.fillRect(0, 0, drawPanel.getSize().width, drawPanel.getSize().height);
 
     }
     
@@ -398,6 +389,19 @@ class DrawGUIs extends JPanel
     public Graphics2D getBackgroundG()
     {
         return backgroundG;
+    }
+
+    /**
+     * @return draw perspective of the gui
+     */
+    public JPanel getDrawPanel()
+    {
+        return drawPanel;
+    }
+
+    public JFrame getDrawFrame()
+    {
+        return drawFrame;
     }
     
 
