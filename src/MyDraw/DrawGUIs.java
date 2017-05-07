@@ -390,6 +390,15 @@ class DrawGUIs extends JPanel
     {
         MyBMPFile.write(filename, img);
     }
+
+    /**
+     * temporary help function for refactoring
+     * @return background graphics of gui class
+     */
+    public Graphics2D getBackgroundG()
+    {
+        return backgroundG;
+    }
     
 
     

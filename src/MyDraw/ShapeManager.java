@@ -36,6 +36,8 @@ class ShapeManager implements ItemListener
 
 		public void mouseDragged(MouseEvent e)
 		{
+            //temp fix
+            backgroundG = gui.getBackgroundG();
 
 			Graphics g = gui.getGraphics();
 			int x = e.getX(), y = e.getY();
@@ -150,6 +152,8 @@ class ShapeManager implements ItemListener
 	public ShapeManager(DrawGUIs itsGui)
 	{
 		gui = itsGui;
+		backgroundG = gui.getBackgroundG();
+		//TODO temp fix
 		// default: scribble mode
 		currentDrawer = scribbleDrawer;
 		// activate scribble drawer
