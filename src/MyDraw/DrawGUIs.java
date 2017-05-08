@@ -19,6 +19,7 @@ class DrawGUIs implements DrawAPI
     Color frameColor;
     BufferedImage saveImage;
     Graphics2D imageG;
+    Graphics2D paintG;
     JPanel drawPanel;
     JFrame drawFrame;
     JButton clear;
@@ -115,6 +116,8 @@ class DrawGUIs implements DrawAPI
         drawFrame.add(auto);
 
 
+
+        paintG = (Graphics2D)drawPanel.getGraphics();
 
         saveImage = new BufferedImage(drawPanel.getWidth(), drawPanel.getHeight(), BufferedImage.TYPE_INT_RGB );
         imageG = saveImage.createGraphics();
@@ -396,6 +399,8 @@ class DrawGUIs implements DrawAPI
     {
         return imageG;
     }
+
+    public Graphics2D getPaintG() { return paintG; }
 
     /**
      * @return draw perspective of the gui
