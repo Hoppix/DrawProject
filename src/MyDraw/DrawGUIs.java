@@ -56,15 +56,6 @@ class DrawGUIs implements DrawAPI
 
         paintG = (Graphics2D)drawPanel.getGraphics();
 
-        /**
-         * This listener makes the panel responsive
-         */
-        WindowStateListener listener = new WindowAdapter()
-        {
-
-        };
-
-        drawFrame.addWindowStateListener(listener);
     }
 
     public void setHeight(int height)
