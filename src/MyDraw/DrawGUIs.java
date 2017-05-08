@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-class DrawGUIs
+class DrawGUIs implements DrawAPI
 {
 
     private static final long serialVersionUID = 5549826489329119875L;
