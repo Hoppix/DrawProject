@@ -1,13 +1,9 @@
 package MyDraw;
 
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.io.IOException;
 
+import java.io.IOException;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.WindowConstants;
+
 
 
 public class GUIHandler
@@ -29,6 +25,8 @@ public class GUIHandler
 
         gui.shape_chooser.addItemListener(new ShapeManager(gui));
         gui.color_chooser.addItemListener(new ColorItemListener(gui));
+
+        gui.getDrawFrame().addWindowStateListener(new ResponsiveHandler(gui));
     }
     
 

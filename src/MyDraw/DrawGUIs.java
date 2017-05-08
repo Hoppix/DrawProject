@@ -1,6 +1,9 @@
 package MyDraw;
 
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowStateListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
@@ -37,96 +40,32 @@ class DrawGUIs implements DrawAPI
     */
     public DrawGUIs()
     {
-        drawPanel = new JPanel();
-        drawFrame = new JFrame();
-        drawFrame.add(drawPanel);
-        drawPanel.setLayout(null);
-        drawFrame.setLayout(null);
-
-        drawPanel.setBounds(0, 37, 694, 535);
-        drawFrame.setBackground(Color.LIGHT_GRAY);
-        drawFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        drawFrame.setPreferredSize(new Dimension(700, 600));
-        drawFrame.pack();
-        drawFrame.setTitle("MyDraw -  Gruppe 5");
-        drawFrame.setResizable(true);
-        drawFrame.setVisible(true);
-
         color = Color.black;
         colorBG = Color.white;
         frameColor = Color.lightGray;
 
-        
-        // selector for drawing modes
-        shape_chooser = new Choice();
-        shape_chooser.add("Scribble");
-        shape_chooser.add("Rectangle");
-        shape_chooser.add("Oval");
-
-        // selector for drawing colors
-        color_chooser = new Choice();
-        color_chooser.add("Black");
-        color_chooser.add("Green");
-        color_chooser.add("Red");
-        color_chooser.add("Blue");
-
-       
-        // Create two buttons
-        clear = new JButton("Clear");
-        quit = new JButton("Quit");
-        auto = new JButton("Auto");
-        save = new JButton("Save");
-                
-        
-        //Create two labels
-        shapeLabel = new JLabel("Shape: ");
-        colorLabel = new JLabel("Color: ");
-
-
-        quit.setBounds(10, 10, 60, 20 );
-        clear.setBounds(80, 10, 70, 20);
-        shapeLabel.setBounds(160, 10, 50, 20);
-        shape_chooser.setBounds(220, 10, 90, 20);
-        colorLabel.setBounds(320, 10, 50, 20);
-        color_chooser.setBounds(380, 10, 90, 20);
-        save.setBounds(550, 10, 70, 20);
-        auto.setBounds(480, 10, 60, 20);
-
-        quit.setBackground(frameColor);
-        clear.setBackground(frameColor);
-        save.setBackground(frameColor);
-        auto.setBackground(frameColor);
-
-        shape_chooser.setForeground(Color.black);
-        color_chooser.setForeground(Color.black);
-
-        drawFrame.getContentPane().setBackground(frameColor);
-        drawFrame.getContentPane().setForeground(frameColor);
-        drawPanel.setBackground(colorBG);
-        drawPanel.setForeground(colorBG);
-
-
-        drawFrame.add(quit);
-        drawFrame.add(clear);
-        drawFrame.add(shapeLabel);
-        drawFrame.add(shape_chooser);
-        drawFrame.add(colorLabel);
-        drawFrame.add(color_chooser);
-        drawFrame.add(save);
-        drawFrame.add(auto);
-
-
-
-        paintG = (Graphics2D)drawPanel.getGraphics();
+        this.setupBorders();
+        this.setupButtons();
+        this.setupChooser();
+        this.addButtons();
 
         saveImage = new BufferedImage(drawPanel.getWidth(), drawPanel.getHeight(), BufferedImage.TYPE_INT_RGB );
         imageG = saveImage.createGraphics();
         imageG.setColor(colorBG);
         imageG.fillRect(0, 37, 694, 535);
 
+        paintG = (Graphics2D)drawPanel.getGraphics();
 
-    } 
-    //constructor end
+        /**
+         * This listener makes the panel responsive
+         */
+        WindowStateListener listener = new WindowAdapter()
+        {
+
+        };
+
+        drawFrame.addWindowStateListener(listener);
+    }
 
     public void setHeight(int height)
     {
@@ -428,6 +367,90 @@ class DrawGUIs implements DrawAPI
     public void redraw()
     {
         //TODO 1.6
+    }
+
+    private void setupBorders()
+    {
+        drawPanel = new JPanel();
+        drawFrame = new JFrame();
+        drawFrame.add(drawPanel);
+        drawPanel.setLayout(null);
+        drawFrame.setLayout(null);
+
+        drawPanel.setBounds(0, 37, 694, 535);
+        drawFrame.setBackground(Color.LIGHT_GRAY);
+        drawFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        drawFrame.setPreferredSize(new Dimension(700, 600));
+        drawFrame.pack();
+        drawFrame.setTitle("MyDraw -  Gruppe 5");
+        drawFrame.setResizable(true);
+        drawFrame.setVisible(true);
+
+        drawFrame.getContentPane().setBackground(frameColor);
+        drawFrame.getContentPane().setForeground(frameColor);
+        drawPanel.setBackground(colorBG);
+        drawPanel.setForeground(colorBG);
+    }
+
+    private void setupButtons()
+    {
+        // Create two buttons
+        clear = new JButton("Clear");
+        quit = new JButton("Quit");
+        auto = new JButton("Auto");
+        save = new JButton("Save");
+
+
+        quit.setBounds(10, 10, 60, 20 );
+        clear.setBounds(80, 10, 70, 20);
+        save.setBounds(550, 10, 70, 20);
+        auto.setBounds(480, 10, 60, 20);
+
+        quit.setBackground(frameColor);
+        clear.setBackground(frameColor);
+        save.setBackground(frameColor);
+        auto.setBackground(frameColor);
+    }
+
+    private void setupChooser()
+    {
+        // selector for drawing modes
+        shape_chooser = new Choice();
+        shape_chooser.add("Scribble");
+        shape_chooser.add("Rectangle");
+        shape_chooser.add("Oval");
+
+        // selector for drawing colors
+        color_chooser = new Choice();
+        color_chooser.add("Black");
+        color_chooser.add("Green");
+        color_chooser.add("Red");
+        color_chooser.add("Blue");
+
+        //Create two labels
+        shapeLabel = new JLabel("Shape: ");
+        colorLabel = new JLabel("Color: ");
+
+        shape_chooser.setForeground(Color.black);
+        color_chooser.setForeground(Color.black);
+
+        shapeLabel.setBounds(160, 10, 50, 20);
+        shape_chooser.setBounds(220, 10, 90, 20);
+        colorLabel.setBounds(320, 10, 50, 20);
+        color_chooser.setBounds(380, 10, 90, 20);
+    }
+
+    private void addButtons()
+    {
+        drawFrame.add(quit);
+        drawFrame.add(clear);
+        drawFrame.add(shapeLabel);
+        drawFrame.add(shape_chooser);
+        drawFrame.add(colorLabel);
+        drawFrame.add(color_chooser);
+        drawFrame.add(save);
+        drawFrame.add(auto);
+
     }
     
 
