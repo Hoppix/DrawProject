@@ -2,20 +2,25 @@ package MyDraw;
 
 
 import java.io.IOException;
-import javax.swing.JFrame;
-
+import javax.swing.*;
 
 
 public class GUIHandler
 {
     //TODO command queue
+    private JFileChooser chooser;
     private JFrame frame;
     public DrawGUIs gui;
-    
+    private String savePath;
+
+
     public GUIHandler(DrawGUIs getgui)
     {
         gui = getgui;
         frame = gui.getDrawFrame();
+        chooser = new JFileChooser();
+
+        chooser.addChoosableFileFilter(new BMPFileFilter());
 
         // Define action listener adapters that connect the  buttons to the app
         gui.clear.addActionListener(new DrawActionListener("clear", this));
@@ -49,9 +54,34 @@ public class GUIHandler
         }
         else if(command.equals("save"))
         {
+            chooser.setVisible(true);
+
+            int retrieve = chooser.showSaveDialog(gui.getDrawFrame());
+
+            if(retrieve == chooser.APPROVE_OPTION)
+            {
+                String extension2 = chooser.getFileFilter().getDescription();
+
+                if(extension2.equals("*bmp,*.BMP"))
+                {
+                    /**
+                     *  ignore
+                     */
+                }
+            }
             try
             {
-                gui.writeImage(gui.getDrawing(), "imageTesting\\test.bmp");
+                savePath = chooser.getSelectedFile().getAbsolutePath();
+            }
+            catch (NullPointerException e)
+            {
+                JOptionPane.showMessageDialog(frame, "Speichern abgebrochen");
+                e.printStackTrace();
+            }
+
+            try
+            {
+                gui.writeImage(gui.getDrawing(), savePath + ".bmp");
             }
             catch (IOException e)
             {
