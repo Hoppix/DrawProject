@@ -6,7 +6,6 @@ import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -14,6 +13,8 @@ class DrawGUIs implements DrawAPI
 {
 
     private static final long serialVersionUID = 5549826489329119875L;
+    private final static int FRAMEWIDTH = 820;
+    private final static int FRAMEHEIGHT = 600;
     Color color;
     Color colorBG;
     Color frameColor;
@@ -28,8 +29,10 @@ class DrawGUIs implements DrawAPI
     JButton save;
     JLabel shapeLabel;
     JLabel colorLabel;
+    JLabel colorBGLabel;
     Choice shape_chooser;
     Choice color_chooser;
+    Choice colorBG_chooser;
 
     /**
     * The GUI constructor does all the work of creating the GUI and setting
@@ -370,7 +373,7 @@ class DrawGUIs implements DrawAPI
 
         drawFrame.setBackground(Color.LIGHT_GRAY);
         drawFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        drawFrame.setPreferredSize(new Dimension(700, 600));
+        drawFrame.setPreferredSize(new Dimension(FRAMEWIDTH, FRAMEHEIGHT));
         drawFrame.pack();
         drawFrame.setTitle("MyDraw -  Gruppe 5");
         drawFrame.setResizable(true);
@@ -395,8 +398,8 @@ class DrawGUIs implements DrawAPI
 
         quit.setBounds(10, 10, 60, 20 );
         clear.setBounds(80, 10, 70, 20);
-        save.setBounds(550, 10, 70, 20);
-        auto.setBounds(480, 10, 60, 20);
+        save.setBounds(650, 10, 70, 20);
+        auto.setBounds(730, 10, 60, 20);
 
         quit.setBackground(frameColor);
         clear.setBackground(frameColor);
@@ -419,17 +422,28 @@ class DrawGUIs implements DrawAPI
         color_chooser.add("Red");
         color_chooser.add("Blue");
 
+        // selector for background color
+        colorBG_chooser = new Choice();
+        colorBG_chooser.add("Black");
+        colorBG_chooser.add("Green");
+        colorBG_chooser.add("Red");
+        colorBG_chooser.add("Blue");
+
         //Create two labels
         shapeLabel = new JLabel("Shape: ");
         colorLabel = new JLabel("Color: ");
+        colorBGLabel = new JLabel("ColorBG: ");
 
         shape_chooser.setForeground(Color.black);
         color_chooser.setForeground(Color.black);
+        colorBG_chooser.setForeground(Color.black);
 
         shapeLabel.setBounds(160, 10, 50, 20);
         shape_chooser.setBounds(220, 10, 90, 20);
         colorLabel.setBounds(320, 10, 50, 20);
-        color_chooser.setBounds(380, 10, 90, 20);
+        color_chooser.setBounds(370, 10, 90, 20);
+        colorBGLabel.setBounds(480, 10, 60, 20);
+        colorBG_chooser.setBounds(540, 10,90,20);
     }
 
     private void addButtons()
@@ -440,6 +454,8 @@ class DrawGUIs implements DrawAPI
         drawFrame.add(shape_chooser);
         drawFrame.add(colorLabel);
         drawFrame.add(color_chooser);
+        drawFrame.add(colorBGLabel);
+        drawFrame.add(colorBG_chooser);
         drawFrame.add(save);
         drawFrame.add(auto);
 
