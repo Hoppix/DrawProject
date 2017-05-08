@@ -30,6 +30,7 @@ public class GUIHandler
 
         gui.shape_chooser.addItemListener(new ShapeManager(gui));
         gui.color_chooser.addItemListener(new ColorItemListener(gui));
+        gui.colorBG_chooser.addItemListener(new ColorBGItemListener(gui));
 
         gui.getDrawFrame().addWindowStateListener(new ResponsiveHandler(gui));
     }
