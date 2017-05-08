@@ -25,25 +25,25 @@ public class ResponsiveHandler implements WindowStateListener
 
             if ((oldState & Frame.MAXIMIZED_BOTH) == 0 && (newState & Frame.MAXIMIZED_BOTH) != 0)
             {
-                responsive.setHeight(responsive.getDrawFrame().getHeight() - 20);
+                responsive.setHeight(responsive.getDrawFrame().getHeight() - 40);
                 responsive.setWidth(responsive.getDrawFrame().getWidth());
 
                 responsive.saveImage =  new BufferedImage(responsive.getDrawPanel().getWidth(), responsive.getDrawPanel().getHeight(), BufferedImage.TYPE_INT_RGB);
 
                 responsive.imageG = responsive.saveImage.createGraphics();
                 responsive.imageG.setColor(responsive.colorBG);
-                responsive.imageG.fillRect(0, 20, responsive.getDrawPanel().getWidth(), responsive.getDrawPanel().getHeight());
+                responsive.imageG.fillRect(0, 40, responsive.getDrawPanel().getWidth(), responsive.getDrawPanel().getHeight());
             }
             else if ((oldState & Frame.MAXIMIZED_BOTH) != 0 && (newState & Frame.MAXIMIZED_BOTH) == 0)
             {
-                responsive.setHeight(responsive.getDrawFrame().getHeight() - 20);
+                responsive.setHeight(responsive.getDrawFrame().getHeight() - 40);
                 responsive.setWidth(responsive.getDrawFrame().getWidth());
 
                 responsive.saveImage =  new BufferedImage(responsive.getDrawPanel().getWidth(), responsive.getDrawPanel().getHeight(), BufferedImage.TYPE_INT_RGB);
 
                 responsive.imageG = responsive.saveImage.createGraphics();
                 responsive.imageG.setColor(responsive.colorBG);
-                responsive.imageG.fillRect(0, 20, responsive.getDrawPanel().getWidth(), responsive.getDrawPanel().getHeight());
+                responsive.imageG.fillRect(0, 40, responsive.getDrawPanel().getWidth(), responsive.getDrawPanel().getHeight());
             }
 
     }

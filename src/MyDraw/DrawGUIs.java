@@ -47,10 +47,6 @@ class DrawGUIs implements DrawAPI
         this.setupChooser();
         this.addButtons();
 
-        //saveImage = new BufferedImage(drawPanel.getWidth(), drawPanel.getHeight(), BufferedImage.TYPE_INT_RGB );
-        //imageG = saveImage.createGraphics();
-        //imageG.setColor(colorBG);
-        //imageG.fillRect(0, 37, 694, 535);
 
         saveImage =  new BufferedImage(drawPanel.getWidth(),drawPanel.getHeight(), BufferedImage.TYPE_INT_RGB);
 
@@ -372,7 +368,6 @@ class DrawGUIs implements DrawAPI
         drawPanel.setLayout(null);
         drawFrame.setLayout(null);
 
-        drawPanel.setBounds(0, 37, 694, 535);
         drawFrame.setBackground(Color.LIGHT_GRAY);
         drawFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         drawFrame.setPreferredSize(new Dimension(700, 600));
@@ -380,6 +375,8 @@ class DrawGUIs implements DrawAPI
         drawFrame.setTitle("MyDraw -  Gruppe 5");
         drawFrame.setResizable(true);
         drawFrame.setVisible(true);
+
+        drawPanel.setBounds(0, 40, drawFrame.getWidth(), drawFrame.getHeight() - 40);
 
         drawFrame.getContentPane().setBackground(frameColor);
         drawFrame.getContentPane().setForeground(frameColor);
