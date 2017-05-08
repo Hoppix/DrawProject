@@ -34,6 +34,7 @@ class DrawGUIs implements DrawAPI
     /**
     * The GUI constructor does all the work of creating the GUI and setting
     * up event listeners.  Note the use of local and anonymous classes.
+     * aka code abomination.
     */
     public DrawGUIs()
     {
@@ -46,10 +47,16 @@ class DrawGUIs implements DrawAPI
         this.setupChooser();
         this.addButtons();
 
-        saveImage = new BufferedImage(drawPanel.getWidth(), drawPanel.getHeight(), BufferedImage.TYPE_INT_RGB );
+        //saveImage = new BufferedImage(drawPanel.getWidth(), drawPanel.getHeight(), BufferedImage.TYPE_INT_RGB );
+        //imageG = saveImage.createGraphics();
+        //imageG.setColor(colorBG);
+        //imageG.fillRect(0, 37, 694, 535);
+
+        saveImage =  new BufferedImage(drawPanel.getWidth(),drawPanel.getHeight(), BufferedImage.TYPE_INT_RGB);
+
         imageG = saveImage.createGraphics();
         imageG.setColor(colorBG);
-        imageG.fillRect(0, 37, 694, 535);
+        imageG.fillRect(0, 20, drawPanel.getWidth(), drawPanel.getHeight());
 
         paintG = (Graphics2D)drawPanel.getGraphics();
 
