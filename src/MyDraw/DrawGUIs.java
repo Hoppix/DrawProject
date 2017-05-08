@@ -418,18 +418,18 @@ class DrawGUIs implements DrawAPI
         // selector for drawing colors
         color_chooser = new Choice();
         color_chooser.add("Black");
+        color_chooser.add("White");
         color_chooser.add("Green");
         color_chooser.add("Red");
         color_chooser.add("Blue");
-        color_chooser.add("White");
 
         // selector for background color
         colorBG_chooser = new Choice();
+        colorBG_chooser.add("White");
         colorBG_chooser.add("Black");
         colorBG_chooser.add("Green");
         colorBG_chooser.add("Red");
         colorBG_chooser.add("Blue");
-        colorBG_chooser.add("White");
 
         //Create two labels
         shapeLabel = new JLabel("Shape: ");
