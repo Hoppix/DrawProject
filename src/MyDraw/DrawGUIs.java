@@ -409,6 +409,21 @@ class DrawGUIs implements DrawAPI
     {
         return drawFrame;
     }
+
+    public void undo()
+    {
+        //TODO 1.6
+    }
+
+    public void redo()
+    {
+        //TODO 1.6
+    }
+
+    public void redraw()
+    {
+        //TODO 1.6
+    }
     
 
     

@@ -27,4 +27,10 @@ public interface DrawAPI
     public void clear();
 
     public Image getDrawing();
+
+    public void redraw();
+
+    public void undo();
+
+    public void redo();
 }
