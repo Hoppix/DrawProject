@@ -421,6 +421,7 @@ class DrawGUIs implements DrawAPI
         color_chooser.add("Green");
         color_chooser.add("Red");
         color_chooser.add("Blue");
+        color_chooser.add("White");
 
         // selector for background color
         colorBG_chooser = new Choice();
@@ -428,6 +429,7 @@ class DrawGUIs implements DrawAPI
         colorBG_chooser.add("Green");
         colorBG_chooser.add("Red");
         colorBG_chooser.add("Blue");
+        colorBG_chooser.add("White");
 
         //Create two labels
         shapeLabel = new JLabel("Shape: ");
