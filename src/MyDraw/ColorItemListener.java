@@ -6,23 +6,20 @@ import java.awt.event.ItemListener;
 
 public class ColorItemListener implements ItemListener
 {
-    DrawGUIs parentGUI = null;
+    GUIHandler parentHandler = null;
     Color color = null;
     
-    public ColorItemListener(DrawGUIs gui)
+    public ColorItemListener(GUIHandler handler)
     {
-        parentGUI = gui;
+    	parentHandler = handler;
     }
 
     @SuppressWarnings("static-access")
     @Override
     public void itemStateChanged(ItemEvent e)
-    {
-        ColorHashMap colorMap = new ColorHashMap();
-        
-        color = colorMap.StringToColor((String)e.getItem());
-        
-        parentGUI.color = color;
+    {   	
+        parentHandler.color = (String)e.getItem();
+        parentHandler.doCommand("changeColor");
     }
 
 }

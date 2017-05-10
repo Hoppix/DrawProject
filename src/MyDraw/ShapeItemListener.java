@@ -16,7 +16,6 @@ public class ShapeItemListener implements ItemListener {
         parentHandler = handler;
     }
 
-    @SuppressWarnings("static-access")
     @Override
     public void itemStateChanged(ItemEvent e)
     {              

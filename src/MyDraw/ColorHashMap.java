@@ -32,6 +32,7 @@ public class ColorHashMap
         
     }
     
+    //TODO: Maps werden erst im Constructor befuellt, Methoden duerfen deshalb nicht statisch sein.
     public static String colorToString(Color color)
     {
         return stringMap.get(color);
