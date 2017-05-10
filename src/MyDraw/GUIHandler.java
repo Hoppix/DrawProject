@@ -12,6 +12,7 @@ import java.awt.event.MouseMotionListener;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 import javax.swing.*;
 
@@ -20,7 +21,7 @@ import javax.swing.*;
 
 public class GUIHandler extends MouseAdapter implements MouseMotionListener
 {
-    //TODO command queue
+    //TODO Draw commands in Command queue aufnehmen
     private JFileChooser chooser;
     private JFrame frame;
     public DrawGUIs gui;
@@ -29,7 +30,9 @@ public class GUIHandler extends MouseAdapter implements MouseMotionListener
     public Graphics2D imageG;
     public Graphics g;
     public Queue<String> cmdQueue;
+    public Stack<String> doneActions; //TODO: durchgeführte commands hier speichern (1.6)
     private Timer timer;
+    
    
     public GUIHandler(DrawGUIs getgui)
     {
@@ -39,6 +42,7 @@ public class GUIHandler extends MouseAdapter implements MouseMotionListener
         imageG = gui.getImageG();
         drawer = new RectangleDrawer(); //default style
         cmdQueue = new LinkedList<String>();
+        doneActions = new Stack<String>();
 
         chooser.addChoosableFileFilter(new BMPFileFilter());
 

@@ -19,6 +19,7 @@ public class ResponsiveHandler implements WindowStateListener, ComponentListener
         responsive = gui;
     }
 
+    //TODO: Panal resize bei beliebiger veraenderung, momentan nur bei Maximierung
     @Override
     public void windowStateChanged(WindowEvent e)
     {
