@@ -4,11 +4,13 @@ package MyDraw;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.Queue;
 
 import javax.swing.*;
@@ -26,9 +28,8 @@ public class GUIHandler extends MouseAdapter implements MouseMotionListener
     public Drawable drawer;
     public Graphics2D imageG;
     public Graphics g;
-    public String shape;
-    public String color;
     public Queue<String> cmdQueue;
+    private Timer timer;
    
     public GUIHandler(DrawGUIs getgui)
     {
@@ -36,8 +37,8 @@ public class GUIHandler extends MouseAdapter implements MouseMotionListener
         frame = gui.getDrawFrame();
         chooser = new JFileChooser();
         imageG = gui.getImageG();
-        shape = "Rectangle";//default style
         drawer = new RectangleDrawer(); //default style
+        cmdQueue = new LinkedList<String>();
 
         chooser.addChoosableFileFilter(new BMPFileFilter());
 
@@ -50,17 +51,24 @@ public class GUIHandler extends MouseAdapter implements MouseMotionListener
         gui.shape_chooser.addItemListener(new ShapeManager(gui));
         //gui.getDrawPanel().addMouseListener(this);
 		//gui.getDrawPanel().addMouseMotionListener(this);
-        //gui.shape_chooser.addItemListener(new ShapeItemListener(this)); // wird ShapeManager ersetzen
-        gui.color_chooser.addItemListener(new ColorItemListener(this)); //TODO ueber doCommand leiten
-        gui.colorBG_chooser.addItemListener(new ColorBGItemListener(gui)); //same here
+        gui.shape_chooser.addItemListener(new ShapeItemListener(this));
+        gui.color_chooser.addItemListener(new ColorItemListener(this));
+        gui.colorBG_chooser.addItemListener(new ColorBGItemListener(this)); 
 
         gui.getDrawFrame().addWindowStateListener(new ResponsiveHandler(gui));
+        
+        timer = new Timer(10, new TimerListener(this));
+        timer.start();
     }
     
 
     
     public void doCommand(String command)
     {
+    	if (command == null)
+    	{
+    		return;
+    	}
         if (command.equals("clear"))
         { 
            gui.clear();
@@ -112,9 +120,10 @@ public class GUIHandler extends MouseAdapter implements MouseMotionListener
             }
 
         }   
-        else if(command.equals("changeShape"))
+        else if(command.contains("changeShape"))
         {
-        	switch (shape)
+        	command = command.replace("changeShape", "");
+        	switch (command)
         	{
         		case "Rectangle": 
         		{       			
@@ -139,10 +148,19 @@ public class GUIHandler extends MouseAdapter implements MouseMotionListener
         		}
         	}
         }
-        else if(command.equals("changeColor"))
+        else if(command.contains("changeColor"))
         {   
+        	command = command.replace("changeColor", "");
         	ColorHashMap map = new ColorHashMap();
-        	gui.color = map.StringToColor(color);         
+        	gui.color = map.StringToColor(command);         
+        }
+        else if(command.contains("changeBGColor"))
+        {
+        	System.out.println(command);
+        	command = command.replace("changeBGColor", "");
+            ColorHashMap map = new ColorHashMap();
+        	gui.colorBG = map.StringToColor(command); 
+            gui.clear();
         }
     }
     

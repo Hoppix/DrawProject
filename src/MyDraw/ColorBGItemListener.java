@@ -9,21 +9,15 @@ import java.awt.event.ItemListener;
  */
 public class ColorBGItemListener implements ItemListener
 {
-    DrawGUIs parentGUI;
+    GUIHandler parentHandler;
     Color colorBG;
-    public ColorBGItemListener(DrawGUIs gui)
+    public ColorBGItemListener(GUIHandler handler)
     {
-        parentGUI = gui;
+        parentHandler = handler;
     }
     @Override
     public void itemStateChanged(ItemEvent e)
-    {
-        ColorHashMap colorMap = new ColorHashMap();
-
-        colorBG = colorMap.StringToColor((String)e.getItem());
-
-        parentGUI.colorBG = colorBG;
-
-        parentGUI.clear();
+    {   	
+    	parentHandler.cmdQueue.add("changeBGColor" + (String)e.getItem());
     }
 }
