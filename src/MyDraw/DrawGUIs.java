@@ -18,6 +18,7 @@ class DrawGUIs implements DrawAPI
     Color color;
     Color colorBG;
     Color frameColor;
+    String shape;
     BufferedImage saveImage;
     Graphics2D imageG;
     Graphics2D paintG;
