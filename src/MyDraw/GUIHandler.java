@@ -2,6 +2,8 @@ package MyDraw;
 
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -20,18 +22,18 @@ public class GUIHandler extends MouseAdapter implements MouseMotionListener
     public DrawGUIs gui;
     private String savePath;
     public Drawable drawer;
+    public Graphics2D imageG;
     public Graphics g;
-    String shape;
-
-
+    public String shape;
+   
     public GUIHandler(DrawGUIs getgui)
     {
         gui = getgui;
         frame = gui.getDrawFrame();
         chooser = new JFileChooser();
-        g = gui.getImageG();
+        imageG = gui.getImageG();
         shape = gui.shape;
-        drawer = null; 
+        drawer = new RectangleDrawer(); //default style
 
         chooser.addChoosableFileFilter(new BMPFileFilter());
 
@@ -41,11 +43,11 @@ public class GUIHandler extends MouseAdapter implements MouseMotionListener
         gui.auto.addActionListener(new DrawActionListener("auto", this));
         gui.save.addActionListener(new DrawActionListener("save", this));
 
-        gui.shape_chooser.addItemListener(new ShapeManager(gui));
+        //gui.shape_chooser.addItemListener(new ShapeManager(gui));
         gui.getDrawPanel().addMouseListener(this);
 		gui.getDrawPanel().addMouseMotionListener(this);
         gui.shape_chooser.addItemListener(new ShapeItemListener(this)); // wird ShapeManager ersetzen
-        gui.color_chooser.addItemListener(new ColorItemListener(gui)); //TODO �ber doCommand leiten
+        gui.color_chooser.addItemListener(new ColorItemListener(gui)); //TODO ueber doCommand leiten
         gui.colorBG_chooser.addItemListener(new ColorBGItemListener(gui)); //same here
 
         gui.getDrawFrame().addWindowStateListener(new ResponsiveHandler(gui));
@@ -111,14 +113,15 @@ public class GUIHandler extends MouseAdapter implements MouseMotionListener
         	switch (shape)
         	{
         		case "Rectangle": 
-        		{
+        		{       			
         			System.out.println("test");
-        			//drawer = new rektangle();
+        			drawer = new RectangleDrawer();
         			break;
         		}
         		case "Oval": 
         		{
-        			//drawer = new Oval();
+        			System.out.println("test");
+        			drawer = new OvalDrawer();
         			break;
         		}
 			
@@ -139,15 +142,24 @@ public class GUIHandler extends MouseAdapter implements MouseMotionListener
     public void mousePressed(MouseEvent e)
 	{
 		//set starting point
+    	System.out.println("mousePressed");
+    	drawer.setStart(e.getPoint());
+    	
 	}
     
     public void mouseDragged(MouseEvent e)
 	{
+    	drawer.setEnd(e.getPoint());
         //expand object
 	}
     
     public void mouseReleased(MouseEvent e)
     {
+    	System.out.println("mouseReleased");
+    	drawer.setEnd(e.getPoint());
+    	g = gui.getDrawPanel().getGraphics();
+    	drawer.draw(g);
+    	drawer.draw(imageG);
     	//draw final object
     }
 }
