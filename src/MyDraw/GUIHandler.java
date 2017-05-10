@@ -45,7 +45,7 @@ public class GUIHandler extends MouseAdapter implements MouseMotionListener
         gui.getDrawPanel().addMouseListener(this);
 		gui.getDrawPanel().addMouseMotionListener(this);
         gui.shape_chooser.addItemListener(new ShapeItemListener(this)); // wird ShapeManager ersetzen
-        gui.color_chooser.addItemListener(new ColorItemListener(gui)); //TODO über doCommand leiten
+        gui.color_chooser.addItemListener(new ColorItemListener(gui)); //TODO ï¿½ber doCommand leiten
         gui.colorBG_chooser.addItemListener(new ColorBGItemListener(gui)); //same here
 
         gui.getDrawFrame().addWindowStateListener(new ResponsiveHandler(gui));
@@ -89,6 +89,15 @@ public class GUIHandler extends MouseAdapter implements MouseMotionListener
             try
             {
                 savePath = chooser.getSelectedFile().getAbsolutePath();
+
+                try
+                {
+                    gui.writeImage(gui.getDrawing(), savePath + ".bmp");
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
             }
             catch (NullPointerException e)
             {
@@ -96,14 +105,6 @@ public class GUIHandler extends MouseAdapter implements MouseMotionListener
                 e.printStackTrace();
             }
 
-            try
-            {
-                gui.writeImage(gui.getDrawing(), savePath + ".bmp");
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
         }   
         else if(command.equals("changeShape"))
         {
