@@ -10,22 +10,36 @@ public class OvalDrawer implements Drawable
 	public Point startPoint;
 	public Point endPoint;
 	
-	public OvalDrawer()
-	{
-		startPoint = new Point();
-		endPoint = new Point();
+	public OvalDrawer(Point start, Point end)
+    {
+        startPoint = start;
+        endPoint = end;
 	}
 
 	public void draw(Graphics g) 
 	{
-		
-	}
-	public void setStart(Point p) 
-	{
-		startPoint = p;
-	}
-	public void setEnd(Point p) 
-	{
-		endPoint = p;
+	    if(startPoint.x < 0 && startPoint.y < 0)
+        {
+            return;
+        }
+        
+	    
+	    int x = (int) startPoint.getX();
+        int y = (int) startPoint.getY();
+        int w = (int)(endPoint.getX() - startPoint.getX());
+        int h = (int) (endPoint.getY() - startPoint.getY());
+        
+        if (w < 0)
+        {
+            w = Math.abs(w);
+            x = (int) endPoint.getX();
+        }
+        if (h < 0)
+        {
+            h = Math.abs(w);
+            y = (int) endPoint.getY();
+        }
+        
+        g.drawOval(x, y, w, h);
 	}
 }

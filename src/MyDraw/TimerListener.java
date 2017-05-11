@@ -5,17 +5,17 @@ import java.awt.event.ActionListener;
 
 public class TimerListener implements ActionListener {
 	
-	GUIHandler parentHandler;
+	CommandHandler parentHandler;
 	
-	public TimerListener(GUIHandler handler)
+	public TimerListener(CommandHandler handler)
     {
     	parentHandler = handler;
     }
 	@Override
 	public void actionPerformed(ActionEvent arg0) 
 	{
-		parentHandler.doCommand(parentHandler.cmdQueue.poll());
-		
+		parentHandler.cmdQueue.poll().draw(parentHandler.imageG);
+		parentHandler.cmdQueue.poll().draw(parentHandler.paintG);
 	}
 
 }

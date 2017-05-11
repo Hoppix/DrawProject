@@ -333,7 +333,10 @@ class DrawGUIs implements DrawAPI
         return imageG;
     }
 
-    public Graphics2D getPaintG() { return paintG; }
+    public Graphics2D getPaintG() 
+    { 
+        return paintG; 
+    }
 
     /**
      * @return draw perspective of the gui

@@ -1,0 +1,36 @@
+package MyDraw;
+
+import java.awt.Graphics;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
+public class CommandHandler
+{
+    //public Queue<Drawable> cmdQueue;
+    public LinkedList<Drawable> cmdQueue;
+    
+    private GUIHandler parentHandler;
+    private Timer timer;
+    
+    public Graphics paintG;
+    public Graphics imageG;
+    
+    public String shape;
+    
+    public CommandHandler(GUIHandler handler)
+    {
+        parentHandler = handler;
+        
+        cmdQueue = new LinkedList<Drawable>();
+        
+        imageG = handler.gui.getImageG();
+        paintG = handler.gui.getPaintG();           
+        
+        timer = new Timer(10, new TimerListener(this));
+        timer.start();
+    }
+}

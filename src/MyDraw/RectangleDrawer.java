@@ -10,30 +10,35 @@ public class RectangleDrawer implements Drawable
 	public Point startPoint;
 	public Point endPoint;
 	
-	public RectangleDrawer()
+	public RectangleDrawer(Point start, Point end)
 	{
-		startPoint = new Point();
-		endPoint = new Point();
+		startPoint = start;
+		endPoint = end;
 	}
 
 	public void draw(Graphics g) 
 	{
+	    if(startPoint.x < 0 && startPoint.y < 0)
+	    {
+	        return;
+	    }
+	    
 		int x = (int) startPoint.getX();
 		int y = (int) startPoint.getY();
 		int w = (int)(endPoint.getX() - startPoint.getX());
 		int h = (int) (endPoint.getY() - startPoint.getY());
-		System.out.println(x);
-		System.out.println(y);
-		System.out.println(w);
-		System.out.println(h);
+		
+		if (w < 0)
+		{
+		    w = Math.abs(w);
+		    x = (int) endPoint.getX();
+		}
+		if (h < 0)
+		{
+		    h = Math.abs(w);
+            y = (int) endPoint.getY();
+		}
+		
 		g.drawRect(x, y, w, h);
-	}
-	public void setStart(Point p) 
-	{
-		startPoint = p;
-	}
-	public void setEnd(Point p) 
-	{
-		endPoint = p;
 	}
 }

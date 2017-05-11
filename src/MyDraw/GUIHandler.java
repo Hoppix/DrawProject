@@ -1,6 +1,7 @@
 package MyDraw;
 
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -19,7 +20,7 @@ import javax.swing.*;
 
 
 
-public class GUIHandler extends MouseAdapter implements MouseMotionListener
+public class GUIHandler
 {
     //TODO Draw commands in Command queue aufnehmen
     private JFileChooser chooser;
@@ -27,22 +28,30 @@ public class GUIHandler extends MouseAdapter implements MouseMotionListener
     public DrawGUIs gui;
     private String savePath;
     public Drawable drawer;
-    public Graphics2D imageG;
-    public Graphics g;
+    public Graphics imageG;
+    public Graphics paintG;
     public Queue<String> cmdQueue;
     public Stack<String> doneActions; //TODO: durchgeführte commands hier speichern (1.6)
     private Timer timer;
+    
+    public CommandHandler executioner;
+    
+    //public Point startPoint;
     
    
     public GUIHandler(DrawGUIs getgui)
     {
         gui = getgui;
-        frame = gui.getDrawFrame();
+
         chooser = new JFileChooser();
-        imageG = gui.getImageG();
-        drawer = new RectangleDrawer(); //default style
         cmdQueue = new LinkedList<String>();
         doneActions = new Stack<String>();
+        //startPoint = new Point();
+        
+        imageG = gui.getImageG();
+        paintG = gui.getPaintG();
+        frame = gui.getDrawFrame();
+       
 
         chooser.addChoosableFileFilter(new BMPFileFilter());
 
@@ -52,17 +61,14 @@ public class GUIHandler extends MouseAdapter implements MouseMotionListener
         gui.auto.addActionListener(new DrawActionListener("auto", this));
         gui.save.addActionListener(new DrawActionListener("save", this));
 
-        gui.shape_chooser.addItemListener(new ShapeManager(gui));
-        //gui.getDrawPanel().addMouseListener(this);
-		//gui.getDrawPanel().addMouseMotionListener(this);
+        
+		
         gui.shape_chooser.addItemListener(new ShapeItemListener(this));
         gui.color_chooser.addItemListener(new ColorItemListener(this));
         gui.colorBG_chooser.addItemListener(new ColorBGItemListener(this)); 
 
         gui.getDrawFrame().addWindowStateListener(new ResponsiveHandler(gui));
-        
-        timer = new Timer(10, new TimerListener(this));
-        timer.start();
+  
     }
     
 
@@ -84,7 +90,8 @@ public class GUIHandler extends MouseAdapter implements MouseMotionListener
             System.exit(0);
         }
         else if(command.equals("auto"))
-        {           
+        {   
+            doneActions.add(command);
             gui.autoDraw();
         }
         else if(command.equals("save"))
@@ -127,30 +134,9 @@ public class GUIHandler extends MouseAdapter implements MouseMotionListener
         else if(command.contains("changeShape"))
         {
         	command = command.replace("changeShape", "");
-        	switch (command)
-        	{
-        		case "Rectangle": 
-        		{       			
-        			drawer = new RectangleDrawer();
-        			break;
-        		}
-        		case "Oval": 
-        		{
-        			drawer = new OvalDrawer();
-        			break;
-        		}
-			
-        		case "Scribble": 
-        		{      			
-        			break;
-        		}
         	
-        		default: 
-        		{
-        			System.out.println("not yet implemented");
-        			break;
-        		}
-        	}
+        	executioner.shape = command;
+        	
         }
         else if(command.contains("changeColor"))
         {   
@@ -160,35 +146,10 @@ public class GUIHandler extends MouseAdapter implements MouseMotionListener
         }
         else if(command.contains("changeBGColor"))
         {
-        	System.out.println(command);
         	command = command.replace("changeBGColor", "");
             ColorHashMap map = new ColorHashMap();
         	gui.colorBG = map.StringToColor(command); 
             gui.clear();
-        }
-    }
-    
-    public void mousePressed(MouseEvent e)
-	{
-		//set starting point
-    	System.out.println("mousePressed");
-    	drawer.setStart(e.getPoint());
-    	
-	}
-    
-    public void mouseDragged(MouseEvent e)
-	{
-    	drawer.setEnd(e.getPoint());
-        //expand object
-	}
-    
-    public void mouseReleased(MouseEvent e)
-    {
-    	System.out.println("mouseReleased");
-    	drawer.setEnd(e.getPoint());
-    	g = gui.getDrawPanel().getGraphics();
-    	drawer.draw(g);
-    	drawer.draw(imageG);
-    	//draw final object
+        }     
     }
 }
