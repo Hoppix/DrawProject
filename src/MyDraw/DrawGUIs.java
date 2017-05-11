@@ -2,14 +2,11 @@ package MyDraw;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
-class DrawGUIs implements DrawAPI
+class DrawGUIs
 {
 
     private static final long serialVersionUID = 5549826489329119875L;
@@ -61,12 +58,14 @@ class DrawGUIs implements DrawAPI
 
     }
 
+    @Deprecated
     public void setHeight(int height)
     {
         Rectangle rekt = drawPanel.getBounds();
         drawPanel.setBounds(rekt.x, rekt.y, rekt.width, height);
     }
 
+    @Deprecated
     public void setWidth(int width)
     {
         Rectangle rekt = drawPanel.getBounds(); //get rekt
@@ -74,6 +73,7 @@ class DrawGUIs implements DrawAPI
     }
     
 
+    @Deprecated
     public void setFGColor(String new_color) throws ColorException
     {
         String colorLowercase = new_color.toLowerCase();
@@ -104,6 +104,8 @@ class DrawGUIs implements DrawAPI
               
 
     }
+
+    @Deprecated
     public String getFGColor()
     {
         if(color.equals(Color.black))
@@ -135,6 +137,7 @@ class DrawGUIs implements DrawAPI
    
     
 
+    @Deprecated
     public void setBGColor(String new_color) throws ColorException
     {
         String colorLowercase = new_color.toLowerCase();
@@ -164,7 +167,8 @@ class DrawGUIs implements DrawAPI
         }
               
     }
-    
+
+    @Deprecated
     public String getBGColor()
     {
         if(colorBG.equals(Color.black))
@@ -192,7 +196,8 @@ class DrawGUIs implements DrawAPI
             return null;
         }
     }
-    
+
+    @Deprecated
     public void drawRectangle(Point upper_left, Point lower_right)
     {
         Graphics g = drawPanel.getGraphics();
@@ -207,7 +212,8 @@ class DrawGUIs implements DrawAPI
         imageG.drawRect(x, y, w, h);
         
     }
-    
+
+    @Deprecated
     public void drawOval(Point upper_left, Point lower_right)
     {
         Graphics g = drawPanel.getGraphics();
@@ -222,7 +228,8 @@ class DrawGUIs implements DrawAPI
         imageG.setColor(color);
         imageG.drawOval(x, y, w, h);
     }
-    
+
+    @Deprecated
     public void drawPolyLine(java.util.List<Point> points)
     {
         Graphics g = drawPanel.getGraphics();
@@ -265,13 +272,15 @@ class DrawGUIs implements DrawAPI
         }
         
     }
+
+    @Deprecated
     public Image getDrawing()
     {
         return saveImage;
     }
     
    
-    
+    @Deprecated
     public void clear()
     {
         Graphics g = drawPanel.getGraphics();
@@ -281,7 +290,8 @@ class DrawGUIs implements DrawAPI
         imageG.fillRect(0, 0, drawPanel.getSize().width, drawPanel.getSize().height);
 
     }
-    
+
+    @Deprecated
     public void autoDraw()
     {
         Point pA = new Point(5, 5);
@@ -312,7 +322,7 @@ class DrawGUIs implements DrawAPI
         }                           
     }
 
-    
+    @Deprecated
     public void writeImage(Image img, String filename) throws IOException
     {
         MyBMPFile.write(filename, img);
@@ -345,20 +355,7 @@ class DrawGUIs implements DrawAPI
         return drawFrame;
     }
 
-    public void undo()
-    {
-        //TODO 1.6
-    }
 
-    public void redo()
-    {
-        //TODO 1.6
-    }
-
-    public void redraw()
-    {
-        //TODO 1.6
-    }
 
     private void setupBorders()
     {
