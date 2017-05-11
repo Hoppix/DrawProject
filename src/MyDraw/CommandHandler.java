@@ -41,7 +41,6 @@ public class CommandHandler
     
     public void execute(Drawable drawCommand)
     {
-    	System.out.println("executed");
     	drawCommand.draw(imageG);
     	drawCommand.draw(paintG);
     }

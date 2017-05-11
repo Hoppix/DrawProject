@@ -132,15 +132,17 @@ public class GUIHandler
         else if(command.contains("changeShape"))
         {
         	command = command.replace("changeShape", "");
-        	System.out.println(command);
         	executioner.shape = command;
         	
         }
         else if(command.contains("changeColor"))
         {   
+        	System.out.println("changingColor: " + command);
         	command = command.replace("changeColor", "");
         	ColorHashMap map = new ColorHashMap();
-        	gui.color = map.StringToColor(command);         
+        	gui.color = map.StringToColor(command);
+        	gui.getImageG().setColor(gui.color);
+        	gui.getPaintG().setColor(gui.color);
         }
         else if(command.contains("changeBGColor"))
         {

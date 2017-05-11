@@ -9,17 +9,26 @@ import java.awt.event.MouseMotionListener;
 public class MouseClickListener implements MouseListener, MouseMotionListener
 {
     CommandHandler parentHandler;
+    GUIHandler guiHandler;
+    DrawGUIs gui;
+    
     public int x;
     public int y;
+    
     public RectangleDrawer rect;
     public OvalDrawer oval;
     public ScribbleDrawer scribble;
+    
     private Point setupPoint;
 
     public MouseClickListener(CommandHandler handler)
     {
     	setupPoint = new Point(-1, -1);
+    	
         parentHandler = handler;
+        guiHandler = handler.parentHandler;
+        gui = guiHandler.gui;
+        
         rect = new RectangleDrawer(setupPoint, setupPoint);
         oval = new OvalDrawer(setupPoint, setupPoint);
         scribble = new ScribbleDrawer(setupPoint, setupPoint);
@@ -56,6 +65,7 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
         {
         case "Rectangle":
             rect = new RectangleDrawer(arg0.getPoint(), arg0.getPoint());
+            System.out.println("start: " + rect.startPoint + "; end: " + rect.endPoint + " - pressed");
             parentHandler.cmdQueue.add(rect);      
             
             break;
@@ -78,12 +88,12 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
     @Override
     public void mouseReleased(MouseEvent arg0)
     {   
-    	System.out.println("Released, fgColor: " + parentHandler.parentHandler.gui.getFGColor());
         switch (parentHandler.shape)
         {
         case "Rectangle":
             rect.endPoint = arg0.getPoint();
             
+            System.out.println("start: " + rect.startPoint + "; end: " + rect.endPoint + " - released");
             parentHandler.cmdQueue.pop();
             parentHandler.cmdQueue.add(rect);
             parentHandler.execute(rect);
@@ -114,16 +124,18 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
     @Override
     public void mouseDragged(MouseEvent e)
     {   
-    	String backup = parentHandler.parentHandler.gui.getFGColor();
     	
+    	gui.getImageG().setColor(gui.getImageG().getBackground());
+    	gui.getPaintG().setColor(gui.getPaintG().getBackground());
+    	System.out.println("start: " + rect.startPoint + "; end: " + rect.endPoint + " - dragging");
         switch (parentHandler.shape)
         {
         case "Rectangle":       
-        	parentHandler.parentHandler.doCommand("changeColor" + parentHandler.parentHandler.gui.getBGColor());
         	parentHandler.execute(rect);
-        	parentHandler.parentHandler.doCommand("changeColor" + backup);
-        	rect.endPoint = e.getPoint();
+        	gui.getImageG().setColor(gui.color);
+        	gui.getPaintG().setColor(gui.color);
         	
+        	rect.endPoint = e.getPoint();        	
             parentHandler.cmdQueue.pop();
             parentHandler.cmdQueue.add(rect);            
             parentHandler.execute(rect);
