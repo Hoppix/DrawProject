@@ -311,13 +311,7 @@ class DrawGUIs implements DrawAPI
             e.printStackTrace();
         }                           
     }
-    
-    @Deprecated
-    public void writeImageDeprecated(Image img, String filename) throws IOException
-    {       
-        File output = new File(filename);
-        ImageIO.write((RenderedImage) img, "bmp", output);
-    }
+
     
     public void writeImage(Image img, String filename) throws IOException
     {

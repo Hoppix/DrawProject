@@ -1,20 +1,15 @@
 package MyDraw;
 
 
-//This example is from _Java Examples in a Nutshell_. (http://www.oreilly.com)
-//Copyright (c) 1997 by David Flanagan
-//This example is provided WITHOUT ANY WARRANTY either expressed or implied.
-//You may study, use, modify, and distribute it for non-commercial purposes.
-//For any commercial use, see http://www.davidflanagan.com/javaexamples
-
-// minimal changes from AWT to Swing -> replace elements/classes
-// behavior is similiar but not equal ! Why?
 // Gruppe 5
 
 
+import java.awt.*;
+import java.io.IOException;
+import java.util.*;
 
 /** The application class.  Processes high-level commands sent by GUI */
-public class Draw
+public class Draw implements DrawAPI
 {
 
     protected GUIHandler app;
@@ -32,7 +27,127 @@ public class Draw
         app = new GUIHandler(gui);
     }
 
-    
+
+    @Override
+    public void setHeight(int height)
+    {
+        Rectangle rekt = gui.getDrawPanel().getBounds();
+        gui.getDrawPanel().setBounds(rekt.x, rekt.y, rekt.width, height);
+    }
+
+    @Override
+    public void setWidth(int width)
+    {
+        Rectangle rekt = gui.getDrawPanel().getBounds(); //get rekt
+        gui.getDrawPanel().setBounds(rekt.x, rekt.y, width, rekt.height);
+    }
+
+    @Override
+    public void setFGColor(String fgColor) throws ColorException
+    {
+        String colorLowercase = fgColor.toLowerCase();
+        if (colorLowercase.equals("black"))
+        {
+            gui.color = Color.black;
+        }
+        else if (colorLowercase.equals("blue"))
+        {
+            gui.color = Color.blue;
+        }
+        else if (colorLowercase.equals("red"))
+        {
+            gui.color = Color.red;
+        }
+        else if (colorLowercase.equals("green"))
+        {
+            gui.color = Color.green;
+        }
+        else if(colorLowercase.equals("white"))
+        {
+            gui.color = Color.white;
+        }
+        else
+        {
+            throw new ColorException();
+        }
+    }
+
+    @Override
+    public void setBGColor(String bgColor) throws ColorException
+    {
+
+    }
+
+    @Override
+    public String getFGColor()
+    {
+        return null;
+    }
+
+    @Override
+    public String getBGColor()
+    {
+        return null;
+    }
+
+    @Override
+    public void writeImage(Image img, String file) throws IOException {
+
+    }
+
+    @Override
+    public void autoDraw()
+    {
+
+    }
+
+    @Override
+    public void clear()
+    {
+
+    }
+
+    @Override
+    public Image getDrawing()
+    {
+        return null;
+    }
+
+    @Override
+    public void redraw()
+    {
+
+    }
+
+    @Override
+    public void undo()
+    {
+
+    }
+
+    @Override
+    public void redo()
+    {
+
+    }
+
+    @Override
+    public void drawRectangle(Point upper_left, Point lower_right)
+    {
+
+    }
+
+    @Override
+    public void drawOval(Point upper_left, Point lower_right)
+    {
+
+    }
+
+    @Override
+    public void drawPolyLine(java.util.List<Point> points)
+    {
+
+    }
 }
 
 

@@ -31,7 +31,7 @@ public class GUIHandler
     public Graphics imageG;
     public Graphics paintG;
     public Queue<String> cmdQueue;
-    public Stack<String> doneActions; //TODO: durchgeführte commands hier speichern (1.6)
+    public Stack<String> doneActions; //TODO: durchgefï¿½hrte commands hier speichern (1.6)
     private Timer timer;
     
     public CommandHandler executioner;
