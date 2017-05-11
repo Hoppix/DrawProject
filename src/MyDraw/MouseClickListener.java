@@ -1,5 +1,6 @@
 package MyDraw;
 
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -12,10 +13,15 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
     public RectangleDrawer rect;
     public OvalDrawer oval;
     public ScribbleDrawer scribble;
+    private Point setupPoint;
 
     public MouseClickListener(CommandHandler handler)
     {
+    	setupPoint = new Point(-1, -1);
         parentHandler = handler;
+        rect = new RectangleDrawer(setupPoint, setupPoint);
+        oval = new OvalDrawer(setupPoint, setupPoint);
+        scribble = new ScribbleDrawer(setupPoint, setupPoint);
         //startPoint = new Point();
     }
 
@@ -55,7 +61,7 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
             break;
         case "Scribble":
             scribble = new ScribbleDrawer(arg0.getPoint(), arg0.getPoint());
-            parentHandler.cmdQueue.add(new ScribbleDrawer(arg0.getPoint(), arg0.getPoint()));            
+            parentHandler.cmdQueue.add(scribble);            
             break;
 
         default:
@@ -73,18 +79,21 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
             
             parentHandler.cmdQueue.pop();
             parentHandler.cmdQueue.add(rect);
+            parentHandler.execute(rect);
             break;
         case "Oval":
             oval.endPoint = arg0.getPoint();
 
             parentHandler.cmdQueue.pop();
-            parentHandler.cmdQueue.add(oval);            
+            parentHandler.cmdQueue.add(oval); 
+            parentHandler.execute(oval);
             break;
         case "Scribble":
             scribble.endPoint = arg0.getPoint();
             
             parentHandler.cmdQueue.pop();
-            parentHandler.cmdQueue.add(scribble);            
+            parentHandler.cmdQueue.add(scribble);    
+            parentHandler.execute(scribble);
             break;
 
         default:
@@ -94,7 +103,7 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
 
     @Override
     public void mouseDragged(MouseEvent e)
-    {
+    {    	
         switch (parentHandler.shape)
         {
         case "Rectangle":
@@ -124,7 +133,7 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
     @Override
     public void mouseMoved(MouseEvent e)
     {
-        // TODO Auto-generated method stub
+        // ignore
         
     }
 

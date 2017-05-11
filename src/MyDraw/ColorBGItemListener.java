@@ -18,6 +18,6 @@ public class ColorBGItemListener implements ItemListener
     @Override
     public void itemStateChanged(ItemEvent e)
     {   	
-    	parentHandler.cmdQueue.add("changeBGColor" + (String)e.getItem());
+    	parentHandler.doCommand("changeBGColor" + (String)e.getItem());
     }
 }

@@ -19,7 +19,7 @@ public class ShapeItemListener implements ItemListener {
     @Override
     public void itemStateChanged(ItemEvent e)
     {              
-        parentHandler.cmdQueue.add("changeShape" + (String)e.getItem());       
+        parentHandler.doCommand("changeShape" + (String)e.getItem());       
     }
 
 }

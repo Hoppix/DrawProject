@@ -18,7 +18,7 @@ public class ColorItemListener implements ItemListener
     @Override
     public void itemStateChanged(ItemEvent e)
     {   	
-        parentHandler.cmdQueue.add("changeColor" + (String)e.getItem());
+        parentHandler.doCommand("changeColor" + (String)e.getItem());
     }
 
 }

@@ -36,8 +36,6 @@ public class GUIHandler
     
     public CommandHandler executioner;
     
-    //public Point startPoint;
-    
    
     public GUIHandler(DrawGUIs getgui)
     {
@@ -45,13 +43,13 @@ public class GUIHandler
 
         chooser = new JFileChooser();
         cmdQueue = new LinkedList<String>();
-        doneActions = new Stack<String>();
-        //startPoint = new Point();
+        doneActions = new Stack<String>();        
         
         imageG = gui.getImageG();
         paintG = gui.getPaintG();
         frame = gui.getDrawFrame();
-       
+        
+        executioner = new CommandHandler(this);
 
         chooser.addChoosableFileFilter(new BMPFileFilter());
 
@@ -134,7 +132,7 @@ public class GUIHandler
         else if(command.contains("changeShape"))
         {
         	command = command.replace("changeShape", "");
-        	
+        	System.out.println(command);
         	executioner.shape = command;
         	
         }

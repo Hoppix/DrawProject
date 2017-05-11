@@ -25,12 +25,23 @@ public class CommandHandler
     {
         parentHandler = handler;
         
+        shape = "Scribble";
+        
         cmdQueue = new LinkedList<Drawable>();
         
         imageG = handler.gui.getImageG();
-        paintG = handler.gui.getPaintG();           
+        paintG = handler.gui.getPaintG();  
         
-        timer = new Timer(10, new TimerListener(this));
-        timer.start();
+        handler.gui.drawPanel.addMouseListener(new MouseClickListener(this));
+        handler.gui.drawPanel.addMouseMotionListener(new MouseClickListener(this));
+        
+        //timer = new Timer(10, new TimerListener(this));
+        //timer.start();
+    }
+    
+    public void execute(Drawable drawCommand)
+    {
+    	drawCommand.draw(imageG);
+    	drawCommand.draw(paintG);
     }
 }

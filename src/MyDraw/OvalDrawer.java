@@ -36,7 +36,7 @@ public class OvalDrawer implements Drawable
         }
         if (h < 0)
         {
-            h = Math.abs(w);
+            h = Math.abs(h);
             y = (int) endPoint.getY();
         }
         

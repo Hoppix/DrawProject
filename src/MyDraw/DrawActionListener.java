@@ -17,6 +17,6 @@ class DrawActionListener implements ActionListener
 
     public void actionPerformed(ActionEvent e)
     {
-        app.cmdQueue.add(command);
+        app.doCommand(command);
     }
 }
