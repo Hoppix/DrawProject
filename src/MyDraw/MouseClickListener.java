@@ -1,5 +1,6 @@
 package MyDraw;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -49,19 +50,24 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
     @Override
     public void mousePressed(MouseEvent arg0)
     {
+    	
+    	
         switch (parentHandler.shape)
         {
         case "Rectangle":
             rect = new RectangleDrawer(arg0.getPoint(), arg0.getPoint());
-            parentHandler.cmdQueue.add(rect);            
+            parentHandler.cmdQueue.add(rect);      
+            
             break;
         case "Oval":
             oval = new OvalDrawer(arg0.getPoint(), arg0.getPoint());
-            parentHandler.cmdQueue.add(oval);            
+            parentHandler.cmdQueue.add(oval);         
+            
             break;
         case "Scribble":
             scribble = new ScribbleDrawer(arg0.getPoint(), arg0.getPoint());
-            parentHandler.cmdQueue.add(scribble);            
+            parentHandler.cmdQueue.add(scribble);
+            
             break;
 
         default:
@@ -72,6 +78,7 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
     @Override
     public void mouseReleased(MouseEvent arg0)
     {   
+    	System.out.println("Released, fgColor: " + parentHandler.parentHandler.gui.getFGColor());
         switch (parentHandler.shape)
         {
         case "Rectangle":
@@ -80,6 +87,7 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
             parentHandler.cmdQueue.pop();
             parentHandler.cmdQueue.add(rect);
             parentHandler.execute(rect);
+            
             break;
         case "Oval":
             oval.endPoint = arg0.getPoint();
@@ -87,13 +95,15 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
             parentHandler.cmdQueue.pop();
             parentHandler.cmdQueue.add(oval); 
             parentHandler.execute(oval);
+            
             break;
         case "Scribble":
             scribble.endPoint = arg0.getPoint();
             
             parentHandler.cmdQueue.pop();
-            parentHandler.cmdQueue.add(scribble);    
+            parentHandler.cmdQueue.add(scribble);  
             parentHandler.execute(scribble);
+            
             break;
 
         default:
@@ -103,26 +113,34 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
 
     @Override
     public void mouseDragged(MouseEvent e)
-    {    	
+    {   
+    	String backup = parentHandler.parentHandler.gui.getFGColor();
+    	
         switch (parentHandler.shape)
         {
-        case "Rectangle":
-            rect.endPoint = e.getPoint();
-            
+        case "Rectangle":       
+        	parentHandler.parentHandler.doCommand("changeColor" + parentHandler.parentHandler.gui.getBGColor());
+        	parentHandler.execute(rect);
+        	parentHandler.parentHandler.doCommand("changeColor" + backup);
+        	rect.endPoint = e.getPoint();
+        	
             parentHandler.cmdQueue.pop();
-            parentHandler.cmdQueue.add(rect);
+            parentHandler.cmdQueue.add(rect);            
+            parentHandler.execute(rect);
             break;
         case "Oval":
             oval.endPoint = e.getPoint();
 
             parentHandler.cmdQueue.pop();
-            parentHandler.cmdQueue.add(oval);            
+            parentHandler.cmdQueue.add(oval);     
+            parentHandler.execute(oval);
             break;
         case "Scribble":
             scribble.endPoint = e.getPoint();
             
             parentHandler.cmdQueue.pop();
-            parentHandler.cmdQueue.add(scribble);            
+            parentHandler.cmdQueue.add(scribble);
+            parentHandler.execute(scribble);
             break;
 
         default:
