@@ -33,4 +33,11 @@ public interface DrawAPI
     public void undo();
 
     public void redo();
+
+    public void drawRectangle(Point upper_left, Point lower_right);
+
+    public void drawOval(Point upper_left, Point lower_right);
+
+    public void drawPolyLine(java.util.List<Point> points);
+
 }
