@@ -1,5 +1,4 @@
 package MyDraw;
-//test change
 import static org.junit.Assert.*;
 
 import java.awt.Graphics2D;
