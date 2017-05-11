@@ -13,7 +13,7 @@ public class CommandHandler
     //public Queue<Drawable> cmdQueue;
     public LinkedList<Drawable> cmdQueue;
     
-    private GUIHandler parentHandler;
+    public GUIHandler parentHandler;
     private Timer timer;
     
     public Graphics paintG;
@@ -41,6 +41,7 @@ public class CommandHandler
     
     public void execute(Drawable drawCommand)
     {
+    	System.out.println("executed");
     	drawCommand.draw(imageG);
     	drawCommand.draw(paintG);
     }
