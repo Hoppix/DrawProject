@@ -12,6 +12,7 @@ class DrawGUIs
     private static final long serialVersionUID = 5549826489329119875L;
     private final static int FRAMEWIDTH = 820;
     private final static int FRAMEHEIGHT = 600;
+    public final static int PANELDIFF = 40;
     Color color;
     Color colorBG;
     Color frameColor;
@@ -90,7 +91,7 @@ class DrawGUIs
         drawFrame.setResizable(true);
         drawFrame.setVisible(true);
 
-        drawPanel.setBounds(0, 40, drawFrame.getWidth(), drawFrame.getHeight() - 40);
+        drawPanel.setBounds(0, PANELDIFF, drawFrame.getWidth(), drawFrame.getHeight() - PANELDIFF);
 
         drawFrame.getContentPane().setBackground(frameColor);
         drawFrame.getContentPane().setForeground(frameColor);
