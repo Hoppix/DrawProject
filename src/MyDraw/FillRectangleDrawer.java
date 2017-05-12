@@ -7,8 +7,6 @@ import java.awt.*;
  */
 public class FillRectangleDrawer extends VisualObject implements Drawable
 {
-    public Point startPoint;
-    public Point endPoint;
 
     public FillRectangleDrawer(Point start, Point end)
     {

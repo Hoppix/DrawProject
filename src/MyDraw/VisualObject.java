@@ -4,30 +4,29 @@ import java.awt.*;
 
 public abstract class VisualObject
 {
-	public Point upperLeft;
-	public Point lowerRight;
+	public Point startPoint;
+	public Point endPoint;
 
 	public VisualObject()
 	{
-		upperLeft = new Point();
-		lowerRight = new Point();
+		startPoint = new Point();
+		endPoint = new Point();
 	}
 
-	public void setUpperLeft(Point p)
+	public void setStartPoint(Point p)
 	{
-		upperLeft = p;
+		startPoint = p;
 	}
 
-	public void setLowerRight(Point p)
+	public void setEndPoint(Point p)
 	{
-		lowerRight = p;
+		endPoint = p;
 	}
 
 	@Override
 	public String toString()
 	{
 		String parseMe = String.valueOf(this.getClass());
-		System.out.println(parseMe);
 		String[] splitMe = parseMe.split("@");
 
 		parseMe = splitMe[0];
@@ -35,8 +34,8 @@ public abstract class VisualObject
 		parseMe = parseMe.replaceFirst("class ", "");
 
 
-		parseMe = parseMe + ": " + "start(" + upperLeft.x + "," + upperLeft.y + ")" + " end(" + lowerRight.x + "," +
-				lowerRight.y + ")";
+		parseMe = parseMe + ": " + "start(" + startPoint.x + "," + startPoint.y + ")" + " end(" + endPoint.x + "," +
+				endPoint.y + ")";
 
 		return parseMe;
 	}

@@ -7,8 +7,6 @@ import java.awt.*;
  */
 public class LineDrawer extends VisualObject implements Drawable
 {
-    public Point startPoint;
-    public Point endPoint;
 
     public LineDrawer(Point start, Point end)
     {

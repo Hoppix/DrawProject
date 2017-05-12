@@ -6,14 +6,12 @@ import java.awt.Point;
 import MyDraw.Drawable;
 
 public class OvalDrawer extends VisualObject implements Drawable
-{	
-	public Point startPoint;
-	public Point endPoint;
-	
+{
+
 	public OvalDrawer(Point start, Point end)
-    {
-        startPoint = start;
-        endPoint = end;
+	{
+		startPoint = start;
+		endPoint = end;
 	}
 
 	public void draw(Graphics g) 

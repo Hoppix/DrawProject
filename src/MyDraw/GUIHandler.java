@@ -272,10 +272,8 @@ public class GUIHandler
 		{
 			if (bufferedReader.readLine() == null)
 			{
-				System.out.println("Writing to line " + i + "..");
 				bufferedWriter.write(executioner.cmdQueue.get(i).toString());
 				bufferedWriter.newLine();
-				System.out.println("Writing finished");
 			}
 
 		}
@@ -297,9 +295,7 @@ public class GUIHandler
 			{
 				//TODO read string input correctly
 			}
-
 			bufferedReader.close();
-			System.out.println("read txt file");
 		}
 		catch (FileNotFoundException e)
 		{
