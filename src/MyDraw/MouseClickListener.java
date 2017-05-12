@@ -66,8 +66,8 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
 
     @Override
     public void mousePressed(MouseEvent arg0)
-    {
-    	parentHandler.startPoint = arg0.getPoint();
+    {    	
+    	parentHandler.startPoint = arg0.getPoint();    	
     	
         switch (parentHandler.shape)
         {
@@ -82,7 +82,6 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
         case "Scribble":
         	
         	parentHandler.startPoint = arg0.getPoint();
-            //scribble = new ScribbleDrawer(arg0.getPoint(), arg0.getPoint());
             
             break;
         case "FillOval":
@@ -104,6 +103,10 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
     @Override
     public void mouseReleased(MouseEvent arg0)
     {   
+    	gui.paintG.setPaintMode();
+    	gui.imageG.setPaintMode();
+    	gui.imageG.setColor(gui.color);
+    	gui.paintG.setColor(gui.color);
         switch (parentHandler.shape)
         {
         case "Rectangle":
@@ -157,22 +160,30 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
         default:
             break;
         }
+        parentHandler.startPoint = setupPoint;
+        parentHandler.endPoint = setupPoint;
     }
 
     @Override
     public void mouseDragged(MouseEvent e)
-    {   
-    	gui.imageG.setColor(gui.colorBG);
-    	gui.paintG.setColor(gui.colorBG);
+    {      	
+    	//set XOR Mode
+    	gui.paintG.setXORMode(gui.color);
+		gui.paintG.setColor(gui.colorBG);
+		gui.imageG.setXORMode(gui.color);
+		gui.imageG.setColor(gui.colorBG);
     	
         switch (parentHandler.shape)
         {
         case "Rectangle": 
         	rect.startPoint = parentHandler.startPoint;
         	
-        	parentHandler.execute(rect);
-        	gui.imageG.setColor(gui.color);
-        	gui.paintG.setColor(gui.color);
+        	if((parentHandler.endPoint.getX() >= 0 && parentHandler.endPoint.getY() >= 0))
+        	{
+        		parentHandler.execute(rect);
+        	}
+
+        	parentHandler.endPoint = e.getPoint();
 
         	rect.endPoint = e.getPoint();        	
                       
@@ -182,9 +193,10 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
         case "Oval":
         	oval.startPoint = parentHandler.startPoint;
         	
-        	parentHandler.execute(oval);
-        	gui.imageG.setColor(gui.color);
-        	gui.paintG.setColor(gui.color);
+        	if((parentHandler.endPoint.getX() >= 0 && parentHandler.endPoint.getY() >= 0))
+        	{
+        		parentHandler.execute(oval);
+        	}
         	
             oval.endPoint = e.getPoint();
    
@@ -192,13 +204,16 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
             break;
             
         case "Scribble":
+        	//ruecksetzen, da Scribble im Drag gemalt wird
+        	gui.paintG.setPaintMode();
+        	gui.imageG.setPaintMode();
         	gui.imageG.setColor(gui.color);
         	gui.paintG.setColor(gui.color);
         	
             scribble.startPoint = parentHandler.startPoint;
             scribble.endPoint = e.getPoint();
             parentHandler.startPoint = e.getPoint();
-            
+
             parentHandler.cmdQueue.add(scribble);
             parentHandler.execute(scribble);
             break;
@@ -206,9 +221,10 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
         case "FillOval":
         	ovalFilled.startPoint = parentHandler.startPoint;
         	
-        	parentHandler.execute(ovalFilled);
-        	gui.imageG.setColor(gui.color);
-        	gui.paintG.setColor(gui.color);
+        	if((parentHandler.endPoint.getX() >= 0 && parentHandler.endPoint.getY() >= 0))
+        	{
+        		parentHandler.execute(ovalFilled);
+        	}
         	
             ovalFilled.endPoint = e.getPoint();
   
@@ -218,9 +234,10 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
         case "FillRectangle":
         	rectFilled.startPoint = parentHandler.startPoint;
         	
-        	parentHandler.execute(rectFilled);
-        	gui.imageG.setColor(gui.color);
-        	gui.paintG.setColor(gui.color);
+        	if((parentHandler.endPoint.getX() >= 0 && parentHandler.endPoint.getY() >= 0))
+        	{
+        		parentHandler.execute(rectFilled);
+        	}
         	
             rectFilled.endPoint = e.getPoint();
   
@@ -230,23 +247,24 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
         case "Line":
         	line.startPoint = parentHandler.startPoint;
         	
-        	parentHandler.execute(line);
-        	
-        	gui.imageG.setColor(gui.color);
-        	gui.paintG.setColor(gui.color);
+        	if((parentHandler.endPoint.getX() >= 0 && parentHandler.endPoint.getY() >= 0))
+        	{
+        		System.out.println(line);
+        		parentHandler.execute(line);
+        	}       	
         	
         	line.endPoint = e.getPoint();
-        	
+        	System.out.println(line);
         	parentHandler.execute(line);
         	break;
         	
         case "Triangle":
         	triangle.startPoint = parentHandler.startPoint;
         	
-        	parentHandler.execute(triangle);
-        	
-        	gui.imageG.setColor(gui.color);
-        	gui.paintG.setColor(gui.color);
+        	if((parentHandler.endPoint.getX() >= 0 && parentHandler.endPoint.getY() >= 0))
+        	{
+        		parentHandler.execute(triangle);
+        	}
         	
         	triangle.endPoint = e.getPoint();
         	

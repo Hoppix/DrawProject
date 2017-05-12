@@ -23,9 +23,13 @@ public class CommandHandler
     public String shape;
     
     public Point startPoint;
+    public Point endPoint; //dirty 
     
     public CommandHandler(GUIHandler handler)
     {
+    	startPoint = new Point(-1, -1);
+    	endPoint = new Point(-1, -1);
+    	
         parentHandler = handler;
         
         shape = "Scribble";
