@@ -130,6 +130,7 @@ class DrawGUIs
 		shape_chooser.add("FillRectangle");
 		shape_chooser.add("Oval");
 		shape_chooser.add("FillOval");
+		shape_chooser.add("Triangle");
 
 		// selector for drawing colors
 		color_chooser = new Choice();
