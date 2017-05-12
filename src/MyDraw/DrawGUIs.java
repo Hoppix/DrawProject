@@ -52,7 +52,7 @@ class DrawGUIs
 		imageG.setColor(colorBG);
 		imageG.fillRect(0, 20, drawPanel.getWidth(), drawPanel.getHeight());
 
-		paintG = (Graphics2D) drawPanel.getGraphics();
+		paintG = drawPanel.getGraphics();
 
 	}
 

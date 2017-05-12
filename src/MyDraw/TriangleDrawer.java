@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * Created by khopf on 11/05/2017.
  */
-public class TriangleDrawer implements Drawable
+public class TriangleDrawer extends VisualObject implements Drawable
 {
     public Point startPoint;
     public Point endPoint;
@@ -24,7 +24,6 @@ public class TriangleDrawer implements Drawable
             return;
         }
 
-
         //fix new triangle
         int x1 = (int) startPoint.getX();
         int y1 = (int) startPoint.getY();
@@ -40,7 +39,6 @@ public class TriangleDrawer implements Drawable
         int cx = (x2 / 2) + x2;
         int cy = (y1 / 2) + y1;
 
-        //untested
         g.drawLine(ax ,ay , bx, by);
         g.drawLine(bx, by, cx, cy);
         g.drawLine(ax, ay, cx, cy);

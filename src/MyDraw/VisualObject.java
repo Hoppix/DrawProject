@@ -13,13 +13,29 @@ public abstract class VisualObject
 		lowerRight = new Point();
 	}
 
-	public void setupperLeft(Point p)
+	public void setUpperLeft(Point p)
 	{
 		upperLeft = p;
 	}
 
-	public void setlowerRight(Point p)
+	public void setLowerRight(Point p)
 	{
 		lowerRight = p;
+	}
+
+	public String toSaveString()
+	{
+		String parseMe = this.toString();
+		String[] splitMe = parseMe.split("@");
+
+		parseMe = splitMe[0];
+		parseMe = parseMe.replaceFirst("MyDraw.", "");
+
+		parseMe = parseMe + ": " + "start(" + upperLeft.x + "," + upperLeft.y + ")" + " end(" + lowerRight.x + "," +
+				lowerRight.y + ")";
+		System.out.println(parseMe);
+
+
+		return parseMe;
 	}
 }
