@@ -1,6 +1,7 @@
 package MyDraw;
 
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -8,12 +9,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
-import javax.swing.*;
-
 
 public class GUIHandler
 {
-	private String savePath;
 	private JFileChooser chooser;
 	private JFrame frame;
 
@@ -83,7 +81,7 @@ public class GUIHandler
 		}
 		else if (command.equals("saveText"))
 		{
-			chooserSave();
+			chooserSaveText();
 		}
 		else if (command.equals("loadText"))
 		{
@@ -91,7 +89,7 @@ public class GUIHandler
 		}
 		else if (command.equals("save"))
 		{
-			chooserSave();
+			chooserSaveImage();
 		}
 		else if (command.contains("changeShape"))
 		{
@@ -104,7 +102,7 @@ public class GUIHandler
 			System.out.println("changingColor: " + command);
 			command = command.replace("changeColor", "");
 			ColorHashMap map = new ColorHashMap();
-			gui.color = map.StringToColor(command);
+			gui.color = ColorHashMap.StringToColor(command);
 			gui.imageG.setColor(gui.color);
 			gui.imageG.setColor(gui.color);
 		}
@@ -112,7 +110,7 @@ public class GUIHandler
 		{
 			command = command.replace("changeBGColor", "");
 			ColorHashMap map = new ColorHashMap();
-			gui.colorBG = map.StringToColor(command);
+			gui.colorBG = ColorHashMap.StringToColor(command);
 			clear();
 		}
 	}
@@ -304,16 +302,15 @@ public class GUIHandler
 		}
 	}
 
-	private void chooserSave()
+	private void chooserSaveImage()
 	{
 		chooser.setVisible(true);
 
 		int retrieve = chooser.showSaveDialog(gui.drawFrame);
 		String extension2 = chooser.getFileFilter().getDescription();
+		String savePath = chooser.getSelectedFile().getAbsolutePath();
 
-		savePath = chooser.getSelectedFile().getAbsolutePath();
-
-		if (retrieve == chooser.APPROVE_OPTION)
+		if (retrieve == JFileChooser.APPROVE_OPTION)
 		{
 			try
 			{
@@ -329,7 +326,28 @@ public class GUIHandler
 						e.printStackTrace();
 					}
 				}
-				else if (extension2.equals("*.txt"))
+			}
+			catch (NullPointerException e)
+			{
+				JOptionPane.showMessageDialog(frame, "Speichern abgebrochen");
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private void chooserSaveText()
+	{
+		chooser.setVisible(true);
+
+		int retrieve = chooser.showSaveDialog(gui.drawFrame);
+		String extension2 = chooser.getFileFilter().getDescription();
+		String savePath = chooser.getSelectedFile().getAbsolutePath();
+
+		if (retrieve == JFileChooser.APPROVE_OPTION)
+		{
+			try
+			{
+				if (extension2.equals("*.txt"))
 				{
 					try
 					{
