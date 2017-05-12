@@ -139,29 +139,41 @@ public class GUIHandler
 
 	public void autoDraw()
 	{
-		//TODO fix redundanz
+		//TODO paintG und imageG verwenden
 		Point pA = new Point(5, 5);
 		Point pB = new Point(150, 150);
 		Point pC = new Point(300, 300);
-		ArrayList<Point> points = new ArrayList<>();
-		points.add(pA);
-		points.add(pB);
-		points.add(pC);
+		
+		
+		RectangleDrawer rect = new RectangleDrawer(pA, pB);
+		FillRectangleDrawer rectFill = new FillRectangleDrawer(pB, pC);
+		OvalDrawer oval = new OvalDrawer(pA, pB);
+		FillOvalDrawer ovalFill = new FillOvalDrawer(pB, pC);
+		LineDrawer line = new LineDrawer(pA, pB);
+		ScribbleDrawer scribble = new ScribbleDrawer(pB, pC);
+		TriangleDrawer triangle = new TriangleDrawer(pA, pC);
 
-		gui.colorBG = Color.white;
 		this.clear();
-
-		gui.color = Color.black;
-		this.drawRectangle(points.get(0), points.get(1));
-
-		gui.color = Color.green;
-		this.drawOval(points.get(1), points.get(2));
-
-		gui.color = Color.red;
-		this.drawPolyLine(points);
-
-		gui.color = Color.blue;
-		this.drawOval(points.get(0), points.get(2));
+		imageG.setColor(Color.black);
+		paintG.setColor(Color.black);
+		executioner.execute(rect);
+		executioner.execute(oval);
+		imageG.setColor(Color.green);
+		paintG.setColor(Color.green);
+		executioner.execute(rectFill);
+		imageG.setColor(Color.red);
+		paintG.setColor(Color.red);
+		executioner.execute(ovalFill);
+		executioner.execute(triangle);
+		imageG.setColor(Color.blue);
+		paintG.setColor(Color.blue);
+		executioner.execute(line);
+		imageG.setColor(Color.white);
+		paintG.setColor(Color.white);
+		executioner.execute(scribble);
+		
+		imageG.setColor(Color.black);
+		paintG.setColor(Color.black);
 	}
 
 	public void redraw()
