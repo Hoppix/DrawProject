@@ -24,6 +24,8 @@ public class TriangleDrawer implements Drawable
             return;
         }
 
+
+        //fix new triangle
         int x1 = (int) startPoint.getX();
         int y1 = (int) startPoint.getY();
         int x2 = (int) endPoint.getX();
