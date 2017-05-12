@@ -29,8 +29,8 @@ public class CommandHandler
         
         cmdQueue = new LinkedList<Drawable>();
         
-        imageG = handler.gui.getImageG();
-        paintG = handler.gui.getPaintG();  
+        imageG = handler.gui.imageG;
+        paintG = handler.gui.imageG;
         
         handler.gui.drawPanel.addMouseListener(new MouseClickListener(this));
         handler.gui.drawPanel.addMouseMotionListener(new MouseClickListener(this));

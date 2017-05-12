@@ -40,9 +40,9 @@ public class GUIHandler {
         cmdQueue = new LinkedList<String>();
         doneActions = new Stack<String>();
 
-        imageG = gui.getImageG();
-        paintG = gui.getPaintG();
-        frame = gui.getDrawFrame();
+        imageG = gui.imageG;
+        paintG = gui.paintG;
+        frame = gui.drawFrame;
 
         executioner = new CommandHandler(this);
 
@@ -59,7 +59,7 @@ public class GUIHandler {
         gui.color_chooser.addItemListener(new ColorItemListener(this));
         gui.colorBG_chooser.addItemListener(new ColorBGItemListener(this));
 
-        gui.getDrawFrame().addWindowStateListener(new ResponsiveHandler(gui));
+        gui.drawFrame.addWindowStateListener(new ResponsiveHandler(gui));
 
     }
 
@@ -81,7 +81,7 @@ public class GUIHandler {
         } else if (command.equals("save")) {
             chooser.setVisible(true);
 
-            int retrieve = chooser.showSaveDialog(gui.getDrawFrame());
+            int retrieve = chooser.showSaveDialog(gui.drawFrame);
 
             if (retrieve == chooser.APPROVE_OPTION) {
                 String extension2 = chooser.getFileFilter().getDescription();
@@ -114,8 +114,8 @@ public class GUIHandler {
             command = command.replace("changeColor", "");
             ColorHashMap map = new ColorHashMap();
             gui.color = map.StringToColor(command);
-            gui.getImageG().setColor(gui.color);
-            gui.getPaintG().setColor(gui.color);
+            gui.imageG.setColor(gui.color);
+            gui.imageG.setColor(gui.color);
         } else if (command.contains("changeBGColor")) {
             command = command.replace("changeBGColor", "");
             ColorHashMap map = new ColorHashMap();

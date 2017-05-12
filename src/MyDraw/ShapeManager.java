@@ -36,9 +36,9 @@ class ShapeManager implements ItemListener
 
 		public void mouseDragged(MouseEvent e)
 		{
-            imageG = gui.getImageG();
+            imageG = gui.imageG;
 
-			Graphics g = gui.getDrawPanel().getGraphics();
+			Graphics g = gui.drawPanel.getGraphics();
 			int x = e.getX(), y = e.getY();
 
 			g.setColor(gui.color);
@@ -71,14 +71,14 @@ class ShapeManager implements ItemListener
 		// and draw the resulting shape
 		public void mouseReleased(MouseEvent e)
 		{
-			Graphics g = gui.getDrawPanel().getGraphics();
+			Graphics g = gui.drawPanel.getGraphics();
 			if (lastx != -1)
 			{
 				// first undraw a rubber rect
 				g.setXORMode(gui.color);
-				g.setColor(gui.getDrawPanel().getBackground());
+				g.setColor(gui.drawPanel.getBackground());
 				imageG.setXORMode(gui.color);
-				imageG.setColor(gui.getDrawPanel().getBackground());
+				imageG.setColor(gui.drawPanel.getBackground());
 				doDraw(pressx, pressy, lastx, lasty, g);
 				lastx = -1;
 				lasty = -1;
@@ -96,13 +96,13 @@ class ShapeManager implements ItemListener
 		// draw the resulting shape in "rubber-band mode"
 		public void mouseDragged(MouseEvent e)
 		{
-			Graphics g = gui.getDrawPanel().getGraphics();
+			Graphics g = gui.drawPanel.getGraphics();
 			// these commands set the rubberband mode
 			g.setXORMode(gui.color);
-			g.setColor(gui.getDrawPanel().getBackground());
+			g.setColor(gui.drawPanel.getBackground());
 
 			imageG.setXORMode(gui.color);
-			imageG.setColor(gui.getDrawPanel().getBackground());
+			imageG.setColor(gui.drawPanel.getBackground());
 
 			if (lastx != -1)
 			{
@@ -155,13 +155,13 @@ class ShapeManager implements ItemListener
 	public ShapeManager(DrawGUIs itsGui)
 	{
 		gui = itsGui;
-		imageG = gui.getImageG();
+		imageG = gui.imageG;
 		//TODO temp fix
 		// default: scribble mode
 		currentDrawer = scribbleDrawer;
 		// activate scribble drawer
-		gui.getDrawPanel().addMouseListener(currentDrawer);
-		gui.getDrawPanel().addMouseMotionListener(currentDrawer);
+		gui.drawPanel.addMouseListener(currentDrawer);
+		gui.drawPanel.addMouseMotionListener(currentDrawer);
 	}
 
 	// reset the shape drawer
@@ -171,12 +171,12 @@ class ShapeManager implements ItemListener
 			return;
 
 		// deactivate previous drawer
-		gui.getDrawPanel().removeMouseListener(currentDrawer);
-		gui.getDrawPanel().removeMouseMotionListener(currentDrawer);
+		gui.drawPanel.removeMouseListener(currentDrawer);
+		gui.drawPanel.removeMouseMotionListener(currentDrawer);
 		// activate new drawer
 		currentDrawer = l;
-		gui.getDrawPanel().addMouseListener(currentDrawer);
-		gui.getDrawPanel().addMouseMotionListener(currentDrawer);
+		gui.drawPanel.addMouseListener(currentDrawer);
+		gui.drawPanel.addMouseMotionListener(currentDrawer);
 	}
 
 	// user selected new shape => reset the shape mode

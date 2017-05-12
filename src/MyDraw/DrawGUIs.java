@@ -74,29 +74,6 @@ class DrawGUIs
     }
 
 
-
-    public Graphics2D getImageG()
-    {
-        return imageG;
-    }
-
-    public Graphics2D getPaintG() 
-    { 
-        return paintG; 
-    }
-
-    public JPanel getDrawPanel()
-    {
-        return drawPanel;
-    }
-
-    public JFrame getDrawFrame()
-    {
-        return drawFrame;
-    }
-
-
-
     private void setupBorders()
     {
         drawPanel = new JPanel();

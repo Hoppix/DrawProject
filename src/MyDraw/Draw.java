@@ -73,6 +73,8 @@ public class Draw implements DrawAPI
         {
             throw new ColorException();
         }
+        gui.paintG.setBackground(gui.color);
+        gui.imageG.setBackground(gui.color);
     }
 
     @Override
@@ -103,6 +105,8 @@ public class Draw implements DrawAPI
         {
             throw new ColorException();
         }
+        gui.paintG.setBackground(gui.colorBG);
+        gui.imageG.setBackground(gui.colorBG);
     }
 
     @Override
@@ -219,8 +223,8 @@ public class Draw implements DrawAPI
 
         for(int i = 0; i < app.executioner.cmdQueue.size(); i++ )
         {
-            app.executioner.cmdQueue.get(i).draw(gui.getPaintG());
-            app.executioner.cmdQueue.get(i).draw(gui.getImageG());
+            app.executioner.cmdQueue.get(i).draw(gui.paintG);
+            app.executioner.cmdQueue.get(i).draw(gui.imageG);
         }
     }
 
@@ -228,15 +232,15 @@ public class Draw implements DrawAPI
     public void undo()
     {
         app.executioner.cmdQueue.pollLast();
-        app.executioner.cmdQueue.getLast().draw(gui.getPaintG());
-        app.executioner.cmdQueue.getLast().draw(gui.getImageG());
+        app.executioner.cmdQueue.getLast().draw(gui.paintG);
+        app.executioner.cmdQueue.getLast().draw(gui.imageG);
     }
 
     @Override
     public void redo()
     {
-        app.executioner.cmdQueue.getLast().draw(gui.getPaintG());
-        app.executioner.cmdQueue.getLast().draw(gui.getImageG());
+        app.executioner.cmdQueue.getLast().draw(gui.paintG);
+        app.executioner.cmdQueue.getLast().draw(gui.imageG);
     }
 
     @Override

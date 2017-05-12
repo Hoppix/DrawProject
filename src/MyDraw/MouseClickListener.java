@@ -125,15 +125,15 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
     public void mouseDragged(MouseEvent e)
     {   
     	
-    	gui.getImageG().setColor(gui.getImageG().getBackground());
-    	gui.getPaintG().setColor(gui.getPaintG().getBackground());
+    	gui.imageG.setColor(gui.imageG.getBackground());
+    	gui.paintG.setColor(gui.paintG.getBackground());
     	System.out.println("start: " + rect.startPoint + "; end: " + rect.endPoint + " - dragging");
         switch (parentHandler.shape)
         {
         case "Rectangle":       
         	parentHandler.execute(rect);
-        	gui.getImageG().setColor(gui.color);
-        	gui.getPaintG().setColor(gui.color);
+        	gui.imageG.setColor(gui.color);
+        	gui.paintG.setColor(gui.color);
         	
         	rect.endPoint = e.getPoint();        	
             parentHandler.cmdQueue.pop();
