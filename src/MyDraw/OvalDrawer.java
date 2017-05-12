@@ -5,7 +5,7 @@ import java.awt.Point;
 
 import MyDraw.Drawable;
 
-public class OvalDrawer implements Drawable
+public class OvalDrawer extends VisualObject implements Drawable
 {	
 	public Point startPoint;
 	public Point endPoint;

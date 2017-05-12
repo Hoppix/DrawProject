@@ -10,7 +10,6 @@ package MyDraw;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.*;
 
 
 public class Draw implements DrawAPI

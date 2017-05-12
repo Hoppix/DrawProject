@@ -23,18 +23,20 @@ public abstract class VisualObject
 		lowerRight = p;
 	}
 
-	public String toSaveString()
+	@Override
+	public String toString()
 	{
-		String parseMe = this.toString();
+		String parseMe = String.valueOf(this.getClass());
+		System.out.println(parseMe);
 		String[] splitMe = parseMe.split("@");
 
 		parseMe = splitMe[0];
 		parseMe = parseMe.replaceFirst("MyDraw.", "");
+		parseMe = parseMe.replaceFirst("class ", "");
+
 
 		parseMe = parseMe + ": " + "start(" + upperLeft.x + "," + upperLeft.y + ")" + " end(" + lowerRight.x + "," +
 				lowerRight.y + ")";
-		System.out.println(parseMe);
-
 
 		return parseMe;
 	}

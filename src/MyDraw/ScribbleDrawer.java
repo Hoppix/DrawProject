@@ -3,7 +3,7 @@ package MyDraw;
 import java.awt.Graphics;
 import java.awt.Point;
 
-public class ScribbleDrawer implements Drawable
+public class ScribbleDrawer extends VisualObject implements Drawable
 {
     public Point startPoint;
     public Point endPoint;

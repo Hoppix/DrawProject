@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * Created by khopf on 11/05/2017.
  */
-public class LineDrawer implements Drawable
+public class LineDrawer extends VisualObject implements Drawable
 {
     public Point startPoint;
     public Point endPoint;
