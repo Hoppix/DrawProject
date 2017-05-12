@@ -1,6 +1,7 @@
 package MyDraw;
 
 import java.awt.Graphics;
+import java.awt.Point;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
@@ -20,6 +21,8 @@ public class CommandHandler
     public Graphics imageG;
     
     public String shape;
+    
+    public Point startPoint;
     
     public CommandHandler(GUIHandler handler)
     {

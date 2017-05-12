@@ -59,7 +59,7 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
     @Override
     public void mousePressed(MouseEvent arg0)
     {
-    	
+    	parentHandler.startPoint = arg0.getPoint();
     	
         switch (parentHandler.shape)
         {
@@ -92,8 +92,7 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
         {
         case "Rectangle":
             rect.endPoint = arg0.getPoint();
-            
-            System.out.println("start: " + rect.startPoint + "; end: " + rect.endPoint + " - released");
+                     
             parentHandler.cmdQueue.pop();
             parentHandler.cmdQueue.add(rect);
             parentHandler.execute(rect);
@@ -124,23 +123,32 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
     @Override
     public void mouseDragged(MouseEvent e)
     {   
-    	
     	gui.imageG.setColor(gui.imageG.getBackground());
     	gui.paintG.setColor(gui.paintG.getBackground());
-    	System.out.println("start: " + rect.startPoint + "; end: " + rect.endPoint + " - dragging");
+    	
+    	//System.out.println("start: " + rect.startPoint + "; end: " + rect.endPoint + " - dragging");
+    	
         switch (parentHandler.shape)
         {
-        case "Rectangle":       
+        case "Rectangle": 
+        	rect.startPoint = parentHandler.startPoint;
+        	
         	parentHandler.execute(rect);
         	gui.imageG.setColor(gui.color);
         	gui.paintG.setColor(gui.color);
         	
         	rect.endPoint = e.getPoint();        	
-            parentHandler.cmdQueue.pop();
+            
             parentHandler.cmdQueue.add(rect);            
             parentHandler.execute(rect);
             break;
         case "Oval":
+        	oval.startPoint = parentHandler.startPoint;
+        	
+        	parentHandler.execute(oval);
+        	gui.imageG.setColor(gui.color);
+        	gui.paintG.setColor(gui.color);
+        	
             oval.endPoint = e.getPoint();
 
             parentHandler.cmdQueue.pop();
