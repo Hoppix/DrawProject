@@ -2,7 +2,7 @@ package MyDraw;
 
 
 import java.awt.*;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -162,6 +162,7 @@ public class GUIHandler
 
 	public void autoDraw()
 	{
+		//TODO fix redundanz
 		Point pA = new Point(5, 5);
 		Point pB = new Point(150, 150);
 		Point pC = new Point(300, 300);
@@ -245,6 +246,7 @@ public class GUIHandler
 		Graphics g = gui.drawPanel.getGraphics();
 		g.setColor(gui.color);
 		gui.imageG.setColor(gui.color);
+
 		for (int i = 0; i < points.size() - 1; i++)
 		{
 			if (points.get(i + 1).equals(null))
@@ -279,6 +281,54 @@ public class GUIHandler
 
 			gui.imageG.drawLine(xA, yA, xB, yB);
 
+		}
+	}
+
+	public void saveToText(String fileName) throws IOException
+	{
+		//TODO overwrite tostring
+		FileWriter fileWriter = new FileWriter(fileName);
+		BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+		FileReader fileReader = new FileReader(fileName);
+		BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+		for (int i = 0; i <executioner.cmdQueue.size(); i++)
+		{
+			if (bufferedReader.readLine() == null)
+			{
+				System.out.println("Writing to line " + i + "..");
+				bufferedWriter.write(executioner.cmdQueue.get(i).toString());
+				bufferedWriter.newLine();
+				System.out.println("Writing finished");
+			}
+
+		}
+
+		bufferedWriter.close();
+		bufferedReader.close();
+	}
+
+	public void loadFromText(String fileName) throws IOException
+	{
+		String line = null;
+
+		try
+		{
+			FileReader fileReader = new FileReader(fileName);
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+			while ((line = bufferedReader.readLine()) != null)
+			{
+				//TODO read string input correctly
+			}
+
+			bufferedReader.close();
+			System.out.println("read txt file");
+		}
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+			System.out.println("datei nicht gefunden");
 		}
 	}
 

@@ -2,7 +2,7 @@ package MyDraw;
 
 /**
  * Gruppe 5
- *
+ * <p>
  * Jonas Sander
  * Kolja Hopfmann
  */
@@ -13,7 +13,8 @@ import java.io.IOException;
 import java.util.*;
 
 
-public class Draw implements DrawAPI {
+public class Draw implements DrawAPI
+{
 
 	protected GUIHandler app;
 	protected DrawGUIs gui;
