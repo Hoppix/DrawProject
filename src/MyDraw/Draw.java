@@ -225,6 +225,38 @@ public class Draw implements DrawAPI {
 	{
 		app.drawPolyLine(points);
 	}
+
+	@Override
+	public void drawFillRectangle(Point upper_left, Point lower_right)
+	{
+		/**
+		 * DUMMY
+		 */
+	}
+
+	@Override
+	public void drawFillOval(Point upper_left, Point lower_right)
+	{
+		/**
+		 * DUMMY
+		 */
+	}
+
+	@Override
+	public void drawTriangle(Point upper_left, Point lower_right)
+	{
+		/**
+		 * DUMMY
+		 */
+	}
+
+	@Override
+	public void drawLine(Point upper_left, Point lower_right)
+	{
+		/**
+		 * DUMMY
+		 */
+	}
 }
 
 

@@ -11,7 +11,8 @@ import java.util.Stack;
 import javax.swing.*;
 
 
-public class GUIHandler {
+public class GUIHandler
+{
 	private String savePath;
 	private JFileChooser chooser;
 	private JFrame frame;

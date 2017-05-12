@@ -40,4 +40,12 @@ public interface DrawAPI
 
     public void drawPolyLine(java.util.List<Point> points);
 
+    public void drawFillRectangle(Point upper_left, Point lower_right);
+
+    public void drawFillOval(Point upper_left, Point lower_right);
+
+    public void drawTriangle(Point upper_left, Point lower_right);
+
+    public void drawLine(Point upper_left, Point lower_right);
+
 }
