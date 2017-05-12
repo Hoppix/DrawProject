@@ -34,6 +34,10 @@ public interface DrawAPI
 
     public void redo();
 
+    public void writeText(String filename) throws IOException;
+
+    public void readText(String filename) throws  IOException;
+
     public void drawRectangle(Point upper_left, Point lower_right);
 
     public void drawOval(Point upper_left, Point lower_right);

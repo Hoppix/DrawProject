@@ -209,6 +209,22 @@ public class Draw implements DrawAPI {
 	}
 
 	@Override
+	public void writeText(String filename) throws IOException
+	{
+		/**
+		 * DUMMY
+		 */
+	}
+
+	@Override
+	public void readText(String filename) throws IOException
+	{
+		/**
+		 * DUMMY
+		 */
+	}
+
+	@Override
 	public void drawRectangle(Point upper_left, Point lower_right)
 	{
 		app.drawRectangle(upper_left, lower_right);
