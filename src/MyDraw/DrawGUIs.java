@@ -24,6 +24,8 @@ class DrawGUIs
     JButton quit;
     JButton auto;
     JButton save;
+    JButton loadText;
+    JButton saveText;
     JLabel shapeLabel;
     JLabel colorLabel;
     JLabel colorBGLabel;
@@ -58,280 +60,21 @@ class DrawGUIs
 
     }
 
-    @Deprecated
-    public void setHeight(int height)
+    public void setPanelHeight(int height)
     {
         Rectangle rekt = drawPanel.getBounds();
         drawPanel.setBounds(rekt.x, rekt.y, rekt.width, height);
     }
 
-    @Deprecated
-    public void setWidth(int width)
+
+    public void setPanelWidth(int width)
     {
         Rectangle rekt = drawPanel.getBounds(); //get rekt
         drawPanel.setBounds(rekt.x, rekt.y, width, rekt.height);
     }
-    
 
-    @Deprecated
-    public void setFGColor(String new_color) throws ColorException
-    {
-        String colorLowercase = new_color.toLowerCase();
-        if (colorLowercase.equals("black"))
-        {
-            color = Color.black;
-        }
-        else if (colorLowercase.equals("blue"))
-        {
-            color = Color.blue;
-        }
-        else if (colorLowercase.equals("red"))
-        {
-            color = Color.red;
-        }
-        else if (colorLowercase.equals("green"))
-        {
-            color = Color.green;
-        }
-        else if(colorLowercase.equals("white"))
-        {
-            color = Color.white;
-        }
-        else
-        {
-            throw new ColorException();
-        }
-              
 
-    }
 
-    @Deprecated
-    public String getFGColor()
-    {
-        if(color.equals(Color.black))
-        {
-            return "black";
-        }
-        else if(color.equals(Color.blue))
-        {
-            return "blue";
-        }
-        else if(color.equals(Color.red))
-        {
-            return "red";
-        }
-        else if(color.equals(Color.green))
-        {
-            return "green";
-        }
-        else if(color.equals(Color.white))
-        {
-            return "white";
-        }
-        else
-        {
-            return null;
-        }
-    }
-    
-   
-    
-
-    @Deprecated
-    public void setBGColor(String new_color) throws ColorException
-    {
-        String colorLowercase = new_color.toLowerCase();
-        if (colorLowercase.equals("black"))
-        {
-            colorBG = Color.black;
-        }
-        else if (colorLowercase.equals("blue"))
-        {
-            colorBG = Color.blue;
-        }
-        else if (colorLowercase.equals("red"))
-        {
-            colorBG = Color.red;
-        }
-        else if (colorLowercase.equals("green"))
-        {
-            colorBG = Color.green;
-        }
-        else if(colorLowercase.equals("white"))
-        {
-            colorBG = Color.white;
-        }
-        else
-        {
-            throw new ColorException();
-        }
-              
-    }
-
-    @Deprecated
-    public String getBGColor()
-    {
-        if(colorBG.equals(Color.black))
-        {
-            return "black";
-        }
-        else if(colorBG.equals(Color.blue))
-        {
-            return "blue";
-        }
-        else if(colorBG.equals(Color.red))
-        {
-            return "red";
-        }
-        else if(colorBG.equals(Color.green))
-        {
-            return "green";
-        }
-        else if(colorBG.equals(Color.white))
-        {
-            return "white";
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-    @Deprecated
-    public void drawRectangle(Point upper_left, Point lower_right)
-    {
-        Graphics g = drawPanel.getGraphics();
-        int x = upper_left.x;
-        int y = upper_left.y;
-        int w = Math.abs(lower_right.x - upper_left.x);
-        int h = Math.abs(lower_right.y - upper_left.y);
-        // draw rectangle
-        g.setColor(color);
-        g.drawRect(x, y, w, h);
-        imageG.setColor(color);
-        imageG.drawRect(x, y, w, h);
-        
-    }
-
-    @Deprecated
-    public void drawOval(Point upper_left, Point lower_right)
-    {
-        Graphics g = drawPanel.getGraphics();
-        g.setColor(color);
-        
-        int x = upper_left.x;
-        int y = upper_left.y;
-        int w = Math.abs(lower_right.x - upper_left.x);
-        int h = Math.abs(lower_right.y - upper_left.y);
-        // draw rectangle
-        g.drawOval(x, y, w, h);
-        imageG.setColor(color);
-        imageG.drawOval(x, y, w, h);
-    }
-
-    @Deprecated
-    public void drawPolyLine(java.util.List<Point> points)
-    {
-        Graphics g = drawPanel.getGraphics();
-        g.setColor(color);
-        imageG.setColor(color);
-        for(int i = 0; i < points.size() -1; i++)
-        {
-            if(points.get(i+1).equals(null))
-            {
-                break;
-            }
-            Point pointA = points.get(i);
-            Point pointB = points.get(i+1);
-            
-            int xA = pointA.x;
-            int yA = pointA.y;
-            int xB = pointB.x;
-            int yB = pointB.y;
-            
-            g.drawLine(xA, yA, xB, yB);
-            
-        }
-        
-        for(int i = 0; i < points.size() -1; i++)
-        {
-            if(points.get(i+1).equals(null))
-            {
-                break;
-            }
-            Point pointA = points.get(i);
-            Point pointB = points.get(i+1);
-            
-            int xA = pointA.x;
-            int yA = pointA.y;
-            int xB = pointB.x;
-            int yB = pointB.y;
-            
-            imageG.drawLine(xA, yA, xB, yB);
-            
-        }
-        
-    }
-
-    @Deprecated
-    public Image getDrawing()
-    {
-        return saveImage;
-    }
-    
-   
-    @Deprecated
-    public void clear()
-    {
-        Graphics g = drawPanel.getGraphics();
-        g.setColor(colorBG);
-        g.fillRect(0, 0, drawPanel.getSize().width, drawPanel.getSize().height);
-        imageG.setColor(colorBG);
-        imageG.fillRect(0, 0, drawPanel.getSize().width, drawPanel.getSize().height);
-
-    }
-
-    @Deprecated
-    public void autoDraw()
-    {
-        Point pA = new Point(5, 5);
-        Point pB = new Point (150, 150);
-        Point pC = new Point(300,300);
-        ArrayList<Point> points = new ArrayList<>();
-        points.add(pA);
-        points.add(pB);
-        points.add(pC);
-      
-        try
-        { 
-            this.setBGColor("white");
-            this.clear();
-
-            this.setFGColor("black");
-            this.drawRectangle(points.get(0), points.get(1));
-            this.setFGColor("GrEEn");
-            this.drawOval(points.get(1), points.get(2));
-            this.setFGColor("RED");
-            this.drawPolyLine(points);
-            this.setFGColor("blue");
-            this.drawOval(points.get(0), points.get(2));
-        }
-        catch (ColorException e)
-        {
-            e.printStackTrace();
-        }                           
-    }
-
-    @Deprecated
-    public void writeImage(Image img, String filename) throws IOException
-    {
-        MyBMPFile.write(filename, img);
-    }
-
-    /**
-     * temporary help function for refactoring
-     * @return background graphics of gui class
-     */
     public Graphics2D getImageG()
     {
         return imageG;
@@ -342,9 +85,6 @@ class DrawGUIs
         return paintG; 
     }
 
-    /**
-     * @return draw perspective of the gui
-     */
     public JPanel getDrawPanel()
     {
         return drawPanel;
@@ -388,6 +128,8 @@ class DrawGUIs
         quit = new JButton("Quit");
         auto = new JButton("Auto");
         save = new JButton("Save");
+        loadText = new JButton("Load Text");
+        saveText = new JButton(("Save Text"));
 
 
         quit.setBounds(10, 10, 60, 20 );
@@ -406,8 +148,11 @@ class DrawGUIs
         // selector for drawing modes
         shape_chooser = new Choice();
         shape_chooser.add("Scribble");
+        shape_chooser.add("Line");
         shape_chooser.add("Rectangle");
+        shape_chooser.add("FillRectangle");
         shape_chooser.add("Oval");
+        shape_chooser.add("FillOval");
 
         // selector for drawing colors
         color_chooser = new Choice();

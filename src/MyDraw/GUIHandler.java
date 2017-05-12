@@ -1,10 +1,7 @@
 package MyDraw;
 
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -20,8 +17,7 @@ import javax.swing.*;
 
 
 
-public class GUIHandler
-{
+public class GUIHandler {
     //TODO Draw commands in Command queue aufnehmen
     private JFileChooser chooser;
     private JFrame frame;
@@ -33,22 +29,21 @@ public class GUIHandler
     public Queue<String> cmdQueue;
     public Stack<String> doneActions; //TODO: durchgef�hrte commands hier speichern (1.6)
     private Timer timer;
-    
+
     public CommandHandler executioner;
-    
-   
-    public GUIHandler(DrawGUIs getgui)
-    {
+
+
+    public GUIHandler(DrawGUIs getgui) {
         gui = getgui;
 
         chooser = new JFileChooser();
         cmdQueue = new LinkedList<String>();
-        doneActions = new Stack<String>();        
-        
+        doneActions = new Stack<String>();
+
         imageG = gui.getImageG();
         paintG = gui.getPaintG();
         frame = gui.getDrawFrame();
-        
+
         executioner = new CommandHandler(this);
 
         chooser.addChoosableFileFilter(new BMPFileFilter());
@@ -59,97 +54,94 @@ public class GUIHandler
         gui.auto.addActionListener(new DrawActionListener("auto", this));
         gui.save.addActionListener(new DrawActionListener("save", this));
 
-        
-		
+
         gui.shape_chooser.addItemListener(new ShapeItemListener(this));
         gui.color_chooser.addItemListener(new ColorItemListener(this));
-        gui.colorBG_chooser.addItemListener(new ColorBGItemListener(this)); 
+        gui.colorBG_chooser.addItemListener(new ColorBGItemListener(this));
 
         gui.getDrawFrame().addWindowStateListener(new ResponsiveHandler(gui));
-  
+
     }
-    
 
-    
-    public void doCommand(String command)
-    {
-    	if (command == null)
-    	{
-    		return;
-    	}
-        if (command.equals("clear"))
-        { 
-           gui.clear();
 
+    public void doCommand(String command) {
+        if (command == null) {
+            return;
         }
-        else if (command.equals("quit"))
-        {
+        if (command.equals("clear")) {
+            clear();
+
+        } else if (command.equals("quit")) {
             frame.dispose();
             System.exit(0);
-        }
-        else if(command.equals("auto"))
-        {   
+        } else if (command.equals("auto")) {
             doneActions.add(command);
-            gui.autoDraw();
-        }
-        else if(command.equals("save"))
-        {
+            //gui.autoDraw();
+            System.out.println("fix Autoraw method");
+        } else if (command.equals("save")) {
             chooser.setVisible(true);
 
             int retrieve = chooser.showSaveDialog(gui.getDrawFrame());
 
-            if(retrieve == chooser.APPROVE_OPTION)
-            {
+            if (retrieve == chooser.APPROVE_OPTION) {
                 String extension2 = chooser.getFileFilter().getDescription();
 
-                if(extension2.equals("*bmp,*.BMP"))
-                {
+                if (extension2.equals("*bmp,*.BMP")) {
                     /**
                      *  ignore
                      */
                 }
             }
-            try
-            {
+            try {
                 savePath = chooser.getSelectedFile().getAbsolutePath();
 
-                try
-                {
-                    gui.writeImage(gui.getDrawing(), savePath + ".bmp");
-                }
-                catch (IOException e)
-                {
+                try {
+                    this.writeImage(this.getDrawing(), savePath + ".bmp");
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }
-            catch (NullPointerException e)
-            {
+            } catch (NullPointerException e) {
                 JOptionPane.showMessageDialog(frame, "Speichern abgebrochen");
                 e.printStackTrace();
             }
 
-        }   
-        else if(command.contains("changeShape"))
-        {
-        	command = command.replace("changeShape", "");
-        	executioner.shape = command;
-        	
-        }
-        else if(command.contains("changeColor"))
-        {   
-        	System.out.println("changingColor: " + command);
-        	command = command.replace("changeColor", "");
-        	ColorHashMap map = new ColorHashMap();
-        	gui.color = map.StringToColor(command);
-        	gui.getImageG().setColor(gui.color);
-        	gui.getPaintG().setColor(gui.color);
-        }
-        else if(command.contains("changeBGColor"))
-        {
-        	command = command.replace("changeBGColor", "");
+        } else if (command.contains("changeShape")) {
+            command = command.replace("changeShape", "");
+            executioner.shape = command;
+
+        } else if (command.contains("changeColor")) {
+            System.out.println("changingColor: " + command);
+            command = command.replace("changeColor", "");
             ColorHashMap map = new ColorHashMap();
-        	gui.colorBG = map.StringToColor(command); 
-            gui.clear();
-        }     
+            gui.color = map.StringToColor(command);
+            gui.getImageG().setColor(gui.color);
+            gui.getPaintG().setColor(gui.color);
+        } else if (command.contains("changeBGColor")) {
+            command = command.replace("changeBGColor", "");
+            ColorHashMap map = new ColorHashMap();
+            gui.colorBG = map.StringToColor(command);
+            clear();
+        }
     }
+
+    public void clear()
+    {
+        gui.paintG.setColor(gui.colorBG);
+        gui.paintG.fillRect(0, 0, gui.drawPanel.getSize().width, gui.drawPanel.getSize().height);
+
+        imageG.setColor(gui.colorBG);
+        imageG.fillRect(0, 0, gui.drawPanel.getSize().width, gui.drawPanel.getSize().height);
+
+    }
+
+    public Image getDrawing()
+    {
+        return gui.saveImage;
+    }
+
+    public void writeImage(Image img, String filename) throws IOException
+    {
+        MyBMPFile.write(filename, img);
+    }
+
 }

@@ -69,8 +69,8 @@ public class ResponsiveHandler implements WindowStateListener, ComponentListener
 
     private void updatePanel()
     {
-        responsive.setHeight(responsive.getDrawFrame().getHeight() - 40);
-        responsive.setWidth(responsive.getDrawFrame().getWidth());
+        responsive.setPanelHeight(responsive.getDrawFrame().getHeight() - 40);
+        responsive.setPanelWidth(responsive.getDrawFrame().getWidth());
 
         responsive.saveImage =  new BufferedImage(responsive.getDrawPanel().getWidth(), responsive.getDrawPanel().getHeight(), BufferedImage.TYPE_INT_RGB);
 

@@ -36,15 +36,13 @@ public class Draw implements DrawAPI
     @Override
     public void setHeight(int height)
     {
-        Rectangle rekt = gui.getDrawPanel().getBounds();
-        gui.getDrawPanel().setBounds(rekt.x, rekt.y, rekt.width, height);
+        gui.setPanelHeight(height);
     }
 
     @Override
     public void setWidth(int width)
     {
-        Rectangle rekt = gui.getDrawPanel().getBounds(); //get rekt
-        gui.getDrawPanel().setBounds(rekt.x, rekt.y, width, rekt.height);
+        gui.setPanelWidth(width);
     }
 
     @Override
