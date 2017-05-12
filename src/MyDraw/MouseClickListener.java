@@ -66,8 +66,8 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
 
     @Override
     public void mousePressed(MouseEvent arg0)
-    {
-    	parentHandler.startPoint = arg0.getPoint();
+    {    	
+    	parentHandler.startPoint = arg0.getPoint();    	
     	
         switch (parentHandler.shape)
         {
@@ -80,9 +80,8 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
             
             break;
         case "Scribble":
-        	
-        	parentHandler.startPoint = arg0.getPoint();
-            //scribble = new ScribbleDrawer(arg0.getPoint(), arg0.getPoint());
+        	// ignore
+        	//parentHandler.startPoint = arg0.getPoint();
             
             break;
         case "FillOval":
@@ -104,6 +103,10 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
     @Override
     public void mouseReleased(MouseEvent arg0)
     {   
+    	gui.paintG.setPaintMode();
+    	gui.imageG.setPaintMode();
+    	gui.imageG.setColor(gui.color);
+    	gui.paintG.setColor(gui.color);
         switch (parentHandler.shape)
         {
         case "Rectangle":
@@ -157,22 +160,30 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
         default:
             break;
         }
+        parentHandler.startPoint = setupPoint;
+        parentHandler.endPoint = setupPoint;
     }
 
     @Override
     public void mouseDragged(MouseEvent e)
-    {   
-    	gui.imageG.setColor(gui.colorBG);
-    	gui.paintG.setColor(gui.colorBG);
+    {      	
+    	//set XOR Mode
+    	gui.paintG.setXORMode(gui.color);
+		gui.paintG.setColor(gui.colorBG);
+		gui.imageG.setXORMode(gui.color);
+		gui.imageG.setColor(gui.colorBG);
     	
         switch (parentHandler.shape)
         {
         case "Rectangle": 
         	rect.startPoint = parentHandler.startPoint;
         	
-        	parentHandler.execute(rect);
-        	gui.imageG.setColor(gui.color);
-        	gui.paintG.setColor(gui.color);
+        	if((parentHandler.endPoint.getX() != -1 && parentHandler.endPoint.getY() != -1))
+        	{
+        		parentHandler.execute(rect);
+        	}
+
+        	parentHandler.endPoint = e.getPoint();
 
         	rect.endPoint = e.getPoint();        	
                       
@@ -182,23 +193,29 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
         case "Oval":
         	oval.startPoint = parentHandler.startPoint;
         	
-        	parentHandler.execute(oval);
-        	gui.imageG.setColor(gui.color);
-        	gui.paintG.setColor(gui.color);
-        	
-            oval.endPoint = e.getPoint();
-   
+        	if((parentHandler.endPoint.getX() != -1 && parentHandler.endPoint.getY() != -1))
+        	{
+        		parentHandler.execute(oval);
+        	}
+
+        	parentHandler.endPoint = e.getPoint();
+
+        	oval.endPoint = e.getPoint();        	
+                      
             parentHandler.execute(oval);
             break;
             
         case "Scribble":
+        	//set PaintMode
+        	gui.paintG.setPaintMode();
+        	gui.imageG.setPaintMode();
         	gui.imageG.setColor(gui.color);
         	gui.paintG.setColor(gui.color);
         	
             scribble.startPoint = parentHandler.startPoint;
             scribble.endPoint = e.getPoint();
             parentHandler.startPoint = e.getPoint();
-            
+
             parentHandler.cmdQueue.add(scribble);
             parentHandler.execute(scribble);
             break;
@@ -206,51 +223,63 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
         case "FillOval":
         	ovalFilled.startPoint = parentHandler.startPoint;
         	
-        	parentHandler.execute(ovalFilled);
-        	gui.imageG.setColor(gui.color);
-        	gui.paintG.setColor(gui.color);
-        	
-            ovalFilled.endPoint = e.getPoint();
-  
+        	if((parentHandler.endPoint.getX() != -1 && parentHandler.endPoint.getY() != -1))
+        	{
+        		parentHandler.execute(ovalFilled);
+        	}
+
+        	parentHandler.endPoint = e.getPoint();
+
+        	ovalFilled.endPoint = e.getPoint();        	
+                      
             parentHandler.execute(ovalFilled);
             break;
         
         case "FillRectangle":
         	rectFilled.startPoint = parentHandler.startPoint;
         	
-        	parentHandler.execute(rectFilled);
-        	gui.imageG.setColor(gui.color);
-        	gui.paintG.setColor(gui.color);
-        	
-            rectFilled.endPoint = e.getPoint();
-  
+        	if((parentHandler.endPoint.getX() != -1 && parentHandler.endPoint.getY() != -1))
+        	{
+        		parentHandler.execute(rectFilled);
+        	}
+
+        	parentHandler.endPoint = e.getPoint();
+
+        	rectFilled.endPoint = e.getPoint();        	
+                      
             parentHandler.execute(rectFilled);
             break;
             
         case "Line":
         	line.startPoint = parentHandler.startPoint;
         	
-        	parentHandler.execute(line);
-        	
-        	gui.imageG.setColor(gui.color);
-        	gui.paintG.setColor(gui.color);
-        	
-        	line.endPoint = e.getPoint();
-        	
-        	parentHandler.execute(line);
-        	break;
+        	if((parentHandler.endPoint.getX() != -1 && parentHandler.endPoint.getY() != -1))
+        	{
+        		parentHandler.execute(line);
+        	}
+
+        	parentHandler.endPoint = e.getPoint();
+
+        	line.endPoint = e.getPoint();        	
+                      
+            parentHandler.execute(line);
+            break;
         	
         case "Triangle":
         	triangle.startPoint = parentHandler.startPoint;
         	
-        	parentHandler.execute(triangle);
-        	
-        	gui.imageG.setColor(gui.color);
-        	gui.paintG.setColor(gui.color);
-        	
-        	triangle.endPoint = e.getPoint();
-        	
-        	parentHandler.execute(triangle);
+        	if((parentHandler.endPoint.getX() != -1 && parentHandler.endPoint.getY() != -1))
+        	{
+        		parentHandler.execute(triangle);
+        	}
+
+        	parentHandler.endPoint = e.getPoint();
+
+        	triangle.endPoint = e.getPoint();        	
+                      
+            parentHandler.execute(triangle);
+            break;
+            
         default:
             break;
         }
