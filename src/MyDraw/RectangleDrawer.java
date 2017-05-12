@@ -6,10 +6,8 @@ import java.awt.Point;
 import MyDraw.Drawable;
 
 public class RectangleDrawer extends VisualObject implements Drawable
-{	
-	public Point startPoint;
-	public Point endPoint;
-	
+{
+
 	public RectangleDrawer(Point start, Point end)
 	{
 		startPoint = start;

@@ -7,15 +7,13 @@ import java.awt.*;
  */
 public class TriangleDrawer extends VisualObject implements Drawable
 {
-    public Point startPoint;
-    public Point endPoint;
+
 
     public TriangleDrawer(Point start, Point end)
     {
         startPoint = start;
         endPoint = end;
     }
-
     @Override
     public void draw(Graphics g)
     {

@@ -7,8 +7,7 @@ import java.awt.*;
  */
 public class FillOvalDrawer extends VisualObject implements Drawable
 {
-    public Point startPoint;
-    public java.awt.Point endPoint;
+
 
     public FillOvalDrawer(Point start, Point end)
     {

@@ -5,9 +5,8 @@ import java.awt.Point;
 
 public class ScribbleDrawer extends VisualObject implements Drawable
 {
-    public Point startPoint;
-    public Point endPoint;
-    
+
+
     public ScribbleDrawer(Point start, Point end)
     {
         startPoint = start;

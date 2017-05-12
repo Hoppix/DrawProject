@@ -40,12 +40,15 @@ public class GUIHandler
 		executioner = new CommandHandler(this);
 
 		chooser.addChoosableFileFilter(new BMPFileFilter());
+		chooser.addChoosableFileFilter(new TextFileFilter());
 
 		// Define action listener adapters that connect the  buttons to the app
 		gui.clear.addActionListener(new DrawActionListener("clear", this));
 		gui.quit.addActionListener(new DrawActionListener("quit", this));
 		gui.auto.addActionListener(new DrawActionListener("auto", this));
 		gui.save.addActionListener(new DrawActionListener("save", this));
+		gui.saveText.addActionListener(new DrawActionListener("saveText", this));
+		gui.loadText.addActionListener(new DrawActionListener("loadText", this));
 
 
 		gui.shape_chooser.addItemListener(new ShapeItemListener(this));
@@ -77,44 +80,18 @@ public class GUIHandler
 		{
 			doneActions.add(command);
 			autoDraw();
-			System.out.println("fix Autoraw method");
+		}
+		else if (command.equals("saveText"))
+		{
+			chooserSave();
+		}
+		else if (command.equals("loadText"))
+		{
+
 		}
 		else if (command.equals("save"))
 		{
-			chooser.setVisible(true);
-
-			int retrieve = chooser.showSaveDialog(gui.drawFrame);
-
-			if (retrieve == chooser.APPROVE_OPTION)
-			{
-				String extension2 = chooser.getFileFilter().getDescription();
-
-				if (extension2.equals("*bmp,*.BMP"))
-				{
-					/**
-					 *  ignore
-					 */
-				}
-			}
-			try
-			{
-				savePath = chooser.getSelectedFile().getAbsolutePath();
-
-				try
-				{
-					this.writeImage(this.getDrawing(), savePath + ".bmp");
-				}
-				catch (IOException e)
-				{
-					e.printStackTrace();
-				}
-			}
-			catch (NullPointerException e)
-			{
-				JOptionPane.showMessageDialog(frame, "Speichern abgebrochen");
-				e.printStackTrace();
-			}
-
+			chooserSave();
 		}
 		else if (command.contains("changeShape"))
 		{
@@ -286,20 +263,17 @@ public class GUIHandler
 
 	public void saveToText(String fileName) throws IOException
 	{
-		//TODO overwrite tostring
 		FileWriter fileWriter = new FileWriter(fileName);
 		BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 		FileReader fileReader = new FileReader(fileName);
 		BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-		for (int i = 0; i <executioner.cmdQueue.size(); i++)
+		for (int i = 0; i < executioner.cmdQueue.size(); i++)
 		{
 			if (bufferedReader.readLine() == null)
 			{
-				System.out.println("Writing to line " + i + "..");
 				bufferedWriter.write(executioner.cmdQueue.get(i).toString());
 				bufferedWriter.newLine();
-				System.out.println("Writing finished");
 			}
 
 		}
@@ -321,9 +295,7 @@ public class GUIHandler
 			{
 				//TODO read string input correctly
 			}
-
 			bufferedReader.close();
-			System.out.println("read txt file");
 		}
 		catch (FileNotFoundException e)
 		{
@@ -332,4 +304,48 @@ public class GUIHandler
 		}
 	}
 
+	private void chooserSave()
+	{
+		chooser.setVisible(true);
+
+		int retrieve = chooser.showSaveDialog(gui.drawFrame);
+		String extension2 = chooser.getFileFilter().getDescription();
+
+		savePath = chooser.getSelectedFile().getAbsolutePath();
+
+		if (retrieve == chooser.APPROVE_OPTION)
+		{
+			try
+			{
+				if (extension2.equals("*.bmp,*.BMP"))
+				{
+					try
+					{
+						this.writeImage(this.getDrawing(), savePath + ".bmp");
+
+					}
+					catch (IOException e)
+					{
+						e.printStackTrace();
+					}
+				}
+				else if (extension2.equals("*.txt"))
+				{
+					try
+					{
+						this.saveToText(savePath + ".txt");
+					}
+					catch (IOException e)
+					{
+						e.printStackTrace();
+					}
+				}
+			}
+			catch (NullPointerException e)
+			{
+				JOptionPane.showMessageDialog(frame, "Speichern abgebrochen");
+				e.printStackTrace();
+			}
+		}
+	}
 }
