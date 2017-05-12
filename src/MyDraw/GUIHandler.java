@@ -117,6 +117,8 @@ public class GUIHandler
 
 	public void clear()
 	{
+		executioner.cmdQueue.clear();
+
 		gui.paintG.setColor(gui.colorBG);
 		gui.paintG.fillRect(0, 0, gui.drawPanel.getSize().width, gui.drawPanel.getSize().height);
 
@@ -283,6 +285,9 @@ public class GUIHandler
 	public void loadFromText(String fileName) throws IOException
 	{
 		String line = null;
+		String parse = null;
+		String [] coordsSTR = null;
+		int[] coordsINT = null;
 
 		try
 		{
@@ -292,6 +297,55 @@ public class GUIHandler
 			while ((line = bufferedReader.readLine()) != null)
 			{
 				//TODO read string input correctly
+				if(line.contains("ScribbleDrawer"))
+				{
+					parse = line.replaceFirst("ScribbleDrawer: ", "");
+					parse = parse.replaceFirst("start", "");
+					parse = parse.substring(line.indexOf('(', line.indexOf(')')));
+					coordsSTR = parse.split(",");
+
+					coordsINT[0] = Integer.parseInt(coordsSTR[0]);
+					coordsINT[1] = Integer.parseInt(coordsSTR[1]);
+
+					Point start = new Point(coordsINT[0], coordsINT[1]);
+
+					parse = line.replaceFirst("ScribbleDrawer: ", "");
+					parse = parse.replaceFirst("start", "");
+					parse = parse.substring(line.indexOf('(', line.indexOf(')')));
+					coordsSTR = parse.split(",");
+
+					coordsINT[0] = Integer.parseInt(coordsSTR[0]);
+					coordsINT[1] = Integer.parseInt(coordsSTR[1]);
+
+					Point end = new Point(coordsINT[0], coordsINT[1]);
+
+					executioner.cmdQueue.add(new ScribbleDrawer(start, end));
+				}
+				else if(line.contains("LineDrawer"))
+				{
+
+				}
+				else if(line.contains("RectangleDrawer"))
+				{
+
+				}
+				else if(line.contains("FillRectangleDrawer"))
+				{
+
+				}
+				else if(line.contains("OvalDrawer"))
+				{
+
+				}
+				else if(line.contains("FillOvalDrawer"))
+				{
+
+				}
+				else if(line.contains("TriangleDrawer"))
+				{
+
+				}
+
 			}
 			bufferedReader.close();
 		}
