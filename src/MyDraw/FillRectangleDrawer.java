@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * Created by khopf on 11/05/2017.
  */
-public class FillRectangleDrawer
+public class FillRectangleDrawer implements Drawable
 {
     public Point startPoint;
     public Point endPoint;
