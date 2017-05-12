@@ -10,10 +10,9 @@ import java.awt.event.MouseMotionListener;
 
 class ShapeManager implements ItemListener
 {
-	//TODO drawable implementieren
-	//TODO graphics g integrieren
+
 	DrawGUIs gui;
-	Graphics2D imageG;
+	Graphics imageG;
 
 	abstract class ShapeDrawer extends MouseAdapter implements MouseMotionListener
 	{
@@ -156,7 +155,6 @@ class ShapeManager implements ItemListener
 	{
 		gui = itsGui;
 		imageG = gui.imageG;
-		//TODO temp fix
 		// default: scribble mode
 		currentDrawer = scribbleDrawer;
 		// activate scribble drawer

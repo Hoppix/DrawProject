@@ -2,13 +2,10 @@ package MyDraw;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.ArrayList;
 import javax.swing.*;
 
 class DrawGUIs
 {
-
     private static final long serialVersionUID = 5549826489329119875L;
     private final static int FRAMEWIDTH = 820;
     private final static int FRAMEHEIGHT = 600;
@@ -17,8 +14,8 @@ class DrawGUIs
     Color colorBG;
     Color frameColor;
     BufferedImage saveImage;
-    Graphics2D imageG;
-    Graphics2D paintG;
+    Graphics imageG;
+    Graphics paintG;
     JPanel drawPanel;
     JFrame drawFrame;
     JButton clear;
