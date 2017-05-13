@@ -1,4 +1,4 @@
-package MyDraw;
+package mydraw;
 
 /**
  * Gruppe 5

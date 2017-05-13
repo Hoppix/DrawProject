@@ -1,4 +1,4 @@
-package MyDraw;
+package mydraw;
 
 import java.awt.Color;
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 package Listener;
 
-import MyDraw.GUIHandler;
+import mydraw.GUIHandler;
 
 import java.awt.*;
 import java.awt.event.ItemEvent;

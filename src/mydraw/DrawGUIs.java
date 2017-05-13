@@ -1,4 +1,4 @@
-package MyDraw;
+package mydraw;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -89,7 +89,7 @@ public class DrawGUIs extends JPanel
 		drawFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		drawFrame.setPreferredSize(new Dimension(FRAMEWIDTH, FRAMEHEIGHT));
 		drawFrame.pack();
-		drawFrame.setTitle("MyDraw -  Gruppe 5");
+		drawFrame.setTitle("mydraw -  Gruppe 5");
 		drawFrame.setResizable(true);
 		drawFrame.setVisible(true);
 
@@ -200,11 +200,13 @@ public class DrawGUIs extends JPanel
 	}
 
 	@Override
-	public void paintComponent(Graphics g)
+	protected void paintComponent(Graphics g)
 	{
-		super.paintComponent(g);
 		setPanelHeight(drawFrame.getHeight() - DrawGUIs.PANELDIFF);
 		setPanelWidth(drawFrame.getWidth());
+
+		super.paintComponent(g);
+		imageG = this.getGraphics();
 	}
 
 

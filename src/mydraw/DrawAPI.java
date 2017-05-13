@@ -1,4 +1,4 @@
-package MyDraw;
+package mydraw;
 
 import java.awt.*;
 import java.io.IOException;
