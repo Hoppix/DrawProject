@@ -74,7 +74,7 @@
       <operations public="true" package="false" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="MyDraw.DrawActionListener" project="drawproject" 
+  <class id="9" language="java" name="Listener.DrawActionListener" project="drawproject"
     file="/drawproject/src/MyDraw/DrawActionListener.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1109" y="182"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
