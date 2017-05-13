@@ -61,6 +61,7 @@ public class GUIHandler
 		gui.colorBG_chooser.addItemListener(new ColorBGItemListener(this));
 
 		gui.drawFrame.addWindowStateListener(new ResponsiveHandler(gui));
+		gui.drawFrame.addComponentListener(new ResponsiveHandler(gui));
 
 	}
 

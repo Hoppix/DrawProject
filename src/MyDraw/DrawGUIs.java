@@ -59,7 +59,7 @@ public class DrawGUIs
 		paintG = drawPanel.getGraphics();
 
 		//TODO TEMPORARY
-		drawFrame.setResizable(false);
+		//drawFrame.setResizable(false);
 
 	}
 
