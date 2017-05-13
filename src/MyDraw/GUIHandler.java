@@ -47,6 +47,9 @@ public class GUIHandler
 		gui.save.addActionListener(new DrawActionListener("save", this));
 		gui.saveText.addActionListener(new DrawActionListener("saveText", this));
 		gui.loadText.addActionListener(new DrawActionListener("loadText", this));
+		gui.redo.addActionListener(new DrawActionListener("undo", this));
+		gui.undo.addActionListener(new DrawActionListener("redo", this));
+		gui.redraw.addActionListener(new DrawActionListener("redraw", this));
 
 
 		gui.shape_chooser.addItemListener(new ShapeItemListener(this));
@@ -67,7 +70,6 @@ public class GUIHandler
 		if (command.equals("clear"))
 		{
 			clear();
-
 		}
 		else if (command.equals("quit"))
 		{
@@ -85,7 +87,7 @@ public class GUIHandler
 		}
 		else if (command.equals("loadText"))
 		{
-
+			//chooserLoadText();
 		}
 		else if (command.equals("save"))
 		{
@@ -119,9 +121,8 @@ public class GUIHandler
 	{
 		executioner.cmdQueue.clear();
 
-		gui.paintG.setColor(gui.colorBG);
-		gui.paintG.fillRect(0, 0, gui.drawPanel.getSize().width, gui.drawPanel.getSize().height);
-
+		paintG.setColor(gui.colorBG);
+		paintG.fillRect(0, 0, gui.drawPanel.getSize().width, gui.drawPanel.getSize().height);
 		imageG.setColor(gui.colorBG);
 		imageG.fillRect(0, 0, gui.drawPanel.getSize().width, gui.drawPanel.getSize().height);
 
@@ -139,11 +140,9 @@ public class GUIHandler
 
 	public void autoDraw()
 	{
-
 		Point pA = new Point(5, 5);
 		Point pB = new Point(150, 150);
 		Point pC = new Point(300, 300);
-
 
 		this.clear();
 		imageG.setColor(Color.black);
