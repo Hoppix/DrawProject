@@ -103,7 +103,7 @@ public class GUIHandler
 		}
 		else if (command.equals("loadText"))
 		{
-			//chooserLoadText();
+			chooserLoadText();
 		}
 		else if (command.equals("save"))
 		{
@@ -282,7 +282,6 @@ public class GUIHandler
 			}
 
 		}
-
 		bufferedWriter.close();
 		bufferedReader.close();
 	}
@@ -290,6 +289,12 @@ public class GUIHandler
 	public void loadFromText(String fileName) throws IOException
 	{
 		String line = null;
+		String parse = null;
+		String[] parseSplit = null;
+
+		String start;
+		String end;
+
 		try
 		{
 			FileReader fileReader = new FileReader(fileName);
@@ -297,36 +302,121 @@ public class GUIHandler
 
 			while ((line = bufferedReader.readLine()) != null)
 			{
-				//TODO read string input correctly
 				if(line.contains("ScribbleDrawer"))
 				{
+					parse = line.replaceFirst("ScribbleDrawer: ", "");
+					parseSplit = parse.split(" ");
+					start = parseSplit[0];
+					end = parseSplit[1];
+					start = start.replaceFirst("start", "");
+					end = end.replaceFirst("end", "");
 
-				}
-				else if(line.contains("LineDrawer"))
-				{
+					Point startPoint = parsePoint(start);
+					Point endPoint = parsePoint(end);
 
-				}
-				else if(line.contains("RectangleDrawer"))
-				{
-
-				}
-				else if(line.contains("FillRectangleDrawer"))
-				{
-
-				}
-				else if(line.contains("OvalDrawer"))
-				{
+					ScribbleDrawer scribble = new ScribbleDrawer(startPoint, endPoint);
+					executioner.cmdQueue.add(scribble);
+					executioner.execute(scribble);
 
 				}
 				else if(line.contains("FillOvalDrawer"))
 				{
+					parse = line.replaceFirst("FillOvalDrawer: ", "");
+					parseSplit = parse.split(" ");
+					start = parseSplit[0];
+					end = parseSplit[1];
+					start = start.replaceFirst("start", "");
+					end = end.replaceFirst("end", "");
 
+					Point startPoint = parsePoint(start);
+					Point endPoint = parsePoint(end);
+
+					FillOvalDrawer filloval =  new FillOvalDrawer(startPoint, endPoint);
+					executioner.cmdQueue.add(filloval);
+					executioner.execute(filloval);
+
+				}
+				else if(line.contains("FillRectangleDrawer"))
+				{
+					parse = line.replaceFirst("FillRectangleDrawer: ", "");
+					parseSplit = parse.split(" ");
+					start = parseSplit[0];
+					end = parseSplit[1];
+					start = start.replaceFirst("start", "");
+					end = end.replaceFirst("end", "");
+
+					Point startPoint = parsePoint(start);
+					Point endPoint = parsePoint(end);
+
+					FillRectangleDrawer fillrect = new FillRectangleDrawer(startPoint, endPoint);
+					executioner.cmdQueue.add(fillrect);
+					executioner.execute(fillrect);
+
+				}
+				else if(line.contains("LineDrawer"))
+				{
+					parse = line.replaceFirst("LineDrawer: ", "");
+					parseSplit = parse.split(" ");
+					start = parseSplit[0];
+					end = parseSplit[1];
+					start = start.replaceFirst("start", "");
+					end = end.replaceFirst("end", "");
+
+					Point startPoint = parsePoint(start);
+					Point endPoint = parsePoint(end);
+
+					LineDrawer lineDraw = new LineDrawer(startPoint, endPoint);
+					executioner.cmdQueue.add(lineDraw);
+					executioner.execute(lineDraw);
+				}
+				else if(line.contains("RectangleDrawer"))
+				{
+					parse = line.replaceFirst("RectangleDrawer: ", "");
+					parseSplit = parse.split(" ");
+					start = parseSplit[0];
+					end = parseSplit[1];
+					start = start.replaceFirst("start", "");
+					end = end.replaceFirst("end", "");
+
+					Point startPoint = parsePoint(start);
+					Point endPoint = parsePoint(end);
+
+					RectangleDrawer rekt = new RectangleDrawer(startPoint, endPoint);
+					executioner.cmdQueue.add(rekt);
+					executioner.execute(rekt);
+				}
+				else if(line.contains("OvalDrawer"))
+				{
+					parse = line.replaceFirst("OvalDrawer: ", "");
+					parseSplit = parse.split(" ");
+					start = parseSplit[0];
+					end = parseSplit[1];
+					start = start.replaceFirst("start", "");
+					end = end.replaceFirst("end", "");
+
+					Point startPoint = parsePoint(start);
+					Point endPoint = parsePoint(end);
+
+					OvalDrawer oval = new OvalDrawer(startPoint, endPoint);
+					executioner.cmdQueue.add(oval);
+					executioner.execute(oval);
 				}
 				else if(line.contains("TriangleDrawer"))
 				{
+					parse = line.replaceFirst("TriangleDrawer: ", "");
+					parseSplit = parse.split(" ");
+					start = parseSplit[0];
+					end = parseSplit[1];
+					start = start.replaceFirst("start", "");
+					end = end.replaceFirst("end", "");
 
+					Point startPoint = parsePoint(start);
+					Point endPoint = parsePoint(end);
+
+					TriangleDrawer triangle = new TriangleDrawer(startPoint, endPoint);
+					executioner.cmdQueue.add(triangle);
+					executioner.execute(triangle);
 				}
-
 			}
 			bufferedReader.close();
 		}
@@ -340,6 +430,7 @@ public class GUIHandler
 	private void chooserSaveImage()
 	{
 		chooser.setVisible(true);
+		chooser.setDialogTitle("Save Image");
 
 		int retrieve = chooser.showSaveDialog(gui.drawFrame);
 		String extension2 = chooser.getFileFilter().getDescription();
@@ -373,6 +464,7 @@ public class GUIHandler
 	private void chooserSaveText()
 	{
 		chooser.setVisible(true);
+		chooser.setDialogTitle("Save Text");
 
 		int retrieve = chooser.showSaveDialog(gui.drawFrame);
 		String extension2 = chooser.getFileFilter().getDescription();
@@ -400,5 +492,40 @@ public class GUIHandler
 				e.printStackTrace();
 			}
 		}
+	}
+
+	private void chooserLoadText()
+	{
+		chooser.setVisible(true);
+		chooser.setDialogTitle("Load Text");
+
+		int retrieve = chooser.showOpenDialog(gui.drawFrame);
+
+		if (retrieve == JFileChooser.APPROVE_OPTION)
+		{
+			File selectedFile = chooser.getSelectedFile();
+			try
+			{
+				this.loadFromText(selectedFile.getAbsolutePath());
+			}
+			catch (IOException e)
+			{
+				JOptionPane.showMessageDialog(frame, "Laden abgebrochen");
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private Point parsePoint(String s)
+	{
+		String[] parseSplit;
+
+		s = s.substring(1, s.length()-1);
+		parseSplit = s.split(",");
+		int startX = Integer.parseInt(parseSplit[0]);
+		int startY = Integer.parseInt(parseSplit[1]);
+		Point startPoint = new Point(startX, startY);
+
+		return startPoint;
 	}
 }
