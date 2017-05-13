@@ -2,9 +2,10 @@ package MyDraw;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import MyDraw.GUIHandler;
 
 //Here's a local class used for action listeners for the buttons
-class DrawActionListener implements ActionListener
+public class DrawActionListener implements ActionListener
 {
     private String command;
     private GUIHandler app;

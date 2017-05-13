@@ -1,12 +1,11 @@
 package MyDraw;
 
+import Listener.MouseClickListener;
+
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
 
-import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class CommandHandler

@@ -1,4 +1,6 @@
-package MyDraw;
+package Listener;
+
+import MyDraw.GUIHandler;
 
 import java.awt.*;
 import java.awt.event.ItemEvent;

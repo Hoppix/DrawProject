@@ -1,15 +1,16 @@
-package MyDraw;
+package Drawers;
+
+import MyDraw.Drawable;
 
 import java.awt.*;
 
 /**
  * Created by khopf on 11/05/2017.
  */
-public class FillOvalDrawer extends VisualObject implements Drawable
+public class FillRectangleDrawer extends VisualObject implements Drawable
 {
 
-
-    public FillOvalDrawer(Point start, Point end)
+    public FillRectangleDrawer(Point start, Point end)
     {
         startPoint = start;
         endPoint = end;
@@ -38,6 +39,6 @@ public class FillOvalDrawer extends VisualObject implements Drawable
             y = (int) endPoint.getY();
         }
 
-        g.fillOval(x, y, w, h);
+        g.fillRect(x, y, w, h);
     }
 }

@@ -1,4 +1,4 @@
-package MyDraw;
+package FileFilters;
 
 import javax.swing.filechooser.FileFilter;
 import java.io.File;

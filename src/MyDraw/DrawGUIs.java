@@ -4,18 +4,19 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
 
-class DrawGUIs
+public class DrawGUIs
 {
 	private static final long serialVersionUID = 5549826489329119875L;
 	private final static int FRAMEWIDTH = 820;
 	private final static int FRAMEHEIGHT = 600;
 	public final static int PANELDIFF = 60;
-	Color color;
-	Color colorBG;
-	Color frameColor;
-	BufferedImage saveImage;
-	Graphics imageG;
-	Graphics paintG;
+	public Color color;
+	public Color colorBG;
+	public Color frameColor;
+	public BufferedImage saveImage;
+	public Graphics imageG;
+	public Graphics paintG;
+
 	JPanel drawPanel;
 	JFrame drawFrame;
 	JButton clear;

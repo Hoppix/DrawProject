@@ -1,10 +1,14 @@
 package MyDraw;
 
 
+import Drawers.*;
+import FileFilters.BMPFileFilter;
+import FileFilters.TextFileFilter;
+import Listener.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
