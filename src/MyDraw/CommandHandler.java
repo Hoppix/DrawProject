@@ -41,9 +41,7 @@ public class CommandHandler
         
         handler.gui.drawPanel.addMouseListener(new MouseClickListener(this));
         handler.gui.drawPanel.addMouseMotionListener(new MouseClickListener(this));
-        
-        //timer = new Timer(10, new TimerListener(this));
-        //timer.start();
+
     }
     
     public void execute(Drawable drawCommand)

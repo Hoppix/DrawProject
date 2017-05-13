@@ -139,38 +139,34 @@ public class GUIHandler
 
 	public void autoDraw()
 	{
-		//TODO paintG und imageG verwenden
+
 		Point pA = new Point(5, 5);
 		Point pB = new Point(150, 150);
 		Point pC = new Point(300, 300);
-		
-		
-		RectangleDrawer rect = new RectangleDrawer(pA, pB);
-		FillRectangleDrawer rectFill = new FillRectangleDrawer(pB, pC);
-		OvalDrawer oval = new OvalDrawer(pA, pB);
-		FillOvalDrawer ovalFill = new FillOvalDrawer(pB, pC);
-		LineDrawer line = new LineDrawer(pA, pB);
-		ScribbleDrawer scribble = new ScribbleDrawer(pB, pC);
-		TriangleDrawer triangle = new TriangleDrawer(pA, pC);
+
 
 		this.clear();
 		imageG.setColor(Color.black);
 		paintG.setColor(Color.black);
-		executioner.execute(rect);
-		executioner.execute(oval);
+		drawRectangle(pA,pB);
+		drawOval(pA, pB);
+
 		imageG.setColor(Color.green);
 		paintG.setColor(Color.green);
-		executioner.execute(rectFill);
+		drawFillRectangle(pB, pC);
+
 		imageG.setColor(Color.red);
 		paintG.setColor(Color.red);
-		executioner.execute(ovalFill);
-		executioner.execute(triangle);
+		drawFillOval(pB, pC);
+		drawTriangle(pA, pC);
+
 		imageG.setColor(Color.blue);
 		paintG.setColor(Color.blue);
-		executioner.execute(line);
+		drawLine(pA, pB);
+
 		imageG.setColor(Color.white);
 		paintG.setColor(Color.white);
-		executioner.execute(scribble);
+		//drawPolyLine();
 		
 		imageG.setColor(Color.black);
 		paintG.setColor(Color.black);
@@ -201,40 +197,42 @@ public class GUIHandler
 
 	public void drawRectangle(Point upper_left, Point lower_right)
 	{
-		Graphics g = gui.drawPanel.getGraphics();
-		g.setColor(gui.color);
-
-		int x = upper_left.x;
-		int y = upper_left.y;
-		int w = Math.abs(lower_right.x - upper_left.x);
-		int h = Math.abs(lower_right.y - upper_left.y);
-
-		g.drawRect(x, y, w, h);
-		gui.imageG.setColor(gui.color);
-		gui.imageG.drawRect(x, y, w, h);
+		RectangleDrawer rect = new RectangleDrawer(upper_left, lower_right);
+		executioner.execute(rect);
 	}
 
 	public void drawOval(Point upper_left, Point lower_right)
 	{
-		Graphics g = gui.drawPanel.getGraphics();
-		g.setColor(gui.color);
+		OvalDrawer oval = new OvalDrawer(upper_left, lower_right);
+		executioner.execute(oval);
+	}
 
-		int x = upper_left.x;
-		int y = upper_left.y;
-		int w = Math.abs(lower_right.x - upper_left.x);
-		int h = Math.abs(lower_right.y - upper_left.y);
+	public void drawFillRectangle(Point upper_left,Point lower_right)
+	{
+		FillRectangleDrawer fillrect = new FillRectangleDrawer(upper_left, lower_right);
+		executioner.execute(fillrect);
+	}
 
+	public void drawFillOval(Point upper_left, Point lower_right)
+	{
+		FillOvalDrawer filloval = new FillOvalDrawer(upper_left, lower_right);
+		executioner.execute(filloval);
+	}
 
-		g.drawOval(x, y, w, h);
-		gui.imageG.setColor(gui.color);
-		gui.imageG.drawOval(x, y, w, h);
+	public void drawLine(Point upper_left,Point lower_right)
+	{
+		LineDrawer line = new LineDrawer(upper_left, lower_right);
+		executioner.execute(line);
+	}
+
+	public void drawTriangle(Point upper_left, Point lower_right)
+	{
+		TriangleDrawer triangle = new TriangleDrawer(upper_left, lower_right);
+		executioner.execute(triangle);
 	}
 
 	public void drawPolyLine(java.util.List<Point> points)
 	{
-		Graphics g = gui.drawPanel.getGraphics();
-		g.setColor(gui.color);
-		gui.imageG.setColor(gui.color);
 
 		for (int i = 0; i < points.size() - 1; i++)
 		{
@@ -245,32 +243,10 @@ public class GUIHandler
 			Point pointA = points.get(i);
 			Point pointB = points.get(i + 1);
 
-			int xA = pointA.x;
-			int yA = pointA.y;
-			int xB = pointB.x;
-			int yB = pointB.y;
-
-			g.drawLine(xA, yA, xB, yB);
-
+			LineDrawer polyline = new LineDrawer(pointA, pointB);
+			executioner.execute(polyline);
 		}
 
-		for (int i = 0; i < points.size() - 1; i++)
-		{
-			if (points.get(i + 1).equals(null))
-			{
-				break;
-			}
-			Point pointA = points.get(i);
-			Point pointB = points.get(i + 1);
-
-			int xA = pointA.x;
-			int yA = pointA.y;
-			int xB = pointB.x;
-			int yB = pointB.y;
-
-			gui.imageG.drawLine(xA, yA, xB, yB);
-
-		}
 	}
 
 	public void saveToText(String fileName) throws IOException
@@ -311,6 +287,9 @@ public class GUIHandler
 				//TODO read string input correctly
 				if(line.contains("ScribbleDrawer"))
 				{
+					/**
+					 * Beweis Kolja kann ab 10 Uhr nichtmehr denken.
+					 */
 					parse = line.replaceFirst("ScribbleDrawer: ", "");
 					parse = parse.replaceFirst("start", "");
 					parse = parse.substring(line.indexOf('(', line.indexOf(')')));

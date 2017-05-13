@@ -2,7 +2,7 @@ package MyDraw;
 
 /**
  * Gruppe 5
- * <p>
+ *
  * Jonas Sander
  * Kolja Hopfmann
  */
@@ -211,17 +211,13 @@ public class Draw implements DrawAPI
 	@Override
 	public void writeText(String filename) throws IOException
 	{
-		/**
-		 * DUMMY
-		 */
+		app.saveToText(filename);
 	}
 
 	@Override
 	public void readText(String filename) throws IOException
 	{
-		/**
-		 * DUMMY
-		 */
+		app.loadFromText(filename);
 	}
 
 	@Override
@@ -245,33 +241,25 @@ public class Draw implements DrawAPI
 	@Override
 	public void drawFillRectangle(Point upper_left, Point lower_right)
 	{
-		/**
-		 * DUMMY
-		 */
+		app.drawFillRectangle(upper_left, lower_right);
 	}
 
 	@Override
 	public void drawFillOval(Point upper_left, Point lower_right)
 	{
-		/**
-		 * DUMMY
-		 */
+		app.drawFillOval(upper_left, lower_right);
 	}
 
 	@Override
 	public void drawTriangle(Point upper_left, Point lower_right)
 	{
-		/**
-		 * DUMMY
-		 */
+		app.drawTriangle(upper_left, lower_right);
 	}
 
 	@Override
 	public void drawLine(Point upper_left, Point lower_right)
 	{
-		/**
-		 * DUMMY
-		 */
+		app.drawLine(upper_left, lower_right);
 	}
 }
 

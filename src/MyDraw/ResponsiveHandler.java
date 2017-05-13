@@ -69,6 +69,7 @@ public class ResponsiveHandler implements WindowStateListener, ComponentListener
 
     private void updatePanel()
     {
+    	//TODO fix responsive handling
         responsive.setPanelHeight(responsive.drawFrame.getHeight() - DrawGUIs.PANELDIFF);
         responsive.setPanelWidth(responsive.drawFrame.getWidth());
 
@@ -77,5 +78,6 @@ public class ResponsiveHandler implements WindowStateListener, ComponentListener
         responsive.imageG = responsive.saveImage.createGraphics();
         responsive.imageG.setColor(responsive.colorBG);
         responsive.imageG.fillRect(0, DrawGUIs.PANELDIFF, responsive.drawFrame.getWidth(), responsive.drawFrame.getHeight());
+
     }
 }
