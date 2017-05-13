@@ -30,7 +30,7 @@ public abstract class VisualObject
 		String[] splitMe = parseMe.split("@");
 
 		parseMe = splitMe[0];
-		parseMe = parseMe.replaceFirst("MyDraw.", "");
+		parseMe = parseMe.replaceFirst("Drawers.", "");
 		parseMe = parseMe.replaceFirst("class ", "");
 
 

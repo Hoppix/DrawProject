@@ -80,6 +80,18 @@ public class GUIHandler
 			frame.dispose();
 			System.exit(0);
 		}
+		else if(command.equals("undo"))
+		{
+			undo();
+		}
+		else if(command.equals("redo"))
+		{
+			redo();
+		}
+		else if(command.equals("redraw"))
+		{
+			redraw();
+		}
 		else if (command.equals("auto"))
 		{
 			doneActions.add(command);
@@ -177,7 +189,7 @@ public class GUIHandler
 
 	public void redraw()
 	{
-
+		//TODO FIX
 		for (int i = 0; i < executioner.cmdQueue.size(); i++)
 		{
 			executioner.cmdQueue.get(i).draw(gui.paintG);
@@ -187,6 +199,7 @@ public class GUIHandler
 
 	public void undo()
 	{
+		//TODO FIX
 		executioner.cmdQueue.pollLast();
 		executioner.cmdQueue.getLast().draw(gui.paintG);
 		executioner.cmdQueue.getLast().draw(gui.imageG);
@@ -194,6 +207,7 @@ public class GUIHandler
 
 	public void redo()
 	{
+		//TODO FIX
 		executioner.cmdQueue.getLast().draw(gui.paintG);
 		executioner.cmdQueue.getLast().draw(gui.imageG);
 	}
@@ -276,10 +290,6 @@ public class GUIHandler
 	public void loadFromText(String fileName) throws IOException
 	{
 		String line = null;
-		String parse = null;
-		String [] coordsSTR = null;
-		int[] coordsINT = null;
-
 		try
 		{
 			FileReader fileReader = new FileReader(fileName);
@@ -290,30 +300,7 @@ public class GUIHandler
 				//TODO read string input correctly
 				if(line.contains("ScribbleDrawer"))
 				{
-					/**
-					 * Beweis Kolja kann ab 10 Uhr nichtmehr denken.
-					 */
-					parse = line.replaceFirst("ScribbleDrawer: ", "");
-					parse = parse.replaceFirst("start", "");
-					parse = parse.substring(line.indexOf('(', line.indexOf(')')));
-					coordsSTR = parse.split(",");
 
-					coordsINT[0] = Integer.parseInt(coordsSTR[0]);
-					coordsINT[1] = Integer.parseInt(coordsSTR[1]);
-
-					Point start = new Point(coordsINT[0], coordsINT[1]);
-
-					parse = line.replaceFirst("ScribbleDrawer: ", "");
-					parse = parse.replaceFirst("start", "");
-					parse = parse.substring(line.indexOf('(', line.indexOf(')')));
-					coordsSTR = parse.split(",");
-
-					coordsINT[0] = Integer.parseInt(coordsSTR[0]);
-					coordsINT[1] = Integer.parseInt(coordsSTR[1]);
-
-					Point end = new Point(coordsINT[0], coordsINT[1]);
-
-					executioner.cmdQueue.add(new ScribbleDrawer(start, end));
 				}
 				else if(line.contains("LineDrawer"))
 				{

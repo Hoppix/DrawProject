@@ -1,5 +1,5 @@
 package MyDraw;
-//test change
+
 public class ColorException extends Exception
 {
     /**

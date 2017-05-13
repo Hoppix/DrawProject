@@ -58,6 +58,9 @@ public class DrawGUIs
 
 		paintG = drawPanel.getGraphics();
 
+		//TODO TEMPORARY
+		drawFrame.setResizable(false);
+
 	}
 
 	public void setPanelHeight(int height)
