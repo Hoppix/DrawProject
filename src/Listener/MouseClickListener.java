@@ -190,6 +190,7 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
         	rect.endPoint = e.getPoint();        	
                       
             parentHandler.execute(rect);
+            
             break;
             
         case "Oval":
@@ -217,9 +218,10 @@ public class MouseClickListener implements MouseListener, MouseMotionListener
             scribble.startPoint = parentHandler.startPoint;
             scribble.endPoint = e.getPoint();
             parentHandler.startPoint = e.getPoint();
-
+                       
             parentHandler.cmdQueue.add(scribble);
             parentHandler.execute(scribble);
+            //System.out.println(parentHandler.cmdQueue.poll().toString());
             break;
             
         case "FillOval":

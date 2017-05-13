@@ -13,6 +13,7 @@ public class CommandHandler
 {
     //public Queue<Drawable> cmdQueue;
     public LinkedList<Drawable> cmdQueue;
+    public LinkedList<Drawable> undoneActions;
     
     public GUIHandler parentHandler;
     private Timer timer;
@@ -35,6 +36,8 @@ public class CommandHandler
         shape = "Scribble";
         
         cmdQueue = new LinkedList<Drawable>();
+        undoneActions = new LinkedList<Drawable>();
+        
         
         imageG = handler.gui.imageG;
         paintG = handler.gui.paintG;

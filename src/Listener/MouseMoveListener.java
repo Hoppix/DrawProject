@@ -23,6 +23,6 @@ public class MouseMoveListener implements MouseMotionListener //extends MouseAda
     @Override
     public void mouseDragged(MouseEvent e)
     {
-        parentHandler.cmdQueue.add("mouseDrag;" + e.getX() + ";" + e.getY());
+        //parentHandler.cmdQueue.add("mouseDrag;" + e.getX() + ";" + e.getY());
     }
 }

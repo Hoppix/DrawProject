@@ -22,8 +22,8 @@ public class GUIHandler
 	public DrawGUIs gui;
 	public Graphics imageG;
 	public Graphics paintG;
-	public Queue<String> cmdQueue;
-	public Stack<String> doneActions;
+	//public Queue<Drawable> cmdQueue;
+	//public Stack<Drawable> undoneActions;
 	public CommandHandler executioner;
 
 
@@ -32,8 +32,8 @@ public class GUIHandler
 		gui = getgui;
 
 		chooser = new JFileChooser();
-		cmdQueue = new LinkedList<String>();
-		doneActions = new Stack<String>();
+		//cmdQueue = new LinkedList<Drawable>();
+		//undoneActions = new Stack<Drawable>();
 
 		imageG = gui.imageG;
 		paintG = gui.paintG;
@@ -51,8 +51,8 @@ public class GUIHandler
 		gui.save.addActionListener(new DrawActionListener("save", this));
 		gui.saveText.addActionListener(new DrawActionListener("saveText", this));
 		gui.loadText.addActionListener(new DrawActionListener("loadText", this));
-		gui.redo.addActionListener(new DrawActionListener("undo", this));
-		gui.undo.addActionListener(new DrawActionListener("redo", this));
+		gui.undo.addActionListener(new DrawActionListener("undo", this));
+		gui.redo.addActionListener(new DrawActionListener("redo", this));
 		gui.redraw.addActionListener(new DrawActionListener("redraw", this));
 
 
@@ -95,7 +95,6 @@ public class GUIHandler
 		}
 		else if (command.equals("auto"))
 		{
-			doneActions.add(command);
 			autoDraw();
 		}
 		else if (command.equals("saveText"))
@@ -118,7 +117,6 @@ public class GUIHandler
 		}
 		else if (command.contains("changeColor"))
 		{
-			System.out.println("changingColor: " + command);
 			command = command.replace("changeColor", "");
 			ColorHashMap map = new ColorHashMap();
 			gui.color = ColorHashMap.StringToColor(command);
@@ -142,7 +140,10 @@ public class GUIHandler
 		paintG.fillRect(0, 0, gui.drawPanel.getSize().width, gui.drawPanel.getSize().height);
 		imageG.setColor(gui.colorBG);
 		imageG.fillRect(0, 0, gui.drawPanel.getSize().width, gui.drawPanel.getSize().height);
-
+		
+		//reset color
+		paintG.setColor(gui.color);
+		imageG.setColor(gui.color);
 	}
 
 	public Image getDrawing()
@@ -200,17 +201,43 @@ public class GUIHandler
 
 	public void undo()
 	{
-		//TODO FIX
-		executioner.cmdQueue.pollLast();
-		executioner.cmdQueue.getLast().draw(gui.paintG);
-		executioner.cmdQueue.getLast().draw(gui.imageG);
+		//return if queue ist empty
+		if(executioner.cmdQueue.size() == 0)
+		{
+			return;
+		}
+		
+		LinkedList<Drawable> tempcmdQueue = (LinkedList<Drawable>) executioner.cmdQueue.clone();
+		LinkedList<Drawable> newQueue = new LinkedList<Drawable>();
+		Drawable d;
+		
+		this.clear();
+
+		while (tempcmdQueue.size() > 1)
+		{			
+			d = tempcmdQueue.poll();
+			
+			newQueue.add(d);
+			
+			executioner.execute(d);
+		}
+		
+		executioner.undoneActions.add(tempcmdQueue.poll());
+		executioner.cmdQueue = newQueue;
 	}
 
 	public void redo()
-	{
+	{	
+		if(executioner.undoneActions.size() == 0)
+		{
+			return;
+		}
+		
+		Drawable d = executioner.undoneActions.getLast();
+		executioner.execute(d);
+		executioner.cmdQueue.add(d);
+		
 		//TODO FIX
-		executioner.cmdQueue.getLast().draw(gui.paintG);
-		executioner.cmdQueue.getLast().draw(gui.imageG);
 	}
 
 	public void drawRectangle(Point upper_left, Point lower_right)
@@ -276,9 +303,15 @@ public class GUIHandler
 
 		for (int i = 0; i < executioner.cmdQueue.size(); i++)
 		{
+			Drawable debug;
+			
 			if (bufferedReader.readLine() == null)
 			{
-				bufferedWriter.write(executioner.cmdQueue.get(i).toString());
+				debug = executioner.cmdQueue.poll();
+				//bufferedWriter.write(executioner.cmdQueue.get(i).toString());
+				System.out.println(debug);
+				System.out.println(debug.toString());
+				//bufferedWriter.write(executioner.cmdQueue.pop().toString());
 				bufferedWriter.newLine();
 			}
 
