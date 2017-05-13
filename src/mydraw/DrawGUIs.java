@@ -1,10 +1,10 @@
-package MyDraw;
+package mydraw;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
 
-public class DrawGUIs
+public class DrawGUIs extends JPanel
 {
 	private static final long serialVersionUID = 5549826489329119875L;
 	private final static int FRAMEWIDTH = 820;
@@ -79,7 +79,7 @@ public class DrawGUIs
 
 	private void setupBorders()
 	{
-		drawPanel = new JPanel();
+		drawPanel = this;
 		drawFrame = new JFrame();
 		drawFrame.add(drawPanel);
 		drawPanel.setLayout(null);
@@ -89,7 +89,7 @@ public class DrawGUIs
 		drawFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		drawFrame.setPreferredSize(new Dimension(FRAMEWIDTH, FRAMEHEIGHT));
 		drawFrame.pack();
-		drawFrame.setTitle("MyDraw -  Gruppe 5");
+		drawFrame.setTitle("mydraw -  Gruppe 5");
 		drawFrame.setResizable(true);
 		drawFrame.setVisible(true);
 
@@ -197,6 +197,16 @@ public class DrawGUIs
 		drawFrame.add(undo);
 		drawFrame.add(redo);
 		drawFrame.add(redraw);
+	}
+
+	@Override
+	protected void paintComponent(Graphics g)
+	{
+		setPanelHeight(drawFrame.getHeight() - DrawGUIs.PANELDIFF);
+		setPanelWidth(drawFrame.getWidth());
+
+		super.paintComponent(g);
+		imageG = this.getGraphics();
 	}
 
 

@@ -1,11 +1,10 @@
-package MyDraw;
+package mydraw;
 
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
-import java.awt.image.BufferedImage;
 
 /**
  * Created by khopf on 08/05/2017.
@@ -68,9 +67,7 @@ public class ResponsiveHandler implements WindowStateListener, ComponentListener
 
 	private void updatePanel()
 	{
-		responsive.setPanelHeight(responsive.drawFrame.getHeight() - DrawGUIs.PANELDIFF);
-		responsive.setPanelWidth(responsive.drawFrame.getWidth());
-
-		responsive.drawPanel.update(responsive.paintG);
+		Graphics g = responsive.drawPanel.getGraphics();
+		responsive.paintComponent(g);
 	}
 }

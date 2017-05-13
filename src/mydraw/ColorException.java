@@ -1,4 +1,4 @@
-package MyDraw;
+package mydraw;
 
 public class ColorException extends Exception
 {
