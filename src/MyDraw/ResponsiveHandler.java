@@ -68,9 +68,6 @@ public class ResponsiveHandler implements WindowStateListener, ComponentListener
 
 	private void updatePanel()
 	{
-		responsive.setPanelHeight(responsive.drawFrame.getHeight() - DrawGUIs.PANELDIFF);
-		responsive.setPanelWidth(responsive.drawFrame.getWidth());
-
-		responsive.drawPanel.update(responsive.paintG);
+		responsive.paintComponent(responsive.paintG);
 	}
 }
