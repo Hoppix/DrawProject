@@ -1,8 +1,5 @@
 package Drawers;
 
-import Drawers.VisualObject;
-import MyDraw.Drawable;
-
 import java.awt.Graphics;
 import java.awt.Point;
 

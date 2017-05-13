@@ -3,9 +3,6 @@ package Drawers;
 import java.awt.Graphics;
 import java.awt.Point;
 
-import Drawers.VisualObject;
-import MyDraw.Drawable;
-
 public class OvalDrawer extends VisualObject implements Drawable
 {
 

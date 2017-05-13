@@ -1,7 +1,5 @@
 package Drawers;
 
-import MyDraw.Drawable;
-
 import java.awt.*;
 
 /**

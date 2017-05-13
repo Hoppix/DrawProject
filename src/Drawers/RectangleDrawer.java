@@ -3,8 +3,6 @@ package Drawers;
 import java.awt.Graphics;
 import java.awt.Point;
 
-import MyDraw.Drawable;
-
 public class RectangleDrawer extends VisualObject implements Drawable
 {
 
