@@ -53,7 +53,6 @@ public class GUIHandler
 		gui.loadText.addActionListener(new DrawActionListener("loadText", this));
 		gui.undo.addActionListener(new DrawActionListener("undo", this));
 		gui.redo.addActionListener(new DrawActionListener("redo", this));
-		gui.redraw.addActionListener(new DrawActionListener("redraw", this));
 
 
 		gui.shape_chooser.addItemListener(new ShapeItemListener(this));

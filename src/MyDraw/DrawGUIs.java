@@ -27,7 +27,6 @@ public class DrawGUIs
 	JButton saveText;
 	JButton undo;
 	JButton redo;
-	JButton redraw;
 	JLabel shapeLabel;
 	JLabel colorLabel;
 	JLabel colorBGLabel;
@@ -112,7 +111,6 @@ public class DrawGUIs
 		saveText = new JButton("Save Text");
 		undo = new JButton("undo");
 		redo = new JButton("redo");
-		redraw = new JButton("redraw");
 
 		quit.setBounds(10, 10, 60, 20);
 		clear.setBounds(80, 10, 70, 20);
@@ -122,7 +120,6 @@ public class DrawGUIs
 		saveText.setBounds(120, 35, 100, 20);
 		undo.setBounds(230, 35, 70,20);
 		redo.setBounds(310, 35, 70,20);
-		redraw.setBounds(390, 35, 80, 20);
 
 		quit.setBackground(frameColor);
 		clear.setBackground(frameColor);
@@ -132,7 +129,6 @@ public class DrawGUIs
 		saveText.setBackground(frameColor);
 		undo.setBackground(frameColor);
 		redo.setBackground(frameColor);
-		redraw.setBackground(frameColor);
 	}
 
 	private void setupChooser()
@@ -196,7 +192,6 @@ public class DrawGUIs
 		drawFrame.add(loadText);
 		drawFrame.add(undo);
 		drawFrame.add(redo);
-		drawFrame.add(redraw);
 	}
 
 
