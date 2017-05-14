@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
 
-public class DrawGUIs
+public class DrawGUIs extends JPanel
 {
 	private static final long serialVersionUID = 5549826489329119875L;
 	private final static int FRAMEWIDTH = 820;
@@ -57,8 +57,7 @@ public class DrawGUIs
 
 		paintG = drawPanel.getGraphics();
 
-		//TODO TEMPORARY
-		//drawFrame.setResizable(false);
+		drawFrame.setResizable(false);
 
 	}
 
@@ -78,8 +77,9 @@ public class DrawGUIs
 
 	private void setupBorders()
 	{
-		drawPanel = new JPanel();
+		drawPanel = this;
 		drawFrame = new JFrame();
+
 		drawFrame.add(drawPanel);
 		drawPanel.setLayout(null);
 		drawFrame.setLayout(null);
@@ -192,6 +192,12 @@ public class DrawGUIs
 		drawFrame.add(loadText);
 		drawFrame.add(undo);
 		drawFrame.add(redo);
+	}
+
+	@Override
+	protected void paintComponent(Graphics g)
+	{
+		super.paintComponent(g);
 	}
 
 

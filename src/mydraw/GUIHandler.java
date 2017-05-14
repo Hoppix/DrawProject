@@ -188,12 +188,9 @@ public class GUIHandler
 
 	public void redraw()
 	{
-		//TODO FIX
-		for (int i = 0; i < executioner.cmdQueue.size(); i++)
-		{
-			executioner.cmdQueue.get(i).draw(gui.paintG);
-			executioner.cmdQueue.get(i).draw(gui.imageG);
-		}
+		/**
+		 * DUMMY
+		 */
 	}
 
 	public void undo()

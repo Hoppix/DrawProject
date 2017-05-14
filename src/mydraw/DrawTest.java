@@ -15,23 +15,18 @@ import org.junit.Test;
 
 public class DrawTest
 {
-    //GUIHandler testApp;
-    //DrawGUIs testMe;    
-    Draw testMe;
 
+    Draw testMe;
 
     public DrawTest()
     {
-        //testMe = new DrawGUIs();
-        //testApp = new GUIHandler(testMe);
+
     	testMe = new Draw();
     }
     
     @Before
     public void resetTestMe()
     {
-        //testMe = new DrawGUIs();
-        //testApp = new GUIHandler(testMe);
     	testMe = new Draw();
     }
     
