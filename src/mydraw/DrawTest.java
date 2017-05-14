@@ -4,6 +4,9 @@ import static org.junit.Assert.*;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -202,7 +205,8 @@ public class DrawTest
     	BufferedImage correctImg = convertToBufferedImage(testCorrect);
 
     	//assertTrue(compareImages(drawnImg, correctImg));
-
+    	
+    	testMe.writeText("imageTesting\\test.bmp");
     }
     
     private BufferedImage convertToBufferedImage(Image image)
@@ -236,5 +240,24 @@ public class DrawTest
     	
     	return true;
     }
-
+    
+	private boolean compareTxt()
+    {
+		String lineSaved = null;
+		String lineOriginal = null;
+		try {
+		FileReader fileReaderSaved;
+		
+			fileReaderSaved = new FileReader("asdf");
+		
+        BufferedReader bufferedReaderSaved = new BufferedReader(fileReaderSaved);
+        FileReader fileReaderOriginal = new FileReader("asdf");
+        BufferedReader bufferedReaderOriginal = new BufferedReader(fileReaderOriginal);		
+		} 
+		catch (FileNotFoundException e) 
+		{
+			e.printStackTrace();
+		}
+        return false;
+    }
 }
