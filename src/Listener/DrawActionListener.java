@@ -2,7 +2,7 @@ package Listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import MyDraw.GUIHandler;
+import mydraw.GUIHandler;
 
 //Here's a local class used for action listeners for the buttons
 public class DrawActionListener implements ActionListener

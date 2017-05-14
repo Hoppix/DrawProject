@@ -1,11 +1,10 @@
-package MyDraw;
+package mydraw;
 
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
-import java.awt.image.BufferedImage;
 
 /**
  * Created by khopf on 08/05/2017.

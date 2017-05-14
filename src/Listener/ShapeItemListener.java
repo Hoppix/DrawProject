@@ -3,9 +3,7 @@ package Listener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-import MyDraw.ColorHashMap;
-import MyDraw.DrawGUIs;
-import MyDraw.GUIHandler;
+import mydraw.GUIHandler;
 
 public class ShapeItemListener implements ItemListener {
 
