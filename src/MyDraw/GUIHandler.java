@@ -303,15 +303,10 @@ public class GUIHandler
 
 		for (int i = 0; i < executioner.cmdQueue.size(); i++)
 		{
-			Drawable debug;
 			
 			if (bufferedReader.readLine() == null)
 			{
-				debug = executioner.cmdQueue.poll();
-				//bufferedWriter.write(executioner.cmdQueue.get(i).toString());
-				System.out.println(debug);
-				System.out.println(debug.toString());
-				//bufferedWriter.write(executioner.cmdQueue.pop().toString());
+				bufferedWriter.write(executioner.cmdQueue.pop().toString());
 				bufferedWriter.newLine();
 			}
 
