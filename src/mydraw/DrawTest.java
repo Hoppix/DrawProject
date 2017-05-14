@@ -8,7 +8,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -189,9 +188,7 @@ public class DrawTest
     @Test
     public void testSaveLoadTxt() throws IOException, InterruptedException
     {
-    	TimeUnit.MILLISECONDS.sleep(100);
     	testMe.readText("txtTesting\\testCorrecttxt.txt");
-    	TimeUnit.MILLISECONDS.sleep(10000);
     	testMe.writeImage(testMe.getDrawing(), "imageTesting\\test.bmp");
     	BufferedImage drawnImg = (BufferedImage) testMe.getDrawing();
     	
@@ -201,7 +198,8 @@ public class DrawTest
 
     	//assertTrue(compareImages(drawnImg, correctImg));
     	
-    	testMe.writeText("imageTesting\\test.bmp");
+    	testMe.writeText("txtTesting\\test.txt");
+    	assertTrue(compareTxt("txtTesting\\test.txt", "txtTesting\\testCorrecttxt.txt"));
     }
     
     private BufferedImage convertToBufferedImage(Image image)
@@ -236,23 +234,49 @@ public class DrawTest
     	return true;
     }
     
-	private boolean compareTxt()
+	private boolean compareTxt(String fileA, String fileB)
     {
 		String lineSaved = null;
 		String lineOriginal = null;
+		String savedAllCommands = "";
+		String originalAllCommands = "";
+		
 		try {
-		FileReader fileReaderSaved;
+		FileReader fileReaderSaved;		
+		fileReaderSaved = new FileReader(fileA);
+		BufferedReader bufferedReaderSaved = new BufferedReader(fileReaderSaved);
 		
-			fileReaderSaved = new FileReader("asdf");
-		
-        BufferedReader bufferedReaderSaved = new BufferedReader(fileReaderSaved);
-        FileReader fileReaderOriginal = new FileReader("asdf");
-        BufferedReader bufferedReaderOriginal = new BufferedReader(fileReaderOriginal);		
+        FileReader fileReaderOriginal = new FileReader(fileB);        
+        BufferedReader bufferedReaderOriginal = new BufferedReader(fileReaderOriginal);
+        
+        try 
+        {
+			while ((lineSaved = bufferedReaderSaved.readLine()) != null)
+			{
+				savedAllCommands = savedAllCommands + lineSaved;
+			}
+		} 
+        catch (IOException e) 
+        {
+			e.printStackTrace();
+		}
+        try 
+        {
+			while ((lineOriginal = bufferedReaderOriginal.readLine()) != null)
+			{
+				originalAllCommands = originalAllCommands + lineOriginal;
+			}
+		} 
+        catch (IOException e) 
+        {
+			e.printStackTrace();
+		}
 		} 
 		catch (FileNotFoundException e) 
 		{
 			e.printStackTrace();
 		}
-        return false;
+		
+		return (originalAllCommands.equals(savedAllCommands));
     }
 }
