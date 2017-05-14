@@ -227,17 +227,37 @@ public class GUIHandler
 
 	public void redo()
 	{	
+		System.out.println(executioner.undoneActions.size());
 		if(executioner.undoneActions.size() == 0)
 		{
 			return;
 		}
 		
-		Drawable d = executioner.undoneActions.getLast();
+		Drawable d = executioner.undoneActions.removeLast();
 		executioner.execute(d);
 		executioner.cmdQueue.add(d);
-		
-		//TODO FIX
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	public void drawRectangle(Point upper_left, Point lower_right)
 	{
