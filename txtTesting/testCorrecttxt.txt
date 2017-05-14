@@ -1,0 +1,6 @@
+RectangleDrawer: start(5,5) end(150,150)
+OvalDrawer: start(5,5) end(150,150)
+FillRectangleDrawer: start(150,150) end(300,300)
+FillOvalDrawer: start(150,150) end(300,300)
+TriangleDrawer: start(5,5) end(300,300)
+LineDrawer: start(5,5) end(150,150)

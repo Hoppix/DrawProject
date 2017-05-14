@@ -225,7 +225,6 @@ public class GUIHandler
 
 	public void redo()
 	{	
-		System.out.println(executioner.undoneActions.size());
 		if(executioner.undoneActions.size() == 0)
 		{
 			return;
@@ -260,36 +259,42 @@ public class GUIHandler
 	public void drawRectangle(Point upper_left, Point lower_right)
 	{
 		RectangleDrawer rect = new RectangleDrawer(upper_left, lower_right);
+		executioner.cmdQueue.add(rect);
 		executioner.execute(rect);
 	}
 
 	public void drawOval(Point upper_left, Point lower_right)
 	{
 		OvalDrawer oval = new OvalDrawer(upper_left, lower_right);
+		executioner.cmdQueue.add(oval);
 		executioner.execute(oval);
 	}
 
 	public void drawFillRectangle(Point upper_left,Point lower_right)
 	{
 		FillRectangleDrawer fillrect = new FillRectangleDrawer(upper_left, lower_right);
+		executioner.cmdQueue.add(fillrect);
 		executioner.execute(fillrect);
 	}
 
 	public void drawFillOval(Point upper_left, Point lower_right)
 	{
 		FillOvalDrawer filloval = new FillOvalDrawer(upper_left, lower_right);
+		executioner.cmdQueue.add(filloval);
 		executioner.execute(filloval);
 	}
 
 	public void drawLine(Point upper_left,Point lower_right)
 	{
 		LineDrawer line = new LineDrawer(upper_left, lower_right);
+		executioner.cmdQueue.add(line);
 		executioner.execute(line);
 	}
 
 	public void drawTriangle(Point upper_left, Point lower_right)
 	{
 		TriangleDrawer triangle = new TriangleDrawer(upper_left, lower_right);
+		executioner.cmdQueue.add(triangle);
 		executioner.execute(triangle);
 	}
 
@@ -306,6 +311,7 @@ public class GUIHandler
 			Point pointB = points.get(i + 1);
 
 			LineDrawer polyline = new LineDrawer(pointA, pointB);
+			executioner.cmdQueue.add(polyline);
 			executioner.execute(polyline);
 		}
 
