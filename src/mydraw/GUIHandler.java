@@ -1,4 +1,4 @@
-package MyDraw;
+package mydraw;
 
 
 import Drawers.*;
@@ -10,8 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
 
 
 public class GUIHandler

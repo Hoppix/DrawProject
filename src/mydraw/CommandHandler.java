@@ -1,4 +1,4 @@
-package MyDraw;
+package mydraw;
 
 import Drawers.Drawable;
 import Listener.MouseClickListener;
