@@ -319,10 +319,9 @@ public class GUIHandler
 		BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 		FileReader fileReader = new FileReader(fileName);
 		BufferedReader bufferedReader = new BufferedReader(fileReader);
-
-		for (int i = 0; i < executioner.cmdQueue.size(); i++)
+		
+		while(executioner.cmdQueue.size() > 0)
 		{
-			
 			if (bufferedReader.readLine() == null)
 			{
 				bufferedWriter.write(executioner.cmdQueue.pop().toString());
@@ -330,6 +329,16 @@ public class GUIHandler
 			}
 
 		}
+		
+		//for (int i = 0; i < executioner.cmdQueue.size(); i++)
+		//{						
+			//if (bufferedReader.readLine() == null)
+			//{
+			//	bufferedWriter.write(executioner.cmdQueue.pop().toString());
+			//	bufferedWriter.newLine();
+			//}
+
+		//}
 		bufferedWriter.close();
 		bufferedReader.close();
 	}
